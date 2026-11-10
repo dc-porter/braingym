@@ -21,6 +21,40 @@
     }catch(e){ /* storage unavailable — app still works in-memory for this session */ }
   }
 
+  /* ---------------- device id ---------------- */
+  // Identifies this phone's Bloom install. The keys deliberately sit outside
+  // PREFIX: export, import and "Reset all progress" only touch prefixed keys,
+  // so the id stays with the phone rather than travelling with, or being
+  // wiped by, the progress. Nothing reads it yet.
+  const DEVICE_ID_KEY = "bloom-device-id";
+  const DEVICE_CREATED_KEY = "bloom-device-id-created";
+  const DEVICE_CREATED_AT_KEY = "bloom-device-id-created-at";
+  function newDeviceId(){
+    try{
+      if(window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
+      if(window.crypto && window.crypto.getRandomValues){
+        const bytes = window.crypto.getRandomValues(new Uint8Array(16));
+        return Array.prototype.map.call(bytes, function(b){ return (b < 16 ? "0" : "") + b.toString(16); }).join("");
+      }
+    }catch(e){ /* fall through */ }
+    return Date.now().toString(16) + Math.random().toString(16).slice(2) + Math.random().toString(16).slice(2);
+  }
+  function ensureDeviceId(){
+    let id = null;
+    try{ id = localStorage.getItem(DEVICE_ID_KEY); }catch(e){ /* storage unavailable */ }
+    // An existing id is always reused, never replaced.
+    if(!id) id = newDeviceId();
+    try{
+      if(localStorage.getItem(DEVICE_ID_KEY) !== id) localStorage.setItem(DEVICE_ID_KEY, id);
+      // Written after the id, so an interrupted first run still reuses the
+      // same id next time and just fills these in.
+      if(localStorage.getItem(DEVICE_CREATED_KEY) !== "true") localStorage.setItem(DEVICE_CREATED_KEY, "true");
+      if(!localStorage.getItem(DEVICE_CREATED_AT_KEY)) localStorage.setItem(DEVICE_CREATED_AT_KEY, new Date().toISOString());
+    }catch(e){ /* storage unavailable — the id lasts for this session only */ }
+    return id;
+  }
+  const deviceId = ensureDeviceId();
+
   /* ---------------- helpers ---------------- */
   function esc(str){
     return String(str == null ? "" : str).replace(/[&<>"']/g, function(c){
