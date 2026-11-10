@@ -1,0 +1,7 @@
+{
+  "name": "bloom",
+  "private": true,
+  "dependencies": {
+    "pg": "^8.23.1"
+  }
+}
