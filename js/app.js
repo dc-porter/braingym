@@ -55,6 +55,22 @@
   }
   const deviceId = ensureDeviceId();
 
+  // Marks the saved progress as belonging to this phone. It is its own
+  // progress record rather than a field inside another one: history is a
+  // list, and skillState/categoryState are looped over assuming every entry
+  // is a skill record, so an extra field inside them would break that.
+  // Set once; a progress that already has one keeps it. Uses the id stored
+  // under DEVICE_ID_KEY and never makes one, so with none stored it does
+  // nothing. save() and load() are used as they are.
+  function attachDeviceIdToProgress(){
+    let id = null;
+    try{ id = localStorage.getItem(DEVICE_ID_KEY); }catch(e){ /* storage unavailable */ }
+    if(!id) return;
+    if(load("deviceId", null)) return;
+    save("deviceId", id);
+  }
+  attachDeviceIdToProgress();
+
   /* ---------------- helpers ---------------- */
   function esc(str){
     return String(str == null ? "" : str).replace(/[&<>"']/g, function(c){
