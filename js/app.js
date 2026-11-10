@@ -818,6 +818,7 @@
 
   /* ---------------- import ---------------- */
   let pendingImport = null;   // a validated backup waiting on confirmation
+  let restoredSummary = null; // set once a restore has succeeded, until the app reloads
 
   function readBackupFile(file){
     // Validation only — storage is not touched until the restore is confirmed.
@@ -908,13 +909,58 @@
     pendingImport = null;
     if(!payload){ render(); return; }
     if(restoreBackup(payload)){
-      setBackupStatus(true, "Progress restored. Reloading…");
-      // Reload so the restored progress is what's on screen; the in-memory
-      // state belongs to the progress that was just replaced.
-      setTimeout(function(){ window.location.reload(); }, 1200);
+      showSettings = false;
+      try{ restoredSummary = summarizeStoredProgress(payload); }
+      // The restore itself has already succeeded, so a summary that can't be
+      // built must never be reported as a failed import.
+      catch(e){ restoredSummary = { lines: [] }; }
+      render();
     }else{
       setBackupStatus(false, "Import failed — your progress is unchanged.");
     }
+  }
+  // Reload so the restored progress is what's on screen; the in-memory state
+  // belongs to the progress that was just replaced, so every way out of the
+  // summary comes through here.
+  function finishImport(){ window.location.reload(); }
+
+  // Built from what is in storage right now, after the restore, not from the
+  // file — so it shows what Bloom actually holds. Each line is [label, value].
+  function summarizeStoredProgress(payload){
+    const asObject = function(v){ return v && typeof v === "object" && !Array.isArray(v) ? v : null; };
+    const validDate = function(ts){ return typeof ts === "number" && isFinite(ts) && !isNaN(new Date(ts).getTime()); };
+    const result = asObject(load("placementResult", null));
+    const progress = asObject(load("placementProgress", null));
+    const history = load("history", null);
+    const skills = asObject(load("skillState", null));
+
+    const exported = payload && typeof payload.exportedAt === "string" ? Date.parse(payload.exportedAt) : NaN;
+
+    let placement = "none";
+    if(result){
+      const parts = [typeof result.level === "number" ? "Level " + result.level : "Result restored"];
+      if(validDate(result.completedAt)) parts.push("completed " + formatDate(result.completedAt));
+      placement = parts.join(", ");
+    }
+
+    // Once a test finishes, only its tallies are kept (placementResult), not
+    // the individual answers; those exist only while a test is in progress.
+    let answers = "none";
+    const answered = progress && Array.isArray(progress.answers)
+      ? progress.answers.filter(function(a){ return a !== null && a !== undefined; }).length : 0;
+    if(answered > 0) answers = answered + " (test in progress)";
+    else if(result && typeof result.total === "number" && result.total > 0) answers = result.total + " (tallied in your result)";
+
+    const lessons = Array.isArray(history) && history.length ? String(history.length) : "none";
+    const skillCount = skills ? Object.keys(skills).length : 0;
+
+    return { lines: [
+      ["Backup date", isNaN(exported) ? "unknown" : formatDate(exported)],
+      ["Placement test", placement],
+      ["Placement answers", answers],
+      ["Lessons", lessons],
+      ["Sub-skill records", skillCount ? String(skillCount) : "none"]
+    ] };
   }
 
   /* ---------------- settings / reset ---------------- */
@@ -1123,7 +1169,8 @@
         ) : "") +
       "</main>" +
       (showSettings ? renderSettingsSheet() : "") +
-      (pendingImport ? renderImportConfirm() : "");
+      (pendingImport ? renderImportConfirm() : "") +
+      (restoredSummary ? renderRestoredSummary() : "");
   }
 
   function renderProfile(){
@@ -1304,6 +1351,19 @@
           '<button class="btn btn-outline" data-action="cancel-import">Cancel</button>' +
           '<button class="btn btn-primary" data-action="confirm-import">Replace</button>' +
         "</div>" +
+      "</div>" +
+    "</div>";
+  }
+  function renderRestoredSummary(){
+    return '<div class="overlay" data-action="finish-import">' +
+      '<div class="sheet stack" data-action="noop">' +
+        '<h3 class="title-md">Progress restored</h3>' +
+        (restoredSummary.lines.length
+          ? '<div class="card-soft stack-sm">' + restoredSummary.lines.map(function(l){
+              return '<div class="sub"><strong style="color:var(--ink)">' + esc(l[0]) + ":</strong> " + esc(l[1]) + "</div>";
+            }).join("") + "</div>"
+          : "") +
+        '<button class="btn btn-primary" data-action="finish-import">Done</button>' +
       "</div>" +
     "</div>";
   }
@@ -1529,6 +1589,7 @@
       case "import-progress": openImportPicker(); break;
       case "cancel-import": cancelImport(); break;
       case "confirm-import": confirmImport(); break;
+      case "finish-import": finishImport(); break;
       case "reset-all": confirmResetAll(); break;
       case "dismiss-standalone-notice": dismissStandaloneNotice(); break;
       case "open-lessons": openLessons(); break;
