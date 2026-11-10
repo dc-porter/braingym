@@ -742,10 +742,10 @@
   // Bumped only if the shape of the backup file itself changes, so a future
   // version can tell how to read a file this one wrote.
   const BACKUP_VERSION = 1;
-  let exportStatus = null;   // { ok: bool, text: string } shown inside the settings sheet
+  let backupStatus = null;   // { ok: bool, text: string } shown inside the settings sheet
 
-  function setExportStatus(ok, text){
-    exportStatus = text ? { ok:ok, text:text } : null;
+  function setBackupStatus(ok, text){
+    backupStatus = text ? { ok:ok, text:text } : null;
     render();
   }
   function buildBackupFile(){
@@ -783,14 +783,14 @@
     a.click();
     document.body.removeChild(a);
     setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
-    setExportStatus(true, "Backup saved as " + built.name + ".");
+    setBackupStatus(true, "Backup saved as " + built.name + ".");
   }
   function exportProgress(){
     let built;
     try{
       built = buildBackupFile();
     }catch(e){
-      setExportStatus(false, "Export failed — your progress is untouched. Please try again.");
+      setBackupStatus(false, "Export failed — your progress is untouched. Please try again.");
       return;
     }
     try{
@@ -798,26 +798,127 @@
       // so the file is built synchronously above rather than awaited.
       if(navigator.share && navigator.canShare && navigator.canShare({ files: [built.file] })){
         navigator.share({ files: [built.file] }).then(function(){
-          setExportStatus(true, "Backup saved.");
+          setBackupStatus(true, "Backup saved.");
         }).catch(function(err){
           // Dismissing the share sheet is a choice, not a failure.
           if(err && (err.name === "AbortError" || err.name === "NotAllowedError")){
-            setExportStatus(null, "");
+            setBackupStatus(null, "");
             return;
           }
           try{ downloadBackup(built); }
-          catch(e2){ setExportStatus(false, "Export failed — your progress is untouched. Please try again."); }
+          catch(e2){ setBackupStatus(false, "Export failed — your progress is untouched. Please try again."); }
         });
         return;
       }
       downloadBackup(built);
     }catch(e){
-      setExportStatus(false, "Export failed — your progress is untouched. Please try again.");
+      setBackupStatus(false, "Export failed — your progress is untouched. Please try again.");
+    }
+  }
+
+  /* ---------------- import ---------------- */
+  let pendingImport = null;   // a validated backup waiting on confirmation
+
+  function readBackupFile(file){
+    // Validation only — storage is not touched until the restore is confirmed.
+    return file.text().then(function(text){
+      let parsed;
+      try{ parsed = JSON.parse(text); }
+      catch(e){ throw new Error("invalid"); }
+      const isObject = function(v){ return !!v && typeof v === "object" && !Array.isArray(v); };
+      if(!isObject(parsed) || parsed.app !== "Bloom" || !isObject(parsed.data)) throw new Error("invalid");
+      if(typeof parsed.backupVersion !== "number" || !isFinite(parsed.backupVersion)) throw new Error("invalid");
+      // A file from a later Bloom may hold a shape this build doesn't
+      // understand, so refuse it rather than restore it wrongly.
+      if(parsed.backupVersion > BACKUP_VERSION) throw new Error("newer");
+      return parsed;
+    }, function(){ throw new Error("invalid"); });
+  }
+  function restoreBackup(payload){
+    // Serialize everything first: if any value can't be prepared, nothing has
+    // been touched yet and the restore stops with storage exactly as it was.
+    // Values are re-encoded the same way save() writes them, since that is
+    // what produced the file.
+    let incoming;
+    try{
+      incoming = Object.keys(payload.data).map(function(k){
+        return [PREFIX + k, JSON.stringify(payload.data[k])];
+      });
+    }catch(e){ return false; }
+
+    const snapshot = [];
+    for(let i = 0; i < localStorage.length; i++){
+      const key = localStorage.key(i);
+      if(key && key.indexOf(PREFIX) === 0) snapshot.push([key, localStorage.getItem(key)]);
+    }
+    const clearOurKeys = function(){
+      for(let i = localStorage.length - 1; i >= 0; i--){   // downward: removing shifts indices
+        const key = localStorage.key(i);
+        if(key && key.indexOf(PREFIX) === 0) localStorage.removeItem(key);
+      }
+    };
+    try{
+      clearOurKeys();
+      incoming.forEach(function(pair){ localStorage.setItem(pair[0], pair[1]); });
+      return true;
+    }catch(e){
+      // Put back exactly what was there — a half-written restore is worse
+      // than none at all.
+      try{
+        clearOurKeys();
+        snapshot.forEach(function(pair){ localStorage.setItem(pair[0], pair[1]); });
+      }catch(e2){ /* storage is refusing writes entirely; nothing further to try */ }
+      return false;
+    }
+  }
+  function openImportPicker(){
+    backupStatus = null;
+    try{
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = ".json,application/json";
+      input.style.position = "fixed";
+      input.style.left = "-9999px";
+      input.onchange = function(){
+        const file = input.files && input.files[0];
+        if(input.parentNode) input.parentNode.removeChild(input);
+        if(!file) return;
+        readBackupFile(file).then(function(payload){
+          pendingImport = payload;
+          render();
+        }, function(err){
+          pendingImport = null;
+          setBackupStatus(false, err && err.message === "newer"
+            ? "This backup was made by a newer version of Bloom."
+            : "This isn't a valid Bloom backup.");
+        });
+      };
+      document.body.appendChild(input);
+      input.click();   // straight from the tap, so iOS opens the file picker
+    }catch(e){
+      setBackupStatus(false, "Couldn't open the file picker. Please try again.");
+    }
+  }
+  function cancelImport(){
+    pendingImport = null;
+    render();
+  }
+  function confirmImport(){
+    const payload = pendingImport;
+    pendingImport = null;
+    if(!payload){ render(); return; }
+    if(restoreBackup(payload)){
+      setBackupStatus(true, "Progress restored. Reloading…");
+      // Reload so the restored progress is what's on screen; the in-memory
+      // state belongs to the progress that was just replaced.
+      setTimeout(function(){ window.location.reload(); }, 1200);
+    }else{
+      setBackupStatus(false, "Import failed — your progress is unchanged.");
     }
   }
 
   /* ---------------- settings / reset ---------------- */
-  function toggleSettings(open){ showSettings = open; exportStatus = null; render(); }
+  function toggleSettings(open){ showSettings = open; backupStatus = null; render(); }
   function confirmRetakePlacement(){
     if(!window.confirm("Retake the placement test? This will recalculate your Grammar & Punctuation level. Your lesson history stays saved.")) return;
     placementResult = null; save("placementResult", null);
@@ -1021,7 +1122,8 @@
           "</div>"
         ) : "") +
       "</main>" +
-      (showSettings ? renderSettingsSheet() : "");
+      (showSettings ? renderSettingsSheet() : "") +
+      (pendingImport ? renderImportConfirm() : "");
   }
 
   function renderProfile(){
@@ -1193,17 +1295,30 @@
       "</main>";
   }
 
+  function renderImportConfirm(){
+    return '<div class="overlay" data-action="cancel-import">' +
+      '<div class="sheet stack" data-action="noop">' +
+        '<h3 class="title-md">Replace your progress?</h3>' +
+        '<p class="sub">This will replace the progress currently in Bloom with the progress in this backup. Continue?</p>' +
+        '<div class="btn-row">' +
+          '<button class="btn btn-outline" data-action="cancel-import">Cancel</button>' +
+          '<button class="btn btn-primary" data-action="confirm-import">Replace</button>' +
+        "</div>" +
+      "</div>" +
+    "</div>";
+  }
   function renderSettingsSheet(){
     return '<div class="overlay" data-action="close-settings">' +
       '<div class="sheet stack" data-action="noop">' +
         '<div class="row-between"><h3 class="title-md">Settings</h3><button class="icon-btn" data-action="close-settings">' + svgIcon("close") + "</button></div>" +
         '<button class="btn btn-outline" data-action="retake-placement">Retake placement test</button>' +
         '<button class="btn btn-outline" data-action="export-progress">Export my progress</button>' +
+        '<button class="btn btn-outline" data-action="import-progress">Import my progress</button>' +
         '<button class="btn btn-outline" style="color:var(--danger); border-color:var(--danger-bg);" data-action="reset-all">Reset all progress</button>' +
-        (exportStatus
-          ? '<div class="card-soft" style="' + (exportStatus.ok
+        (backupStatus
+          ? '<div class="card-soft" style="' + (backupStatus.ok
               ? "border-color:var(--success-bg); color:var(--success);"
-              : "border-color:var(--danger-bg); color:var(--danger);") + '">' + esc(exportStatus.text) + "</div>"
+              : "border-color:var(--danger-bg); color:var(--danger);") + '">' + esc(backupStatus.text) + "</div>"
           : "") +
       "</div>" +
     "</div>";
@@ -1411,6 +1526,9 @@
       case "close-settings": toggleSettings(false); break;
       case "retake-placement": confirmRetakePlacement(); break;
       case "export-progress": exportProgress(); break;
+      case "import-progress": openImportPicker(); break;
+      case "cancel-import": cancelImport(); break;
+      case "confirm-import": confirmImport(); break;
       case "reset-all": confirmResetAll(); break;
       case "dismiss-standalone-notice": dismissStandaloneNotice(); break;
       case "open-lessons": openLessons(); break;
