@@ -805,6 +805,8 @@
     for(let i = 0; i < localStorage.length; i++){
       const key = localStorage.key(i);
       if(!key || key.indexOf(PREFIX) !== 0) continue;
+      // The device ID identifies this phone, so a backup never carries it.
+      if(key === PREFIX + "deviceId") continue;
       const raw = localStorage.getItem(key);
       try{ data[key.slice(PREFIX.length)] = JSON.parse(raw); }
       catch(e){ data[key.slice(PREFIX.length)] = raw; }  // keep anything unparseable verbatim
@@ -892,9 +894,16 @@
     // what produced the file.
     let incoming;
     try{
-      incoming = Object.keys(payload.data).map(function(k){
+      // Any deviceId in the file belongs to whichever phone made it, so it is
+      // dropped, and this phone's own ID (if it has one) takes its place. It
+      // goes in with the rest, so it is rolled back along with them if the
+      // restore fails.
+      incoming = Object.keys(payload.data).filter(function(k){ return k !== "deviceId"; }).map(function(k){
         return [PREFIX + k, JSON.stringify(payload.data[k])];
       });
+      let ownId = null;
+      try{ ownId = localStorage.getItem(DEVICE_ID_KEY); }catch(e){ /* storage unavailable */ }
+      if(ownId) incoming.push([PREFIX + "deviceId", JSON.stringify(ownId)]);
     }catch(e){ return false; }
 
     const snapshot = [];
