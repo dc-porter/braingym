@@ -738,8 +738,86 @@
     navigate("history-detail", { record: record });
   }
 
+  /* ---------------- export ---------------- */
+  // Bumped only if the shape of the backup file itself changes, so a future
+  // version can tell how to read a file this one wrote.
+  const BACKUP_VERSION = 1;
+  let exportStatus = null;   // { ok: bool, text: string } shown inside the settings sheet
+
+  function setExportStatus(ok, text){
+    exportStatus = text ? { ok:ok, text:text } : null;
+    render();
+  }
+  function buildBackupFile(){
+    // Everything under the app's storage prefix, rather than a hand-written
+    // list, so progress added later is carried without touching this code.
+    const data = {};
+    for(let i = 0; i < localStorage.length; i++){
+      const key = localStorage.key(i);
+      if(!key || key.indexOf(PREFIX) !== 0) continue;
+      const raw = localStorage.getItem(key);
+      try{ data[key.slice(PREFIX.length)] = JSON.parse(raw); }
+      catch(e){ data[key.slice(PREFIX.length)] = raw; }  // keep anything unparseable verbatim
+    }
+    const now = new Date();
+    const pad = function(n){ return (n < 10 ? "0" : "") + n; };
+    const stamp = now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate());
+    const name = "bloom-backup-" + stamp + ".json";
+    const payload = {
+      app: "Bloom",
+      backupVersion: BACKUP_VERSION,
+      storagePrefix: PREFIX,
+      exportedAt: now.toISOString(),
+      data: data
+    };
+    return { name: name, file: new File([JSON.stringify(payload, null, 2)], name, { type: "application/json" }) };
+  }
+  function downloadBackup(built){
+    // Fallback for anywhere the share sheet isn't offered (desktop browsers,
+    // older iOS): save straight to the browser's downloads instead.
+    const url = URL.createObjectURL(built.file);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = built.name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    setExportStatus(true, "Backup saved as " + built.name + ".");
+  }
+  function exportProgress(){
+    let built;
+    try{
+      built = buildBackupFile();
+    }catch(e){
+      setExportStatus(false, "Export failed — your progress is untouched. Please try again.");
+      return;
+    }
+    try{
+      // Must be called straight from the tap for iOS to open the share sheet,
+      // so the file is built synchronously above rather than awaited.
+      if(navigator.share && navigator.canShare && navigator.canShare({ files: [built.file] })){
+        navigator.share({ files: [built.file] }).then(function(){
+          setExportStatus(true, "Backup saved.");
+        }).catch(function(err){
+          // Dismissing the share sheet is a choice, not a failure.
+          if(err && (err.name === "AbortError" || err.name === "NotAllowedError")){
+            setExportStatus(null, "");
+            return;
+          }
+          try{ downloadBackup(built); }
+          catch(e2){ setExportStatus(false, "Export failed — your progress is untouched. Please try again."); }
+        });
+        return;
+      }
+      downloadBackup(built);
+    }catch(e){
+      setExportStatus(false, "Export failed — your progress is untouched. Please try again.");
+    }
+  }
+
   /* ---------------- settings / reset ---------------- */
-  function toggleSettings(open){ showSettings = open; render(); }
+  function toggleSettings(open){ showSettings = open; exportStatus = null; render(); }
   function confirmRetakePlacement(){
     if(!window.confirm("Retake the placement test? This will recalculate your Grammar & Punctuation level. Your lesson history stays saved.")) return;
     placementResult = null; save("placementResult", null);
@@ -1120,7 +1198,13 @@
       '<div class="sheet stack" data-action="noop">' +
         '<div class="row-between"><h3 class="title-md">Settings</h3><button class="icon-btn" data-action="close-settings">' + svgIcon("close") + "</button></div>" +
         '<button class="btn btn-outline" data-action="retake-placement">Retake placement test</button>' +
+        '<button class="btn btn-outline" data-action="export-progress">Export my progress</button>' +
         '<button class="btn btn-outline" style="color:var(--danger); border-color:var(--danger-bg);" data-action="reset-all">Reset all progress</button>' +
+        (exportStatus
+          ? '<div class="card-soft" style="' + (exportStatus.ok
+              ? "border-color:var(--success-bg); color:var(--success);"
+              : "border-color:var(--danger-bg); color:var(--danger);") + '">' + esc(exportStatus.text) + "</div>"
+          : "") +
       "</div>" +
     "</div>";
   }
@@ -1326,6 +1410,7 @@
       case "open-settings": toggleSettings(true); break;
       case "close-settings": toggleSettings(false); break;
       case "retake-placement": confirmRetakePlacement(); break;
+      case "export-progress": exportProgress(); break;
       case "reset-all": confirmResetAll(); break;
       case "dismiss-standalone-notice": dismissStandaloneNotice(); break;
       case "open-lessons": openLessons(); break;
