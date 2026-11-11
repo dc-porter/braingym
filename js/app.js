@@ -28,6 +28,8 @@
   // Import and Reset never see them.
   const SYNC_VERSION_KEY = "bloom-sync-version";   // last server version this phone saw
   const SYNC_CHANGED_KEY = "bloom-sync-changed";   // "true" while changes await upload
+  const SYNC_FINGERPRINT_KEY = "bloom-sync-fingerprint"; // fingerprints of copies sent without hearing back
+  const SYNC_MAX_UNCONFIRMED = 5;
   const SYNC_DELAY_MS = 3000;                      // upload this long after the last change
   let syncChangeSeq = 0;   // bumps on every change, so an upload can tell if more arrived meanwhile
   let syncTimer = null;
@@ -1087,6 +1089,77 @@
   // open, so no other screen is ever redrawn by a sync.
   function refreshSyncStatus(){ if(showSettings) render(); }
 
+  // The same canonical JSON and fingerprint the server computes (api/progress.js),
+  // so the two can be compared. null where SHA-256 isn't available (it needs a
+  // secure page), in which case a conflict is simply treated as a real one.
+  function canonicalJson(v){
+    if(v === null || typeof v !== "object") return JSON.stringify(v);
+    if(Array.isArray(v)) return "[" + v.map(canonicalJson).join(",") + "]";
+    return "{" + Object.keys(v).sort().map(function(k){ return JSON.stringify(k) + ":" + canonicalJson(v[k]); }).join(",") + "}";
+  }
+  function fingerprintOf(obj){
+    try{
+      if(!(window.crypto && window.crypto.subtle && typeof window.crypto.subtle.digest === "function")) return Promise.resolve(null);
+      return window.crypto.subtle.digest("SHA-256", new TextEncoder().encode(canonicalJson(obj))).then(function(buf){
+        return Array.prototype.map.call(new Uint8Array(buf), function(b){ return (b < 16 ? "0" : "") + b.toString(16); }).join("").slice(0, 32);
+      }, function(){ return null; });
+    }catch(e){ return Promise.resolve(null); }
+  }
+  // Fingerprints of copies this phone has sent without hearing the outcome.
+  // A list rather than one value, because after a lost reply the next upload
+  // usually carries newer changes: the copy the server holds is then the
+  // earlier one, not the last one sent.
+  function readUnconfirmed(){
+    try{ const raw = localStorage.getItem(SYNC_FINGERPRINT_KEY); return raw ? raw.split(",").filter(Boolean) : []; }
+    catch(e){ return []; }
+  }
+  function writeUnconfirmed(list){
+    try{
+      if(list.length) localStorage.setItem(SYNC_FINGERPRINT_KEY, list.slice(-SYNC_MAX_UNCONFIRMED).join(","));
+      else localStorage.removeItem(SYNC_FINGERPRINT_KEY);
+    }catch(e){ /* storage unavailable */ }
+  }
+  function syncFetch(url, options){
+    const abort = typeof AbortController === "function" ? new AbortController() : null;
+    const timer = abort ? setTimeout(function(){ abort.abort(); }, SYNC_TIMEOUT_MS) : null;
+    options.signal = abort ? abort.signal : undefined;
+    const done = function(){ if(timer) clearTimeout(timer); };
+    return fetch(url, options).then(function(res){
+      return res.json().catch(function(){ return null; }).then(function(data){ done(); return { status: res.status, data: data }; });
+    }, function(err){ done(); throw err; });
+  }
+
+  // The server refused an upload. Either another copy really changed it, or an
+  // earlier upload from this phone did save and its reply never arrived. Ask
+  // the server for its version and fingerprint (never the progress) and see
+  // whether it holds a copy this phone sent. Never rejects.
+  function resolveConflict(id){
+    return syncFetch("/api/progress?check=1", { method: "GET", headers: { "X-Bloom-Device-Id": id } }).then(function(r){
+      const d = r.data;
+      if(r.status === 200 && d && d.status === "ok" && Number.isInteger(d.version) && typeof d.fingerprint === "string" &&
+         readUnconfirmed().indexOf(d.fingerprint) !== -1){
+        // The server holds a copy this phone sent: take its version and carry on.
+        try{ localStorage.setItem(SYNC_VERSION_KEY, String(d.version)); }catch(e){ /* storage unavailable */ }
+        writeUnconfirmed([]);
+        syncLastAt = Date.now();
+        const seqNow = syncChangeSeq;
+        return fingerprintOf(progressBundle()).then(function(current){
+          if(current && current === d.fingerprint){
+            // Nothing newer than what the server holds.
+            if(syncChangeSeq === seqNow){ try{ localStorage.removeItem(SYNC_CHANGED_KEY); }catch(e){ /* storage unavailable */ } }
+          }else{
+            syncAgain = true;   // newer changes: upload them against the corrected version
+          }
+        });
+      }
+      // The server's copy is not one this phone sent: a real conflict.
+      writeUnconfirmed([]);
+      syncPausedUntilOpen = "the saved copy was changed somewhere else";
+    }, function(){
+      syncLastError = "no connection";
+    });
+  }
+
   function uploadNow(){
     if(syncTimer){ clearTimeout(syncTimer); syncTimer = null; }
     if(syncPausedUntilOpen) return;
@@ -1110,15 +1183,19 @@
     syncBusy = true;
     syncLastError = null;
     refreshSyncStatus();
-    const abort = typeof AbortController === "function" ? new AbortController() : null;
-    const abortTimer = abort ? setTimeout(function(){ abort.abort(); }, SYNC_TIMEOUT_MS) : null;
-    fetch("/api/progress", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Bloom-Device-Id": id },
-      body: body,
-      signal: abort ? abort.signal : undefined
-    }).then(function(res){
-      return res.json().catch(function(){ return null; }).then(function(data){ return { status: res.status, data: data }; });
+    fingerprintOf(bundle).then(function(fp){
+      // Recorded before the request goes out, so a reply that never arrives
+      // still leaves a note of what was sent.
+      if(fp){
+        const list = readUnconfirmed().filter(function(x){ return x !== fp; });
+        list.push(fp);
+        writeUnconfirmed(list);
+      }
+      return syncFetch("/api/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Bloom-Device-Id": id },
+        body: body
+      });
     }).then(function(r){
       if(r.status === 200 && r.data && r.data.status === "saved" && Number.isInteger(r.data.version)){
         try{
@@ -1127,24 +1204,25 @@
           // the flag stays set for the next one.
           if(syncChangeSeq === seq) localStorage.removeItem(SYNC_CHANGED_KEY);
         }catch(e){ /* storage unavailable */ }
+        writeUnconfirmed([]);
         syncLastAt = Date.now();
       }else if(r.status === 409){
-        // Someone else's copy is newer. Change nothing here; keep the flag,
-        // and leave it until the app next opens.
-        syncPausedUntilOpen = "the saved copy was changed somewhere else";
+        // Refused: find out whether that is a real conflict or only a lost reply.
+        return resolveConflict(id);
       }else if(r.status === 413){
+        writeUnconfirmed([]);
         syncPausedUntilOpen = "progress is too large to upload (over 4 MB)";
       }else if(r.status === 400){
+        writeUnconfirmed([]);
         syncPausedUntilOpen = "the server refused the upload";
       }else{
-        syncLastError = "the server is unavailable";
+        syncLastError = "the server is unavailable";   // outcome unknown: keep the note
       }
     }, function(){
-      syncLastError = "no connection";
+      syncLastError = "no connection";                 // outcome unknown: keep the note
     }).then(function(){
-      if(abortTimer) clearTimeout(abortTimer);
       syncBusy = false;
-      const again = syncAgain && !syncLastError;
+      const again = syncAgain && !syncLastError && !syncPausedUntilOpen;
       syncAgain = false;
       refreshSyncStatus();
       if(again) uploadNow();
