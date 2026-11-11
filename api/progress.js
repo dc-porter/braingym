@@ -2,7 +2,10 @@
 //
 //   GET  — load:  replies with the saved progress and its version, or
 //                 "nothing saved yet" for a phone with no row.
+//   GET ?check=1  replies with only the saved version and a fingerprint of
+//                 the saved progress, never the progress itself.
 //   POST — save:  body { "lastSeenVersion": <number> | "none", "progress": {...} }
+//                 and the reply to a successful save carries the fingerprint.
 //
 // The phone identifies itself in the X-Bloom-Device-Id header, never in the
 // address. The raw ID is never stored, logged or echoed: it is scrambled with
@@ -48,6 +51,19 @@ function safeCode(err){
 }
 function isPlainObject(v){
   return !!v && typeof v === "object" && !Array.isArray(v);
+}
+
+// A short fingerprint of a progress object: SHA-256 of its canonical JSON
+// (keys sorted, no spaces), cut to 32 hex characters. Canonical so it does
+// not depend on key order or on how Postgres re-stores the JSON; the app
+// computes it the same way, so the two can be compared.
+function canonicalJson(v){
+  if(v === null || typeof v !== "object") return JSON.stringify(v);
+  if(Array.isArray(v)) return "[" + v.map(canonicalJson).join(",") + "]";
+  return "{" + Object.keys(v).sort().map(function(k){ return JSON.stringify(k) + ":" + canonicalJson(v[k]); }).join(",") + "}";
+}
+function fingerprintOf(progress){
+  return crypto.createHash("sha256").update(canonicalJson(progress), "utf8").digest("hex").slice(0, 32);
 }
 
 function deviceKeyFrom(req){
@@ -112,7 +128,14 @@ async function load(client, deviceKey){
   return { status: 200, body: { status: "ok", version: r.rows[0].version, progress: r.rows[0].progress } };
 }
 
-async function save(client, deviceKey, lastSeen, progressJson){
+async function check(client, deviceKey){
+  const r = await client.query("SELECT progress, version FROM bloom_progress WHERE device_key = $1", [deviceKey]);
+  if(!r.rows.length) return { status: 200, body: { status: "none" } };
+  // The progress is read here only to fingerprint it; it is not sent back.
+  return { status: 200, body: { status: "ok", version: r.rows[0].version, fingerprint: fingerprintOf(r.rows[0].progress) } };
+}
+
+async function save(client, deviceKey, lastSeen, progressJson, fingerprint){
   // Each branch decides and writes in ONE statement, so two saves at once
   // can never both win: Postgres serialises them on the row (or the unique
   // device_key), and the loser's condition no longer matches.
@@ -130,7 +153,7 @@ async function save(client, deviceKey, lastSeen, progressJson){
       [deviceKey, progressJson, lastSeen]
     );
   }
-  if(r.rows.length) return { status: 200, body: { status: "saved", version: r.rows[0].version } };
+  if(r.rows.length) return { status: 200, body: { status: "saved", version: r.rows[0].version, fingerprint: fingerprint } };
 
   // Nothing was written. Read the current version only to report it; the
   // decision above is already final.
@@ -149,6 +172,7 @@ module.exports = async function handler(req, res){
 
   let lastSeen = null;
   let progressJson = null;
+  let fingerprint = null;
   if(req.method === "POST"){
     let body;
     try{ body = await readBody(req); }
@@ -166,6 +190,7 @@ module.exports = async function handler(req, res){
     }
     lastSeen = v;
     progressJson = JSON.stringify(parsed.progress);
+    fingerprint = fingerprintOf(parsed.progress);
   }
 
   let client;
@@ -176,9 +201,10 @@ module.exports = async function handler(req, res){
     return error(res, 503, "Database unavailable" + (code ? " (" + code + ")" : "") + ".");
   }
   try{
+    const checking = req.method === "GET" && new URL(req.url, "http://localhost").searchParams.get("check") === "1";
     const out = req.method === "GET"
-      ? await load(client, device.key)
-      : await save(client, device.key, lastSeen, progressJson);
+      ? (checking ? await check(client, device.key) : await load(client, device.key))
+      : await save(client, device.key, lastSeen, progressJson, fingerprint);
     reply(res, out.status, out.body);
   }catch(err){
     const code = safeCode(err);
