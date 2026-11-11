@@ -104,14 +104,14 @@ const PLACEMENT_POOL = [
     explanation:"\"Along with several aides and a security detail\" is a parenthetical phrase, not part of the grammatical subject, so the verb must agree with the singular \"senator\" alone: \"was escorted.\" \"were escorted\" is tempting because the sentence mentions several people, but only \"senator\" actually controls the verb." },
 
   { id:"ge6", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:7,
-    prompt:"Attached to the grant proposal ⟦was⟧ several appendices detailing the project's budget and timeline.",
-    options:["NO CHANGE","has been","were","is"], correctIndex:2,
-    explanation:"In this inverted sentence, the subject \"several appendices\" follows the verb and is plural, so it requires \"were.\" \"was\" is the tempting default because the verb appears first, before the reader has seen the plural subject that actually governs it." },
+    prompt:"When the committee opened the file last March, attached to the grant proposal ⟦was⟧ several appendices detailing the project's budget and timeline.",
+    options:["NO CHANGE","has been","were","have been"], correctIndex:2,
+    explanation:"In this inverted clause, the subject \"several appendices\" follows the verb and is plural, so it needs a plural verb, and the past-tense frame set by \"opened the file last March\" makes that verb \"were.\" \"was\" is the tempting default because the verb appears before the reader reaches the plural subject; \"has been\" and \"have been\" shift into the present perfect, which clashes with a completed past event." },
 
   { id:"ge7", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:3,
     prompt:"When the surgeon consulted with the resident before the procedure, ⟦she⟧ reviewed the imaging results one final time.",
-    options:["NO CHANGE","he","they","the surgeon"], correctIndex:3,
-    explanation:"Since both \"the surgeon\" and \"the resident\" could plausibly be female, \"she\" is an ambiguous pronoun reference; replacing it with \"the surgeon\" removes the ambiguity entirely. Switching to \"they\" doesn't fix the problem, since it's still unclear which single person the pronoun refers to." },
+    options:["NO CHANGE","which","the surgeon","the surgeon, she,"], correctIndex:2,
+    explanation:"Since both \"the surgeon\" and \"the resident\" could plausibly be female, \"she\" is an ambiguous pronoun reference; replacing it with \"the surgeon\" removes the ambiguity. \"which\" is a relative pronoun for things, not people, and cannot serve as the subject of this main clause. \"the surgeon, she,\" names the subject twice, creating a redundant double subject." },
 
   { id:"ge8", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:1,
     prompt:"The nonprofit organization announced that ⟦they⟧ would expand its outreach program to three additional counties next year.",
@@ -269,9 +269,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Ensuring that every reading stayed within tolerance\" has no subject or finite verb, making it a fragment; \"This ensured\" supplies both, creating a complete sentence. Both other alternatives are tempting since they rephrase the wording, but each keeps a participial or infinitive phrase with no finite main verb, so the fragment persists." },
 
   { id:"ge39", type:"error", category:"error", sub:"Sentence Fragments", difficulty:8,
-    prompt:"The consultant's report reached a striking conclusion. ⟦Its central claim being that automation will eliminate one in four manufacturing jobs within the decade⟧.",
-    options:["NO CHANGE","Its central claim, being that automation will eliminate one in four manufacturing jobs within the decade","Its central claim was that automation would eliminate one in four manufacturing jobs within the decade","With its central claim being that automation will eliminate one in four manufacturing jobs within the decade"], correctIndex:2,
-    explanation:"\"Being\" is a participle, not a finite verb, so the sentence has no main verb and remains a fragment no matter how it's punctuated; replacing \"being\" with the finite verb \"was\" fixes it, and because the report's claim is being reported from the past-tense frame set by \"reached,\" the embedded future \"will eliminate\" should backshift to \"would eliminate.\" The second option is tempting because adding a comma makes the sentence look more deliberate, but a comma cannot substitute for a missing finite verb, so it remains a fragment; it also fails to backshift the tense." },
+    prompt:"The consultant's report reached a striking conclusion. ⟦Its central claim being that automation would eliminate one in four manufacturing jobs within the decade⟧.",
+    options:["NO CHANGE","Its central claim was that automation would eliminate one in four manufacturing jobs within the decade","Its central claim was, that automation would eliminate one in four manufacturing jobs within the decade","Its central claim, that automation would eliminate one in four manufacturing jobs within the decade"], correctIndex:1,
+    explanation:"\"Being\" is a participle, not a finite verb, so the original has no main verb and is a fragment; replacing it with the finite verb \"was\" makes the sentence complete. The last option is also a fragment: it renames the claim with an appositive but never says anything about it. \"was, that\" is tempting because it is a complete sentence, but a comma should not separate a linking verb from the clause that completes it." },
 
   { id:"ge40", type:"error", category:"error", sub:"Sentence Fragments", difficulty:3,
     prompt:"The proposal outlines three phases of implementation. ⟦Each phase requires separate approval from the regional board.⟧",
@@ -304,9 +304,9 @@ const PLACEMENT_POOL = [
     explanation:"Because the quotation continues as a single sentence after the interrupting dialogue tag, the first part should end with a comma, not a period, to show the sentence isn't finished. A period is tempting since the first part reads like a complete thought on its own, but the continuation with \"but\" shows it's grammatically one sentence split by the attribution." },
 
   { id:"ge46", type:"error", category:"error", sub:"Sentence Variety", difficulty:5,
-    prompt:"⟦The startup relied on a single supplier for its raw materials. This made the company vulnerable to price shocks and shipping delays.⟧",
-    options:["NO CHANGE","The startup relied on a single supplier for its raw materials, and this made the company vulnerable to price shocks and shipping delays, which was a problem.","Because the startup relied on a single supplier for its raw materials, the company was vulnerable to price shocks and shipping delays.","Relying on a single supplier for its raw materials, price shocks and shipping delays made the company vulnerable."], correctIndex:2,
-    explanation:"Combining with the subordinating conjunction \"Because\" efficiently shows the cause-effect relationship between the two ideas in one sentence, avoiding the choppy original. The first alternative is tempting since it also combines the sentences, but tacking on \"which was a problem\" adds redundant filler instead of tightening the sentence; the last option opens with a dangling modifier, since \"Relying on a single supplier\" should describe \"the company,\" not \"price shocks and shipping delays.\"" },
+    prompt:"⟦The startup relied on a single supplier for its raw materials, this made the company vulnerable to price shocks and shipping delays.⟧",
+    options:["NO CHANGE","Because the startup relied on a single supplier for its raw materials, the company was vulnerable to price shocks and shipping delays.","Although the startup relied on a single supplier for its raw materials, the company was vulnerable to price shocks and shipping delays.","Relying on a single supplier for its raw materials, price shocks and shipping delays left the startup vulnerable."], correctIndex:1,
+    explanation:"As written, the sentence is a comma splice: two independent clauses joined only by a comma. Combining them with the subordinating conjunction \"Because\" fixes the error and shows the cause-effect relationship between the ideas. \"Although\" is tempting because it is built the same way, but it signals contrast where the ideas show cause and effect; the last option opens with a dangling modifier, since \"Relying on a single supplier\" should describe the startup, not \"price shocks and shipping delays.\"" },
 
   { id:"ge47", type:"error", category:"error", sub:"Sentence Variety", difficulty:8,
     prompt:"⟦The senator voted against the bill. She had supported similar legislation in the past. Her constituents were surprised by the reversal.⟧",
@@ -339,9 +339,9 @@ const PLACEMENT_POOL = [
     explanation:"The true subject is the plural \"findings,\" not the nearer singular nouns \"report\" or \"fieldwork,\" so the plural verb \"remain\" is required. \"has remained\" is tempting because it echoes the nearby singular \"report,\" but that noun is only part of a prepositional phrase and cannot govern the verb." },
 
   { id:"gx3", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:9,
-    prompt:"What troubles regulators most about the proposed merger ⟦is⟧ the potential job losses and the resulting drop in regional tax revenue.",
-    options:["NO CHANGE","are","have been","were"], correctIndex:0,
-    explanation:"The subject is the singular noun clause \"What troubles regulators most about the proposed merger,\" so the singular verb \"is\" is correct as written, regardless of the plural-sounding complement that follows. \"are\" is tempting because it seems to agree with \"job losses,\" but a verb agrees with its subject, not with a complement on the other side of \"is.\"" },
+    prompt:"The biggest worry for regulators reviewing the proposed merger ⟦is⟧ the potential job losses and the resulting drop in regional tax revenue.",
+    options:["NO CHANGE","are","is being","are being"], correctIndex:0,
+    explanation:"The subject is the singular noun \"worry,\" so the singular verb \"is\" is correct as written. \"are\" is tempting because it seems to agree with \"job losses,\" but a verb agrees with its subject, not with the complement that follows it. \"is being\" and \"are being\" wrongly use the progressive with a linking verb that simply identifies what the worry is, and \"are being\" also has the wrong number." },
 
   { id:"gx4", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:2,
     prompt:"The committee members finished ⟦his⟧ report a day early, well before the deadline imposed by the board.",
@@ -516,8 +516,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb13", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
     prompt:"Regulators alleged that the three airlines had engaged in _____ price-fixing rather than simply responding independently to the same market pressures.",
-    options:["collusive","cooperative","collaborative","coordinated"], correctIndex:0,
-    explanation:"\"Collusive\" specifically denotes secret, illegitimate cooperation meant to defraud, matching the accusation of price-fixing. \"Cooperative\" and \"collaborative\" describe legitimate teamwork and would undercut the very charge of wrongdoing the sentence makes." },
+    options:["collusive","conclusive","coercive","competitive"], correctIndex:0,
+    explanation:"\"Collusive\" denotes secret, illegitimate cooperation meant to defraud, matching the charge that the airlines fixed prices together rather than acting independently. \"Conclusive\" is a lookalike meaning \"decisive\"; \"coercive\" implies one party forcing another rather than an agreement among equals; and \"competitive\" contradicts price-fixing, which is the opposite of competition." },
 
   { id:"wb14", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:9,
     prompt:"Employees rolled their eyes at the CEO's _____ tribute to himself in the annual report, larded with self-congratulation.",
@@ -545,9 +545,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Gaunt\" connotes an unhealthy, haggard thinness, matching the \"hollow\" cheeks and illness. \"Svelte\" and \"lithe\" both carry a positive, attractive connotation of slimness, jarringly inappropriate for someone wasted by chemotherapy." },
 
   { id:"wb19", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:10,
-    prompt:"Historians still struggle to convey the _____ of the famine, in which policy decisions killed millions who might otherwise have been saved.",
-    options:["magnitude","immensity","enormity","enormousness"], correctIndex:2,
-    explanation:"\"Enormity\" precisely denotes the moral monstrousness of an act, not merely its size — apt for a catastrophe caused by human policy. \"Magnitude,\" \"immensity,\" and \"enormousness\" all describe sheer scale neutrally, missing the connotation of moral horror the sentence demands; the distinction is genuinely subtle, since \"enormity\" is now widely misused as a mere synonym for great size, even among careful writers." },
+    prompt:"Historians still struggle to convey the moral _____ of the famine, in which officials knowingly let millions die.",
+    options:["enormity","enormousness","triviality","neutrality"], correctIndex:0,
+    explanation:"\"Enormity\" denotes the moral monstrousness of an act, not merely its size, which suits a catastrophe in which officials knowingly let millions die. \"Enormousness\" is the tempting lookalike, but it describes sheer scale and does not pair with \"moral\"; \"triviality\" and \"neutrality\" contradict the sentence, since knowingly letting millions die is neither minor nor morally neutral." },
 
   { id:"wb20", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
     prompt:"The toddler's _____ nature delighted her parents, who found her constant questions about how things worked more charming than exhausting.",
@@ -957,9 +957,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Vociferous\" combines voc-/voci- (\"voice\") with -fer- (\"to carry, bear\"), literally \"voice-carrying,\" describing loud, forceful expression — matching chants \"audible three blocks away.\" \"Physically violent\" is a trap because vociferous describes loudness of voice, not physical aggression." },
 
   { id:"vc26", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:10,
-    prompt:"Investors dismissed his plan to terraform a desert single-handedly as quixotic, admiring his idealism even as they doubted it could ever work. Which word is closest in meaning to \"quixotic\" as used here:",
-    options:["romantic","impractically idealistic","utopian","visionary"], correctIndex:1,
-    explanation:"\"Quixotic\" describes a noble but unrealistic idealism pursued without regard for practicality, matching investors who admired the \"idealism\" while doubting it \"could ever work\" — best matched by \"impractically idealistic.\" \"Visionary\" is a trap because it carries a positive sense of far-sighted, achievable insight, missing the impracticality that defines quixotic ambition." },
+    prompt:"Investors dismissed his plan to terraform a desert single-handedly as quixotic and politely declined to fund it. Which word is closest in meaning to \"quixotic\" as used here:",
+    options:["impractically idealistic","recklessly destructive","secretly self-serving","cautiously realistic"], correctIndex:0,
+    explanation:"\"Quixotic\" describes a noble but unrealistic idealism pursued without regard for practicality, best matched by \"impractically idealistic.\" \"Recklessly destructive\" and \"secretly self-serving\" are tempting misreadings of an extreme, solitary plan, but quixotic implies neither harm nor hidden motives; \"cautiously realistic\" is close to its opposite." },
 
   { id:"vc27", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:9,
     prompt:"The manager's terse email contained only three words: \"Approved. Proceed immediately.\" Which word is closest in meaning to \"terse\" as used here:",
@@ -1153,8 +1153,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx15", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:3,
     prompt:"Even after earning a large salary, she stayed frugal, packing her own lunch and repairing old furniture instead of buying new. Which word is closest in meaning to \"frugal\" as used here?",
-    options:["Stingy","Poor","Careful and economical with money","Generous"], correctIndex:2,
-    explanation:"Frugal describes sensible, deliberate thrift, a positive trait distinct from \"stingy,\" which implies an unwillingness to spend even when appropriate." },
+    options:["Careful and economical with money","Selfish and unwilling to share money","Short of money and struggling","Generous and free with money"], correctIndex:0,
+    explanation:"Frugal describes sensible, deliberate thrift, a positive trait. \"Selfish and unwilling to share money\" describes stinginess, which implies refusing to spend even when appropriate; \"short of money and struggling\" describes poverty, which her large salary rules out; and \"generous and free with money\" is close to the opposite." },
 
   { id:"vx16", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:5,
     prompt:"Despite ending their business partnership, the two founders kept things amicable, still meeting for coffee every month. Which word is closest in meaning to \"amicable\" as used here?",
@@ -1202,9 +1202,9 @@ const PLACEMENT_POOL = [
     explanation:"Diffident means lacking confidence, often to the point of shyness; the three wrong options all describe that same hesitant quality, while the true opposite is self-assured or confident." },
 
   { id:"vx25", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:10,
-    prompt:"Although every advisor in the room urged him to reconsider, the general remained obdurate, refusing to alter the battle plan by a single detail. What is the opposite of \"obdurate\" as used here?",
-    options:["compliant and open to persuasion","stubbornly inflexible","unyielding and firm","resolutely fixed in position"], correctIndex:0,
-    explanation:"Obdurate describes a stubborn refusal to change despite pressure; the three wrong options all describe that same unyielding quality, while the true opposite is compliant or open to persuasion." },
+    prompt:"Although every advisor in the room urged him to reconsider, the general remained obdurate. What is the opposite of \"obdurate\" as used here?",
+    options:["yielding and open to persuasion","rigid and set in his own ways","cautious and slow to reach a decision","calm and untroubled by pressure"], correctIndex:0,
+    explanation:"Obdurate describes a stubborn refusal to change despite pressure, so its opposite is yielding and open to persuasion. \"Rigid and set in his own ways\" is a trap because it restates obdurate rather than reversing it, while \"cautious and slow to reach a decision\" and \"calm and untroubled by pressure\" describe different traits, hesitation and composure, not a willingness to be persuaded." },
 
   /* ---- Reading comprehension (50, across 10 shared passages) ---- */
   { id:"rc1", type:"reading", category:"reading", sub:"Main Idea", difficulty:5, passageId:"RP1",
