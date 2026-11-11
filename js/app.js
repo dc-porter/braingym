@@ -29,6 +29,7 @@
   const SYNC_VERSION_KEY = "bloom-sync-version";   // last server version this phone saw
   const SYNC_CHANGED_KEY = "bloom-sync-changed";   // "true" while changes await upload
   const SYNC_FINGERPRINT_KEY = "bloom-sync-fingerprint"; // fingerprints of copies sent without hearing back
+  const SYNC_IMPORT_KEY = "bloom-sync-import";     // "true" until an import has replaced the saved copy
   const SYNC_MAX_UNCONFIRMED = 5;
   const SYNC_DELAY_MS = 3000;                      // upload this long after the last change
   let syncChangeSeq = 0;   // bumps on every change, so an upload can tell if more arrived meanwhile
@@ -943,6 +944,10 @@
     try{
       clearOurKeys();
       incoming.forEach(function(pair){ localStorage.setItem(pair[0], pair[1]); });
+      // An import replaces the saved copy on the server, so it must not go
+      // through the normal version check. Written inside this step so a failed
+      // restore rolls back without leaving it set.
+      localStorage.setItem(SYNC_IMPORT_KEY, "true");
       markChanged();
       return true;
     }catch(e){
@@ -1160,18 +1165,81 @@
     });
   }
 
+  function syncImportPending(){
+    try{ return localStorage.getItem(SYNC_IMPORT_KEY) === "true"; }catch(e){ return false; }
+  }
+
+  // Replaces the saved copy with this phone's (just-imported) progress. Rather
+  // than upload against the last version this phone saw, which may be long out
+  // of date, it asks the server for its current version first and uploads
+  // against that, or as a first save when the server has nothing. If the
+  // version moves in between it asks again, once. It never reports a conflict.
+  function importUpload(id, bundle, seq){
+    const attempt = function(retried){
+      return syncFetch("/api/progress?check=1", { method: "GET", headers: { "X-Bloom-Device-Id": id } }).then(function(c){
+        const d = c.data;
+        let lastSeen;
+        if(c.status === 200 && d && d.status === "none") lastSeen = "none";
+        else if(c.status === 200 && d && d.status === "ok" && Number.isInteger(d.version)) lastSeen = d.version;
+        else{ syncLastError = "the server is unavailable"; return; }
+        return fingerprintOf(bundle).then(function(fp){
+          if(fp){
+            const list = readUnconfirmed().filter(function(x){ return x !== fp; });
+            list.push(fp);
+            writeUnconfirmed(list);
+          }
+          return syncFetch("/api/progress", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-Bloom-Device-Id": id },
+            body: JSON.stringify({ lastSeenVersion: lastSeen, progress: bundle })
+          });
+        }).then(function(r){
+          if(r.status === 200 && r.data && r.data.status === "saved" && Number.isInteger(r.data.version)){
+            try{
+              localStorage.setItem(SYNC_VERSION_KEY, String(r.data.version));
+              localStorage.removeItem(SYNC_IMPORT_KEY);   // the saved copy is now the imported one
+              // Changes made during the upload are not in it: the flag stays for a normal upload.
+              if(syncChangeSeq === seq) localStorage.removeItem(SYNC_CHANGED_KEY);
+            }catch(e){ /* storage unavailable */ }
+            writeUnconfirmed([]);
+            syncLastAt = Date.now();
+          }else if(r.status === 409){
+            if(!retried) return attempt(true);
+            syncLastError = "the saved copy kept changing";   // not a conflict pause: tries again at the next chance
+          }else if(r.status === 413){
+            writeUnconfirmed([]);
+            syncPausedUntilOpen = "progress is too large to upload (over 4 MB)";
+          }else if(r.status === 400){
+            writeUnconfirmed([]);
+            syncPausedUntilOpen = "the server refused the upload";
+          }else{
+            syncLastError = "the server is unavailable";
+          }
+        });
+      });
+    };
+    return attempt(false).then(null, function(){ syncLastError = "no connection"; });
+  }
+
   function uploadNow(){
     if(syncTimer){ clearTimeout(syncTimer); syncTimer = null; }
-    if(syncPausedUntilOpen) return;
+    const importing = syncImportPending();
+    if(syncPausedUntilOpen && !importing) return;
     if(syncBusy){ syncAgain = true; return; }
     const id = readDeviceId();
     if(!id) return;
     const version = readSyncVersion();
     // Upload when something changed, or when this phone has never uploaded.
-    if(!syncChanged() && version !== null) return;
+    if(!syncChanged() && version !== null && !importing) return;
     let bundle;
     try{ bundle = progressBundle(); }catch(e){ return; }
-    if(!hasProgress(bundle)) return;   // never upload an empty bundle
+    if(!hasProgress(bundle)){
+      // An import that has since been reset away leaves nothing to replace the saved copy with.
+      if(importing){ try{ localStorage.removeItem(SYNC_IMPORT_KEY); }catch(e){ /* storage unavailable */ } }
+      return;   // never upload an empty bundle
+    }
+    // An import replaces the saved copy, so a conflict noted earlier no longer applies.
+    if(importing) syncPausedUntilOpen = null;
     const body = JSON.stringify({ lastSeenVersion: version === null ? "none" : version, progress: bundle });
     if(new TextEncoder().encode(body).length > SYNC_MAX_BYTES){
       syncPausedUntilOpen = "progress is too large to upload (over 4 MB)";
@@ -1183,6 +1251,14 @@
     syncBusy = true;
     syncLastError = null;
     refreshSyncStatus();
+    const finish = function(){
+      syncBusy = false;
+      const again = syncAgain && !syncLastError && (!syncPausedUntilOpen || syncImportPending());
+      syncAgain = false;
+      refreshSyncStatus();
+      if(again) uploadNow();
+    };
+    if(importing){ importUpload(id, bundle, seq).then(finish); return; }
     fingerprintOf(bundle).then(function(fp){
       // Recorded before the request goes out, so a reply that never arrives
       // still leaves a note of what was sent.
@@ -1220,13 +1296,7 @@
       }
     }, function(){
       syncLastError = "no connection";                 // outcome unknown: keep the note
-    }).then(function(){
-      syncBusy = false;
-      const again = syncAgain && !syncLastError && !syncPausedUntilOpen;
-      syncAgain = false;
-      refreshSyncStatus();
-      if(again) uploadNow();
-    });
+    }).then(finish);
   }
   function syncStatusText(){
     if(!readDeviceId()) return "Sync paused — this phone has no device ID.";
