@@ -2,7 +2,7 @@
    Same-origin requests always try the network first (bypassing the HTTP
    cache) so a freshly deployed version is picked up immediately whenever
    the device is online; the cache is only a fallback for offline use. */
-const CACHE_NAME = "bloom-shell-v2";
+const CACHE_NAME = "bloom-shell-v3";
 const SHELL_FILES = [
   "./",
   "./index.html",
@@ -34,6 +34,9 @@ self.addEventListener("activate", function(event){
 
 self.addEventListener("fetch", function(event){
   if(event.request.method !== "GET") return;
+  // API replies are live data, never part of the app shell: leave them to
+  // the browser so none is cached or served stale when offline.
+  if(new URL(event.request.url).pathname.indexOf("/api/") === 0) return;
   const sameOrigin = new URL(event.request.url).origin === self.location.origin;
 
   if(sameOrigin){
