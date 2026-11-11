@@ -18,7 +18,27 @@
     try{
       if(val === null || val === undefined) localStorage.removeItem(PREFIX + key);
       else localStorage.setItem(PREFIX + key, JSON.stringify(val));
+      if(key !== "deviceId") markChanged();
     }catch(e){ /* storage unavailable — app still works in-memory for this session */ }
+  }
+
+  /* ---------------- sync bookkeeping ---------------- */
+  // Declared straight after save() because save() runs while the app is still
+  // starting up. Both keys sit outside PREFIX, like the device ID, so Export,
+  // Import and Reset never see them.
+  const SYNC_VERSION_KEY = "bloom-sync-version";   // last server version this phone saw
+  const SYNC_CHANGED_KEY = "bloom-sync-changed";   // "true" while changes await upload
+  const SYNC_DELAY_MS = 3000;                      // upload this long after the last change
+  let syncChangeSeq = 0;   // bumps on every change, so an upload can tell if more arrived meanwhile
+  let syncTimer = null;
+  function markChanged(){
+    syncChangeSeq++;
+    try{ localStorage.setItem(SYNC_CHANGED_KEY, "true"); }catch(e){ /* storage unavailable */ }
+    scheduleUpload();
+  }
+  function scheduleUpload(){
+    if(syncTimer) clearTimeout(syncTimer);
+    syncTimer = setTimeout(function(){ syncTimer = null; uploadNow(); }, SYNC_DELAY_MS);
   }
 
   /* ---------------- device id ---------------- */
@@ -758,6 +778,7 @@
     activeLesson = null;
     save("activeLesson", null);
     navigate("lesson-result");
+    uploadNow();
   }
   function repeatLesson(){
     if(!lastLessonResult) return goLessonSetup();
@@ -920,6 +941,7 @@
     try{
       clearOurKeys();
       incoming.forEach(function(pair){ localStorage.setItem(pair[0], pair[1]); });
+      markChanged();
       return true;
     }catch(e){
       // Put back exactly what was there — a half-written restore is worse
@@ -1020,6 +1042,123 @@
       ["Lessons", lessons],
       ["Sub-skill records", skillCount ? String(skillCount) : "none"]
     ] };
+  }
+
+  /* ---------------- background upload ---------------- */
+  // Upload only. Nothing here reads progress from the server, and no server
+  // reply ever changes what is stored on the phone except the two sync keys.
+  const SYNC_MAX_BYTES = 4 * 1024 * 1024;
+  const SYNC_TIMEOUT_MS = 30000;
+  let syncBusy = false;
+  let syncAgain = false;          // a newer copy is waiting for the upload in flight to finish
+  let syncPausedUntilOpen = null; // reason; set by a conflict or a refusal, cleared only by reopening
+  let syncLastError = null;       // reason the last try failed; the next chance retries
+  let syncLastAt = null;          // time of the last successful upload this session
+
+  function readSyncVersion(){
+    let n = NaN;
+    try{ n = parseInt(localStorage.getItem(SYNC_VERSION_KEY), 10); }catch(e){ /* storage unavailable */ }
+    return Number.isInteger(n) && n >= 1 ? n : null;
+  }
+  function syncChanged(){
+    try{ return localStorage.getItem(SYNC_CHANGED_KEY) === "true"; }catch(e){ return false; }
+  }
+  function readDeviceId(){
+    try{ return localStorage.getItem(DEVICE_ID_KEY) || null; }catch(e){ return null; }
+  }
+  // The same records Export walks. The deviceId record is left out: the
+  // server keys rows by a scrambled ID, so the raw ID must not ride along
+  // inside the progress.
+  function progressBundle(){
+    const data = {};
+    for(let i = 0; i < localStorage.length; i++){
+      const key = localStorage.key(i);
+      if(!key || key.indexOf(PREFIX) !== 0 || key === PREFIX + "deviceId") continue;
+      const raw = localStorage.getItem(key);
+      try{ data[key.slice(PREFIX.length)] = JSON.parse(raw); }
+      catch(e){ data[key.slice(PREFIX.length)] = raw; }
+    }
+    return data;
+  }
+  function hasProgress(bundle){
+    return !!bundle.placementResult || (Array.isArray(bundle.history) && bundle.history.length > 0);
+  }
+  // The status line lives in the settings sheet; re-render only while it is
+  // open, so no other screen is ever redrawn by a sync.
+  function refreshSyncStatus(){ if(showSettings) render(); }
+
+  function uploadNow(){
+    if(syncTimer){ clearTimeout(syncTimer); syncTimer = null; }
+    if(syncPausedUntilOpen) return;
+    if(syncBusy){ syncAgain = true; return; }
+    const id = readDeviceId();
+    if(!id) return;
+    const version = readSyncVersion();
+    // Upload when something changed, or when this phone has never uploaded.
+    if(!syncChanged() && version !== null) return;
+    let bundle;
+    try{ bundle = progressBundle(); }catch(e){ return; }
+    if(!hasProgress(bundle)) return;   // never upload an empty bundle
+    const body = JSON.stringify({ lastSeenVersion: version === null ? "none" : version, progress: bundle });
+    if(new TextEncoder().encode(body).length > SYNC_MAX_BYTES){
+      syncPausedUntilOpen = "progress is too large to upload (over 4 MB)";
+      refreshSyncStatus();
+      return;
+    }
+
+    const seq = syncChangeSeq;
+    syncBusy = true;
+    syncLastError = null;
+    refreshSyncStatus();
+    const abort = typeof AbortController === "function" ? new AbortController() : null;
+    const abortTimer = abort ? setTimeout(function(){ abort.abort(); }, SYNC_TIMEOUT_MS) : null;
+    fetch("/api/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Bloom-Device-Id": id },
+      body: body,
+      signal: abort ? abort.signal : undefined
+    }).then(function(res){
+      return res.json().catch(function(){ return null; }).then(function(data){ return { status: res.status, data: data }; });
+    }).then(function(r){
+      if(r.status === 200 && r.data && r.data.status === "saved" && Number.isInteger(r.data.version)){
+        try{
+          localStorage.setItem(SYNC_VERSION_KEY, String(r.data.version));
+          // Changes made while this upload was in flight are not in it, so
+          // the flag stays set for the next one.
+          if(syncChangeSeq === seq) localStorage.removeItem(SYNC_CHANGED_KEY);
+        }catch(e){ /* storage unavailable */ }
+        syncLastAt = Date.now();
+      }else if(r.status === 409){
+        // Someone else's copy is newer. Change nothing here; keep the flag,
+        // and leave it until the app next opens.
+        syncPausedUntilOpen = "the saved copy was changed somewhere else";
+      }else if(r.status === 413){
+        syncPausedUntilOpen = "progress is too large to upload (over 4 MB)";
+      }else if(r.status === 400){
+        syncPausedUntilOpen = "the server refused the upload";
+      }else{
+        syncLastError = "the server is unavailable";
+      }
+    }, function(){
+      syncLastError = "no connection";
+    }).then(function(){
+      if(abortTimer) clearTimeout(abortTimer);
+      syncBusy = false;
+      const again = syncAgain && !syncLastError;
+      syncAgain = false;
+      refreshSyncStatus();
+      if(again) uploadNow();
+    });
+  }
+  function syncStatusText(){
+    if(!readDeviceId()) return "Sync paused — this phone has no device ID.";
+    if(syncPausedUntilOpen) return "Sync paused — " + syncPausedUntilOpen + ". Will try again next time Bloom opens.";
+    if(syncBusy) return "Syncing…";
+    if(syncLastError) return "Sync paused — " + syncLastError + ". Will retry.";
+    const v = readSyncVersion();
+    if(v === null) return "Not synced yet";
+    if(syncChanged()) return (hasProgress(progressBundle()) ? "Changes waiting to sync" : "Nothing to sync yet") + " · last synced version " + v;
+    return "Synced, version " + v + (syncLastAt ? ", at " + formatTime(syncLastAt) : "");
   }
 
   /* ---------------- settings / reset ---------------- */
@@ -1434,6 +1573,7 @@
         '<button class="btn btn-outline" data-action="export-progress">Export my progress</button>' +
         '<button class="btn btn-outline" data-action="import-progress">Import my progress</button>' +
         '<button class="btn btn-outline" style="color:var(--danger); border-color:var(--danger-bg);" data-action="reset-all">Reset all progress</button>' +
+        '<p class="sub center" style="font-size:.82rem;" data-sync-status>' + esc(syncStatusText()) + "</p>" +
         (backupStatus
           ? '<div class="card-soft" style="' + (backupStatus.ok
               ? "border-color:var(--success-bg); color:var(--success);"
@@ -1681,6 +1821,11 @@
     // how the app was launched (Safari tab vs. home-screen icon), so the
     // app opens the same way every time.
     navigate("home");
+    // Background upload when the app opens, comes back to the front, or gets
+    // its connection back. Nothing is sent when the app closes.
+    document.addEventListener("visibilitychange", function(){ if(document.visibilityState === "visible") uploadNow(); });
+    window.addEventListener("online", function(){ uploadNow(); });
+    uploadNow();
     if("serviceWorker" in navigator){
       const sw = navigator.serviceWorker;
       // Only a *change* of controller (not the first-ever install claiming
