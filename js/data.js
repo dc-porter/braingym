@@ -103,12 +103,12 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","was escorted","have been escorted","are being escorted"], correctIndex:1,
     explanation:"\"Along with several aides and a security detail\" is a parenthetical phrase, not part of the grammatical subject, so the verb must agree with the singular \"senator\" alone: \"was escorted.\" \"were escorted\" is tempting because the sentence mentions several people, but only \"senator\" actually controls the verb." },
 
-  { id:"ge6", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:7,
+  { id:"ge6", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:6,
     prompt:"When the committee opened the file last March, attached to the grant proposal ⟦was⟧ several appendices detailing the project's budget and timeline.",
     options:["NO CHANGE","has been","were","have been"], correctIndex:2,
     explanation:"In this inverted clause, the subject \"several appendices\" follows the verb and is plural, so it needs a plural verb, and the past-tense frame set by \"opened the file last March\" makes that verb \"were.\" \"was\" is the tempting default because the verb appears before the reader reaches the plural subject; \"has been\" and \"have been\" shift into the present perfect, which clashes with a completed past event." },
 
-  { id:"ge7", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:3,
+  { id:"ge7", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:4,
     prompt:"When the surgeon consulted with the resident before the procedure, ⟦she⟧ reviewed the imaging results one final time.",
     options:["NO CHANGE","which","the surgeon","the surgeon, she,"], correctIndex:2,
     explanation:"Since both \"the surgeon\" and \"the resident\" could plausibly be female, \"she\" is an ambiguous pronoun reference; replacing it with \"the surgeon\" removes the ambiguity. \"which\" is a relative pronoun for things, not people, and cannot serve as the subject of this main clause. \"the surgeon, she,\" names the subject twice, creating a redundant double subject." },
@@ -268,7 +268,7 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","Ensuring every reading, which stayed within tolerance","To ensure that every reading stayed within tolerance","This ensured that every reading stayed within tolerance"], correctIndex:3,
     explanation:"\"Ensuring that every reading stayed within tolerance\" has no subject or finite verb, making it a fragment; \"This ensured\" supplies both, creating a complete sentence. Both other alternatives are tempting since they rephrase the wording, but each keeps a participial or infinitive phrase with no finite main verb, so the fragment persists." },
 
-  { id:"ge39", type:"error", category:"error", sub:"Sentence Fragments", difficulty:8,
+  { id:"ge39", type:"error", category:"error", sub:"Sentence Fragments", difficulty:6,
     prompt:"The consultant's report reached a striking conclusion. ⟦Its central claim being that automation would eliminate one in four manufacturing jobs within the decade⟧.",
     options:["NO CHANGE","Its central claim was that automation would eliminate one in four manufacturing jobs within the decade","Its central claim was, that automation would eliminate one in four manufacturing jobs within the decade","Its central claim, that automation would eliminate one in four manufacturing jobs within the decade"], correctIndex:1,
     explanation:"\"Being\" is a participle, not a finite verb, so the original has no main verb and is a fragment; replacing it with the finite verb \"was\" makes the sentence complete. The last option is also a fragment: it renames the claim with an appositive but never says anything about it. \"was, that\" is tempting because it is a complete sentence, but a comma should not separate a linking verb from the clause that completes it." },
@@ -338,7 +338,7 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","remain","is remaining","has remained"], correctIndex:1,
     explanation:"The true subject is the plural \"findings,\" not the nearer singular nouns \"report\" or \"fieldwork,\" so the plural verb \"remain\" is required. \"has remained\" is tempting because it echoes the nearby singular \"report,\" but that noun is only part of a prepositional phrase and cannot govern the verb." },
 
-  { id:"gx3", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:9,
+  { id:"gx3", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:7,
     prompt:"The biggest worry for regulators reviewing the proposed merger ⟦is⟧ the potential job losses and the resulting drop in regional tax revenue.",
     options:["NO CHANGE","are","is being","are being"], correctIndex:0,
     explanation:"The subject is the singular noun \"worry,\" so the singular verb \"is\" is correct as written. \"are\" is tempting because it seems to agree with \"job losses,\" but a verb agrees with its subject, not with the complement that follows it. \"is being\" and \"are being\" wrongly use the progressive with a linking verb that simply identifies what the worry is, and \"are being\" also has the wrong number." },
@@ -514,7 +514,7 @@ const PLACEMENT_POOL = [
     options:["miserly","frugal","cheap","stingy"], correctIndex:1,
     explanation:"\"Frugal\" is the neutral-to-positive term for careful spending, matching the admiring \"celebrated.\" \"Miserly\" describes the same behavior but with a strongly negative connotation of ungenerous hoarding, which clashes with the sentence's praise." },
 
-  { id:"wb13", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
+  { id:"wb13", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"Regulators alleged that the three airlines had engaged in _____ price-fixing rather than simply responding independently to the same market pressures.",
     options:["conclusive","coercive","competitive","collusive"], correctIndex:3,
     explanation:"\"Collusive\" denotes secret, illegitimate cooperation meant to defraud, matching the charge that the airlines fixed prices together rather than acting independently. \"Conclusive\" is a lookalike meaning \"decisive\"; \"coercive\" implies one party forcing another rather than an agreement among equals; and \"competitive\" contradicts price-fixing, which is the opposite of competition." },
@@ -544,7 +544,7 @@ const PLACEMENT_POOL = [
     options:["slender","svelte","gaunt","lithe"], correctIndex:2,
     explanation:"\"Gaunt\" connotes an unhealthy, haggard thinness, matching the \"hollow\" cheeks and illness. \"Svelte\" and \"lithe\" both carry a positive, attractive connotation of slimness, jarringly inappropriate for someone wasted by chemotherapy." },
 
-  { id:"wb19", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:10,
+  { id:"wb19", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:7,
     prompt:"Historians still struggle to convey the moral _____ of the famine, in which officials knowingly let millions die.",
     options:["enormousness","triviality","enormity","duration"], correctIndex:2,
     explanation:"\"Enormity\" denotes the moral monstrousness of an act, not merely its size, which suits a catastrophe in which officials knowingly let millions die. \"Enormousness\" is the tempting lookalike, but it describes sheer scale and does not pair with \"moral\"; \"triviality\" contradicts the sentence, since knowingly letting millions die is not a minor matter, and \"duration\" names how long the famine lasted, which cannot carry a moral quality." },
@@ -956,7 +956,7 @@ const PLACEMENT_POOL = [
     options:["physically violent","loudly and forcefully expressive","poorly organized","legally protected"], correctIndex:1,
     explanation:"\"Vociferous\" combines voc-/voci- (\"voice\") with -fer- (\"to carry, bear\"), literally \"voice-carrying,\" describing loud, forceful expression — matching chants \"audible three blocks away.\" \"Physically violent\" is a trap because vociferous describes loudness of voice, not physical aggression." },
 
-  { id:"vc26", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:10,
+  { id:"vc26", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:7,
     prompt:"Investors dismissed his plan to terraform a desert single-handedly as quixotic and politely declined to fund it. Which word is closest in meaning to \"quixotic\" as used here:",
     options:["recklessly destructive","secretly self-serving","cautiously realistic","impractically idealistic"], correctIndex:3,
     explanation:"\"Quixotic\" describes a noble but unrealistic idealism pursued without regard for practicality, best matched by \"impractically idealistic.\" \"Recklessly destructive\" and \"secretly self-serving\" are tempting misreadings of an extreme, solitary plan, but quixotic implies neither harm nor hidden motives; \"cautiously realistic\" is close to its opposite." },
@@ -1201,7 +1201,7 @@ const PLACEMENT_POOL = [
     options:["shy and hesitant","timid and unsure","modestly reserved","self-assured and confident"], correctIndex:3,
     explanation:"Diffident means lacking confidence, often to the point of shyness; the three wrong options all describe that same hesitant quality, while the true opposite is self-assured or confident." },
 
-  { id:"vx25", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:10,
+  { id:"vx25", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"Although every advisor in the room urged him to reconsider, the general remained obdurate. What is the opposite of \"obdurate\" as used here?",
     options:["rigid and set in his own ways","yielding and open to persuasion","cautious and slow to reach a decision","calm and untroubled by pressure"], correctIndex:1,
     explanation:"Obdurate describes a stubborn refusal to change despite pressure, so its opposite is yielding and open to persuasion. \"Rigid and set in his own ways\" is a trap because it restates obdurate rather than reversing it, while \"cautious and slow to reach a decision\" and \"calm and untroubled by pressure\" describe different traits, hesitation and composure, not a willingness to be persuaded." },
