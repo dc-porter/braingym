@@ -516,7 +516,7 @@ const PLACEMENT_POOL = [
 
   { id:"wb13", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
     prompt:"Regulators alleged that the three airlines had engaged in _____ price-fixing rather than simply responding independently to the same market pressures.",
-    options:["collusive","conclusive","coercive","competitive"], correctIndex:0,
+    options:["conclusive","coercive","competitive","collusive"], correctIndex:3,
     explanation:"\"Collusive\" denotes secret, illegitimate cooperation meant to defraud, matching the charge that the airlines fixed prices together rather than acting independently. \"Conclusive\" is a lookalike meaning \"decisive\"; \"coercive\" implies one party forcing another rather than an agreement among equals; and \"competitive\" contradicts price-fixing, which is the opposite of competition." },
 
   { id:"wb14", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:9,
@@ -546,8 +546,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb19", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:10,
     prompt:"Historians still struggle to convey the moral _____ of the famine, in which officials knowingly let millions die.",
-    options:["enormity","enormousness","triviality","neutrality"], correctIndex:0,
-    explanation:"\"Enormity\" denotes the moral monstrousness of an act, not merely its size, which suits a catastrophe in which officials knowingly let millions die. \"Enormousness\" is the tempting lookalike, but it describes sheer scale and does not pair with \"moral\"; \"triviality\" and \"neutrality\" contradict the sentence, since knowingly letting millions die is neither minor nor morally neutral." },
+    options:["enormousness","triviality","enormity","duration"], correctIndex:2,
+    explanation:"\"Enormity\" denotes the moral monstrousness of an act, not merely its size, which suits a catastrophe in which officials knowingly let millions die. \"Enormousness\" is the tempting lookalike, but it describes sheer scale and does not pair with \"moral\"; \"triviality\" contradicts the sentence, since knowingly letting millions die is not a minor matter, and \"duration\" names how long the famine lasted, which cannot carry a moral quality." },
 
   { id:"wb20", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
     prompt:"The toddler's _____ nature delighted her parents, who found her constant questions about how things worked more charming than exhausting.",
@@ -958,7 +958,7 @@ const PLACEMENT_POOL = [
 
   { id:"vc26", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:10,
     prompt:"Investors dismissed his plan to terraform a desert single-handedly as quixotic and politely declined to fund it. Which word is closest in meaning to \"quixotic\" as used here:",
-    options:["impractically idealistic","recklessly destructive","secretly self-serving","cautiously realistic"], correctIndex:0,
+    options:["recklessly destructive","secretly self-serving","cautiously realistic","impractically idealistic"], correctIndex:3,
     explanation:"\"Quixotic\" describes a noble but unrealistic idealism pursued without regard for practicality, best matched by \"impractically idealistic.\" \"Recklessly destructive\" and \"secretly self-serving\" are tempting misreadings of an extreme, solitary plan, but quixotic implies neither harm nor hidden motives; \"cautiously realistic\" is close to its opposite." },
 
   { id:"vc27", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:9,
@@ -1153,7 +1153,7 @@ const PLACEMENT_POOL = [
 
   { id:"vx15", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:3,
     prompt:"Even after earning a large salary, she stayed frugal, packing her own lunch and repairing old furniture instead of buying new. Which word is closest in meaning to \"frugal\" as used here?",
-    options:["Careful and economical with money","Selfish and unwilling to share money","Short of money and struggling","Generous and free with money"], correctIndex:0,
+    options:["Selfish and unwilling to share money","Short of money and struggling","Careful and economical with money","Generous and free with money"], correctIndex:2,
     explanation:"Frugal describes sensible, deliberate thrift, a positive trait. \"Selfish and unwilling to share money\" describes stinginess, which implies refusing to spend even when appropriate; \"short of money and struggling\" describes poverty, which her large salary rules out; and \"generous and free with money\" is close to the opposite." },
 
   { id:"vx16", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:5,
@@ -1203,7 +1203,7 @@ const PLACEMENT_POOL = [
 
   { id:"vx25", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:10,
     prompt:"Although every advisor in the room urged him to reconsider, the general remained obdurate. What is the opposite of \"obdurate\" as used here?",
-    options:["yielding and open to persuasion","rigid and set in his own ways","cautious and slow to reach a decision","calm and untroubled by pressure"], correctIndex:0,
+    options:["rigid and set in his own ways","yielding and open to persuasion","cautious and slow to reach a decision","calm and untroubled by pressure"], correctIndex:1,
     explanation:"Obdurate describes a stubborn refusal to change despite pressure, so its opposite is yielding and open to persuasion. \"Rigid and set in his own ways\" is a trap because it restates obdurate rather than reversing it, while \"cautious and slow to reach a decision\" and \"calm and untroubled by pressure\" describe different traits, hesitation and composure, not a willingness to be persuaded." },
 
   /* ---- Reading comprehension (50, across 10 shared passages) ---- */
