@@ -78,10 +78,10 @@ const CATEGORY_INSIGHTS = {
 /* =================== PLACEMENT TEST POOL =================== */
 const PLACEMENT_POOL = [
   /* ---- Grammar & sentence structure (50) ---- */
-  { id:"ge1", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:9,
-    prompt:"Politics, as practiced in small municipalities where budgets are tight and rivalries run deep, ⟦often determine⟧ which infrastructure projects receive funding.",
-    options:["NO CHANGE","have often determined","are often determining","often determines"], correctIndex:3,
-    explanation:"Though it ends in -s, \"politics\" here names a single field or activity (like \"economics\" or \"mathematics\"), not a plural collection of individual policies, so it takes a singular verb: \"often determines.\" The intervening plural nouns \"budgets\" and \"rivalries\" don't change that. \"have often determined\" is tempting because it sounds like it's agreeing with a plural subject and adds a plausible perfect aspect, but it keeps the same plural-agreement error as the original." },
+  { id:"ge1", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:5,
+    prompt:"Patronage, as practiced in small municipalities where budgets are tight and rivalries run deep, ⟦often determine⟧ which infrastructure projects receive funding.",
+    options:["NO CHANGE","have often determined","often determines","are often determining"], correctIndex:2,
+    explanation:"The subject is the singular noun \"patronage,\" so the verb must be singular: \"often determines.\" The plural nouns \"municipalities,\" \"budgets\" and \"rivalries\" sit between the subject and the verb and don't change that. The other options are plural forms that would agree with one of those nouns." },
 
   { id:"ge2", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:3,
     prompt:"Each of the proposed amendments ⟦require⟧ a two-thirds majority vote before it can take effect.",
@@ -123,10 +123,10 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","me","I","ourselves"], correctIndex:2,
     explanation:"\"Myself\" is a reflexive pronoun and cannot serve as part of a subject; the compound subject needs the nominative \"I.\" \"me\" is tempting because it sounds appropriately modest, but as a subject it must be nominative, not objective." },
 
-  { id:"ge10", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:5,
-    prompt:"The new intern already writes more polished reports than ⟦him⟧, according to the managing editor's assessment.",
-    options:["NO CHANGE","he","he did","himself"], correctIndex:1,
-    explanation:"The comparison is shorthand for \"than he writes,\" so the pronoun must be in the subject form \"he,\" not the object form \"him.\" \"he did\" is tempting since it supplies a verb, but its past tense clashes with the present-tense \"writes\" used earlier in the sentence." },
+  { id:"ge10", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:4,
+    prompt:"The new safety regulations, written by a panel of engineers, are so strict that many small businesses struggle to comply with ⟦it⟧.",
+    options:["NO CHANGE","them","they","themselves"], correctIndex:1,
+    explanation:"The pronoun stands for \"regulations,\" a plural noun, and it is the object of \"comply with,\" so it must be the plural object form \"them.\" \"it\" is singular and would only match a singular noun such as \"panel,\" \"they\" is the subject form, and \"themselves\" is a reflexive with no subject to reflect." },
 
   { id:"ge11", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:3,
     prompt:"The policy, ⟦which⟧ was drafted by a bipartisan committee, has been praised by economists across the political spectrum.",
@@ -158,10 +158,10 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","has passed","was passing","passed"], correctIndex:3,
     explanation:"\"Last year\" and \"debated\" establish a completed past action, so the parallel verb needs the simple past \"passed.\" \"has passed\" is tempting because it also suggests completion, but the present perfect wrongly ties the event to the present moment instead of keeping it in the finished past." },
 
-  { id:"ge17", type:"error", category:"error", sub:"Verb Tense Consistency", difficulty:10,
-    prompt:"If the company had diversified its supply chain a decade ago, it ⟦would have avoided⟧ the shortages that are currently crippling production.",
-    options:["NO CHANGE","would avoid","will have avoided","would have been avoiding"], correctIndex:1,
-    explanation:"This is a mixed conditional: the if-clause describes an unreal past action (\"had diversified\"), but the result clause describes a hypothetical PRESENT state, confirmed by \"are currently crippling.\" A past condition paired with a present result takes \"would\" plus the base verb, \"would avoid,\" not the past-referring \"would have avoided.\" \"would have avoided\" sounds like the obviously correct third-conditional form and is fluent on its own, but it wrongly places the avoided shortages in the past instead of describing the present state that would exist now had the company acted differently." },
+  { id:"ge17", type:"error", category:"error", sub:"Verb Tense Consistency", difficulty:7,
+    prompt:"If the company had diversified its supply chain a decade ago, it ⟦would have been operating⟧ at full capacity today instead of idling its factories.",
+    options:["NO CHANGE","will be operating","would have operated","would be operating"], correctIndex:3,
+    explanation:"This is a mixed conditional: the if-clause describes an unreal past action (\"had diversified\"), but the result is a hypothetical present state, marked by \"today.\" A past condition with a present result takes \"would\" plus the base verb: \"would be operating.\" \"would have been operating\" and \"would have operated\" look like the third conditional, which refers to a past result, so they clash with \"today.\" \"will be operating\" ignores that the condition is unreal." },
 
   { id:"ge18", type:"error", category:"error", sub:"Verb Tense Consistency", difficulty:5,
     prompt:"The novel is set in a dystopian future where technology has replaced most human labor, and citizens ⟦depended⟧ entirely on state-issued rations.",
@@ -348,10 +348,10 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","their","its","one's"], correctIndex:1,
     explanation:"The antecedent \"committee members\" is plural, so it needs the plural pronoun \"their,\" not the singular \"his.\" \"its\" is tempting as another common pronoun, but it's reserved for a single non-personal antecedent, not a group of people." },
 
-  { id:"gx5", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:6,
-    prompt:"The regulators delayed approval of the drug for nearly a year without citing specific concerns, ⟦which⟧ alarmed the company's investors.",
-    options:["NO CHANGE","a delay that","and this","it"], correctIndex:1,
-    explanation:"\"which\" has no single clear antecedent — it could seem to point to \"the drug\" or \"specific concerns\" — when the writer actually means the act of delaying itself, so replacing it with the concrete noun phrase \"a delay that\" removes the ambiguity. \"and this\" is tempting since \"this\" often sums up a whole preceding idea, but it's still a vague pronoun standing in for no clear noun, and it awkwardly turns the sentence into two coordinated clauses instead of one subordinate one." },
+  { id:"gx5", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:5,
+    prompt:"The regulators delayed approval of the drug for nearly a year without citing specific concerns, ⟦it⟧ alarmed the company's investors.",
+    options:["NO CHANGE","a delay that","this","a delay, that"], correctIndex:1,
+    explanation:"As written, \"it\" starts a second independent clause joined to the first with only a comma, a comma splice, and it has no clear noun to refer to. Replacing it with \"a delay that\" renames the delay and ties it to what alarmed the investors, which fixes both problems. \"this\" creates the same comma splice with a vague pronoun, and \"a delay, that\" puts a comma before \"that,\" which introduces an essential clause and should not be set off." },
 
   { id:"gx6", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:10,
     prompt:"The prize ultimately went to Dr. Alvarez, ⟦than whom⟧ no other researcher on the panel had published more extensively on coral bleaching.",
@@ -393,10 +393,10 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","Because the dog was barking loudly all night, the neighbors finally called the police.","Barking loudly all night, the police were finally called by the neighbors about the dog.","The neighbors finally called the police, barking loudly all night, about the dog."], correctIndex:1,
     explanation:"As written, \"Barking loudly all night\" grammatically describes \"the neighbors,\" absurdly suggesting they were the ones barking; rephrasing with \"Because the dog was barking loudly all night\" gives the modifier its correct, explicit subject. The last option is tempting since it repositions the phrase, but placing it right before \"about the dog\" still leaves it ambiguously attached to \"the police\" or the act of calling, not to the dog." },
 
-  { id:"gx14", type:"error", category:"error", sub:"Modifier Placement", difficulty:5,
+  { id:"gx14", type:"error", category:"error", sub:"Modifier Placement", difficulty:4,
     prompt:"⟦Students who study consistently improve⟧ their retention of new material over the course of a semester.",
-    options:["NO CHANGE","Consistently, students who study improve","Students who consistently study improve","Students, who study consistently, improve"], correctIndex:2,
-    explanation:"\"consistently\" sits ambiguously between \"study\" and \"improve,\" so it's unclear whether the sentence means studying consistently or improving consistently — a squinting modifier. \"Students who consistently study improve\" ties the word clearly to \"study.\" The last option is tempting since it also repositions the phrase, but setting the clause off with commas wrongly implies all students are being discussed, not just those who study." },
+    options:["NO CHANGE","Students consistently who study improve","Students, who study consistently, improve","Students who consistently study improve"], correctIndex:3,
+    explanation:"In the original, \"consistently\" sits between \"study\" and \"improve,\" so it could modify either verb. Placing it before \"study\" makes the sentence clearly about students who study consistently. \"Students consistently who study\" misplaces the adverb, and the commas in the other option wrongly imply that all students study consistently." },
 
   { id:"gx15", type:"error", category:"error", sub:"Modifier Placement", difficulty:10,
     prompt:"⟦Its findings corroborated by three independent laboratories⟧, the research team's paper was accepted for publication without further peer review.",
@@ -499,10 +499,10 @@ const PLACEMENT_POOL = [
     options:["noisome","noisy","odious","obnoxious"], correctIndex:0,
     explanation:"\"Noisome\" means offensive, especially foul-smelling, despite its resemblance to \"noisy\" — a classic trap, since the word actually derives from \"annoy,\" not \"noise.\" \"Noisy\" fits the sound-alike temptation exactly wrong; \"odious\" and \"obnoxious\" both describe general hatefulness or unpleasantness but don't specifically denote a bad smell, the quality the runoff calls for." },
 
-  { id:"wb10", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:4,
+  { id:"wb10", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:3,
     prompt:"Though normally talkative, the witness grew strangely _____ the moment the defendant's name was mentioned.",
-    options:["reluctant","reticent","evasive","hesitant"], correctIndex:1,
-    explanation:"\"Reticent\" means disinclined to speak, matching a witness who suddenly stops talking. \"Reluctant\" is the common confusable — it means unwilling to act in general, not specifically unwilling to speak — so it fits the silence less precisely." },
+    options:["resentful","reticent","restless","reminiscent"], correctIndex:1,
+    explanation:"\"Reticent\" means inclined to be silent or uncommunicative in speech, matching a talkative witness who suddenly says little. \"Resentful\" and \"restless\" describe feelings that don't contrast with \"normally talkative,\" and \"reminiscent\" means given to remembering." },
 
   { id:"wb11", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
     prompt:"Long after the data had disproven his hypothesis, the researcher's _____ refusal to revise the paper baffled his colleagues.",
@@ -529,10 +529,10 @@ const PLACEMENT_POOL = [
     options:["timid","cowardly","hesitant","prudent"], correctIndex:3,
     explanation:"\"Prudent\" casts caution as wise judgment, matching the board's praise and the positive outcome. \"Timid\" and \"cowardly\" describe the same caution as a character flaw born of fear, which contradicts a sentence praising the result." },
 
-  { id:"wb16", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
-    prompt:"Smoke from the burning tires left an _____ haze over the neighborhood that stung residents' eyes for hours.",
-    options:["pungent","acrid","aromatic","fragrant"], correctIndex:1,
-    explanation:"\"Acrid\" denotes a sharp, unpleasant, irritating smell, matching \"stung residents' eyes.\" \"Pungent\" is close but connotationally neutral, sometimes even appetizing as with spices, and doesn't capture the painful irritation described." },
+  { id:"wb16", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
+    prompt:"Smoke from the burning tires filled the neighborhood with _____ fumes that stung residents' eyes for hours.",
+    options:["acrid","fragrant","musty","bland"], correctIndex:0,
+    explanation:"\"Acrid\" means sharp and unpleasantly irritating to the smell or taste, matching fumes that sting the eyes. \"Fragrant\" means sweet-smelling, \"musty\" means smelling of damp and decay, and \"bland\" means not irritating, the opposite of what the sentence describes." },
 
   { id:"wb17", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:9,
     prompt:"The defense's _____ argument that the confession was coerced collapsed once jurors watched the full, uninterrupted interrogation video.",
@@ -576,8 +576,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb25", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:2,
     prompt:"The editor asked the reporter to _____ the article, which had ballooned to twice its assigned length.",
-    options:["condense","truncate","abbreviate","paraphrase"], correctIndex:0,
-    explanation:"\"Condense\" means to compress something into a shorter form while preserving its essential content, exactly what the editor wants for an overlong article. \"Truncate\" means to cut off abruptly at some point, losing whatever comes after, rather than compressing the whole; \"abbreviate\" properly applies to shortening individual words or phrases, not an entire article; and \"paraphrase\" means restating in different words, which doesn't necessarily make something shorter." },
+    options:["expand","paraphrase","condense","annotate"], correctIndex:2,
+    explanation:"\"Condense\" means to make more compact or concise, which is what an editor wants for an article that has ballooned past its length. \"Expand\" would make it longer, \"paraphrase\" only restates the content in different words, and \"annotate\" adds notes." },
 
   { id:"wb26", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:3,
     prompt:"Before closing the books, the bookkeeper had to _____ the two ledgers, which disagreed by several hundred dollars.",
@@ -617,7 +617,7 @@ const PLACEMENT_POOL = [
   { id:"wb33", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:6,
     prompt:"The board was not inherently _____ risk, but it insisted on seeing a detailed contingency plan first.",
     options:["averse to","averse of","averse from","averse for"], correctIndex:0,
-    explanation:"\"Averse to\" is the standard idiom for feeling strong reluctance toward something. \"Averse from,\" though it echoes the Latin root, is archaic and no longer idiomatic in contemporary usage." },
+    explanation:"\"Averse to\" is the standard idiom for feeling strong dislike or reluctance toward something; Merriam-Webster notes that \"averse\" is usually used with \"to.\" The other options pair \"averse\" with prepositions that are not the standard idiom." },
 
   { id:"wb34", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:3,
     prompt:"The union's demands were fundamentally _____ management's insistence on freezing wages for another year.",
@@ -669,10 +669,10 @@ const PLACEMENT_POOL = [
     options:["recoil","detract","digress","refrain"], correctIndex:3,
     explanation:"To \"refrain from\" doing something is to hold yourself back from it, as a lawyer would advise. To recoil is to shrink back in fear, to detract is to lessen value, and to digress is to wander off topic." },
 
-  { id:"wb44", type:"blank", category:"blank", sub:"Register", difficulty:7,
-    prompt:"The agency _____ the new emissions standards only after an eighteen-month public comment period.",
-    options:["ratified","promulgated","drafted","amended"], correctIndex:1,
-    explanation:"\"Promulgated\" is the precise formal term for officially announcing and putting a new regulation into effect, fitting a rule issued only after the full comment period concluded. \"Ratified\" means formally approved, typically by vote, which describes approval rather than official issuance; \"drafted\" describes only the writing of a proposed rule, a stage prior to its official announcement; and \"amended\" implies revising an existing standard, not announcing a brand-new one." },
+  { id:"wb44", type:"blank", category:"blank", sub:"Register", difficulty:6,
+    prompt:"The agency formally _____ the new emissions standards, making them enforceable, only after an eighteen-month public comment period.",
+    options:["formulated","amended","evaluated","promulgated"], correctIndex:3,
+    explanation:"\"Promulgate\" means to make a rule public and put it into force, which fits standards made enforceable after a comment period. \"Formulate\" means to devise, \"amend\" means to alter something that already exists, and \"evaluate\" means to appraise; none of them makes a rule enforceable." },
 
   { id:"wb45", type:"blank", category:"blank", sub:"Register", difficulty:2,
     prompt:"The patient was instructed to _____ strenuous activity for at least six weeks following surgery to protect the healing incision.",
@@ -774,10 +774,10 @@ const PLACEMENT_POOL = [
     options:["census","consensus","concession","majority"], correctIndex:1,
     explanation:"A \"consensus\" is general agreement within a group, the natural result of a long debate. A census is a count, a concession is one side giving ground, and a majority is a number, not something a board \"reaches\" to decide." },
 
-  { id:"wx15", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:9,
+  { id:"wx15", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:4,
     prompt:"Given the sensitive nature of the data, the auditors were asked to _____ every transaction from the past year.",
-    options:["peruse","scrutinize","review","skim"], correctIndex:1,
-    explanation:"\"Scrutinize\" specifically means to examine something with intense, critical thoroughness, matching sensitive data that calls for auditors to comb through every transaction closely. \"Peruse,\" despite sounding similarly formal, traditionally implies reading over something at leisure rather than combing through it with rigor; \"review\" suggests a general look-over rather than an intensive, detail-level check; and \"skim\" means to go over something quickly and superficially, nearly the opposite of the careful examination the sentence calls for." },
+    options:["skim","overlook","scrutinize","delegate"], correctIndex:2,
+    explanation:"\"Scrutinize\" means to examine closely and critically, matching sensitive data that calls for a thorough check of every transaction. \"Skim\" and \"overlook\" mean the opposite, and \"delegate\" means to hand a task to someone else." },
 
   { id:"wx16", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:4,
     prompt:"She has always had a knack _____ languages, picking up French and Mandarin with surprising ease.",
@@ -981,10 +981,10 @@ const PLACEMENT_POOL = [
     options:["resentful","longing","watchful","restless"], correctIndex:1,
     explanation:"\"Wistful\" is a quiet yearning for something out of reach, closest to \"longing\". \"Resentful\" is bitterness, \"watchful\" is alertness, and \"restless\" is unease." },
 
-  { id:"vc31", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:4,
+  { id:"vc31", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:3,
     prompt:"The attorney was tenacious, refiling the appeal three times after each rejection until the court finally agreed to hear the case. Which word is closest in meaning to \"tenacious\" as used here:",
-    options:["stubborn","aggressive","persistent","confident"], correctIndex:2,
-    explanation:"\"Tenacious\" describes determined persistence in pursuing a goal despite setbacks, matching refiling \"three times after each rejection\" — precisely \"persistent.\" \"Stubborn\" is a trap because it carries a negative connotation of irrational inflexibility, whereas the context praises productive determination that ultimately succeeded." },
+    options:["persistent","impulsive","ruthless","confident"], correctIndex:0,
+    explanation:"\"Tenacious\" describes determined persistence in pursuing a goal, matching refiling an appeal three times until the court agreed to hear it; \"persistent\" captures this. \"Impulsive\" and \"ruthless\" describe different traits, and \"confident\" describes assurance, not perseverance." },
 
   { id:"vc32", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:5,
     prompt:"Reviewers called the critic's takedown vitriolic, noting that he seemed less interested in evaluating the film than in humiliating its director with personal insults. Which word is closest in meaning to \"vitriolic\" as used here:",
@@ -1001,15 +1001,15 @@ const PLACEMENT_POOL = [
     options:["rebellious","relaxed","reserved","resentful"], correctIndex:2,
     explanation:"\"Reticent\" means inclined to keep quiet, closest to \"reserved\". The other options share only the \"re-\" sound." },
 
-  { id:"vc35", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:6,
+  { id:"vc35", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:4,
     prompt:"The monastery's austere interior contained nothing but a wooden bed, a single chair, and bare stone walls. Which word is closest in meaning to \"austere\" as used here:",
-    options:["strict","stark","harsh","ascetic"], correctIndex:1,
-    explanation:"\"Austere\" describes a severe plainness or simplicity, matching a room with \"nothing but\" bare essentials — best captured by \"stark.\" \"Ascetic\" is a trap because it specifically describes a person's self-denying lifestyle or practice, not the physical appearance of a room." },
+    options:["strict","stark","ornate","cluttered"], correctIndex:1,
+    explanation:"\"Austere\" here means markedly simple or unadorned, matching a room with nothing but a bed, a chair and bare walls; \"stark\" captures this. \"Strict\" describes rules or discipline, \"ornate\" is the opposite of plain, and \"cluttered\" describes a room full of things." },
 
-  { id:"vc36", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:7,
+  { id:"vc36", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:4,
     prompt:"When asked about the missed deadline, he gave a flippant shrug and joked that deadlines were \"more like suggestions.\" Which word is closest in meaning to \"flippant\" as used here:",
-    options:["disrespectful","casual","glib","careless"], correctIndex:0,
-    explanation:"\"Flippant\" describes an inappropriately casual, mocking response to a serious matter, matching joking about a missed deadline — best matched by \"disrespectful.\" \"Glib\" is a trap because it describes fluent, superficially persuasive speech, not the dismissive, joking disregard shown here." },
+    options:["apologetic","remorseful","apprehensive","disrespectful"], correctIndex:3,
+    explanation:"\"Flippant\" means lacking proper respect or seriousness about something serious, matching a shrug and a joke about a missed deadline; \"disrespectful\" captures this. \"Apologetic,\" \"remorseful\" and \"apprehensive\" all describe a person who feels regret or unease about the situation, not someone who treats it lightly." },
 
   { id:"vc37", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:4,
     prompt:"Shareholders grew indignant after learning that executives had received bonuses the same week the company announced layoffs. Which word is closest in meaning to \"indignant\" as used here:",
@@ -1071,10 +1071,10 @@ const PLACEMENT_POOL = [
     options:["antagonistic","cordial","cooperative","diplomatic"], correctIndex:0,
     explanation:"\"But\" signals a breakdown of the earlier friendliness, calling for \"antagonistic,\" meaning openly hostile — confirmed by \"exchanging accusations at every meeting.\" \"Diplomatic\" is a trap because it suggests tactful cooperation, the opposite of the open conflict described." },
 
-  { id:"vc49", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:10,
+  { id:"vc49", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"His twenties were famously sybaritic, filled with lavish parties and imported wine, but after the diagnosis he adopted an almost _____ existence, eating plain rice and sleeping on a bare mat. Which word best completes the sentence?",
-    options:["frugal","ascetic","reclusive","disciplined"], correctIndex:1,
-    explanation:"\"But... after the diagnosis\" signals a reversal from his sybaritic excess to its opposite, calling for \"ascetic,\" meaning practicing severe self-denial — matching \"plain rice\" and \"a bare mat.\" \"Frugal\" is a trap because it describes careful economy in spending, missing the deeper self-denying, near-monastic discipline that ascetic specifically conveys." },
+    options:["ascetic","hedonistic","tranquil","boisterous"], correctIndex:0,
+    explanation:"\"But… after the diagnosis\" signals a reversal from his sybaritic, luxury-loving twenties to the opposite, which is \"ascetic,\" practicing strict self-denial, matching plain rice and a bare mat. \"Hedonistic\" describes his earlier life, \"tranquil\" describes calm and not self-denial, and \"boisterous\" means noisy and high-spirited." },
 
   { id:"vc50", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:1,
     prompt:"The engineers had been relentlessly optimistic about the launch date, but the final inspection left even the most upbeat team members feeling _____ about hitting the deadline. Which word best completes the sentence?",
