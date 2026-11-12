@@ -244,12 +244,16 @@
   const PLACEMENT_ACTUAL_STEP = 2;
   const PLACEMENT_DISPLAY_STEP = 1;
 
+  // A question marked active:false stays in the pool (lessons and saved
+  // records still know it) but the placement test never draws it. Every
+  // question without the flag is active.
+  function isPlacementActive(q){ return q.active !== false; }
   function buildPlacementSequence(){
     const seq = [];
     Object.keys(PLACEMENT_DRAW_COUNTS).forEach(function(cat){
       // Defensive: skip a category with no pool items yet rather than crash
       // (also self-heals if a category's pool is ever fully exhausted).
-      const available = PLACEMENT_POOL.some(function(q){ return q.category === cat; });
+      const available = PLACEMENT_POOL.some(function(q){ return q.category === cat && isPlacementActive(q); });
       if(!available) return;
       for(let i = 0; i < PLACEMENT_DRAW_COUNTS[cat]; i++) seq.push(cat);
     });
@@ -261,7 +265,7 @@
     return typeof q.difficulty === "number" ? q.difficulty : PLACEMENT_START_DIFFICULTY;
   }
   function pickAdaptiveQuestion(cat, targetDifficulty, usedIds){
-    const candidates = PLACEMENT_POOL.filter(function(q){ return q.category === cat && !usedIds[q.id]; });
+    const candidates = PLACEMENT_POOL.filter(function(q){ return q.category === cat && isPlacementActive(q) && !usedIds[q.id]; });
     if(!candidates.length) return null;
     let bestDist = Infinity;
     candidates.forEach(function(q){
