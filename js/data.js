@@ -483,6 +483,16 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","Having studied the evidence, the detective concluding","After studying the evidence, the detective's conclusion was","Having studied the evidence, the detective concluded"], correctIndex:3,
     explanation:"\"Having studied the evidence\" must describe the person who studied it, so \"the detective\" has to be the subject right after the comma, with a full verb. In the original the subject is \"conclusion\"; \"the detective's\" is only a possessive, so the modifier dangles. \"After studying\" keeps the same problem, and \"the detective concluding\" has no finite verb, so the sentence becomes a fragment." },
 
+  { id:"gx32", type:"error", category:"error", sub:"Parallel Structure", difficulty:9,
+    prompt:"The average salaries of nurses in the city are now higher than ⟦teachers⟧.",
+    options:["NO CHANGE","that of teachers","those of teachers","teachers in the city"], correctIndex:2,
+    explanation:"The sentence compares salaries, so the second half must name salaries too: \"those of teachers\" stands for \"the salaries of teachers.\" The original compares salaries with teachers themselves, and so does \"teachers in the city.\" \"That of teachers\" is singular, but \"salaries\" is plural." },
+
+  { id:"gx33", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:8,
+    prompt:"Reviewing the contracts that the three regional offices submitted along with their invoices ⟦have taken⟧ the auditors far longer than expected.",
+    options:["NO CHANGE","was taken","are taking","has taken"], correctIndex:3,
+    explanation:"The subject is the gerund phrase \"Reviewing the contracts…,\" which is singular however many plural nouns follow it, so the verb is \"has taken.\" \"have taken\" and \"are taking\" agree with the nearby plurals \"offices\" and \"invoices.\" \"was taken\" is singular but passive, which leaves \"the auditors\" with no role." },
+
   /* ---- Word choice (75) ---- */
   { id:"wb1", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:4,
     prompt:"After winning the lottery, he liked to _____ his new wealth by driving a different sports car to work every day.",
@@ -888,6 +898,11 @@ const PLACEMENT_POOL = [
     prompt:"Critics argued that the new surveillance rules were _____ the very freedoms they claimed to protect.",
     options:["integral to","incidental to","identical to","inimical to"], correctIndex:3,
     explanation:"\"Inimical\" means harmful or hostile, which is the critics' point: the rules threaten the freedoms they claim to protect. \"Integral to\" means essential to, \"incidental to\" means a minor side effect of, and \"identical to\" means the same as; none expresses the critics' objection." },
+
+  { id:"wx32", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
+    prompt:"Within months of taking over, the committee chair began to _____ to herself powers that the bylaws had given only to the full board.",
+    options:["arrogate","abrogate","derogate","interrogate"], correctIndex:0,
+    explanation:"\"Arrogate\" means to claim or seize something without justification, and it is usually followed by \"to oneself.\" \"Abrogate\" means to abolish or cancel, \"derogate\" means to belittle or detract from, and \"interrogate\" means to question; none of them can take \"powers\" with \"to herself.\"" },
 
 
   /* ---- Vocabulary (50) ---- */
@@ -1295,6 +1310,26 @@ const PLACEMENT_POOL = [
     prompt:"The obstreperous crowd at the back of the hall drowned out the first three speakers. Which word is closest in meaning to \"obstreperous\" as used here?",
     options:["Unruly","Jubilant","Sullen","Inattentive"], correctIndex:0,
     explanation:"\"Obstreperous\" means noisy and hard to control, closest to \"unruly.\" A jubilant crowd is joyful, not necessarily defiant; a sullen crowd is gloomily silent; and an inattentive crowd would not drown anyone out." },
+
+  { id:"vx32", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
+    prompt:"The documentary drew praise for its rare archival footage but was dismissed as tendentious by several historians of the period. As used here, \"tendentious\" most nearly means:",
+    options:["slanted to one side","poorly researched","too long to hold attention","overly technical in tone"], correctIndex:0,
+    explanation:"\"Tendentious\" means marked by a tendency to favor one point of view: biased. Historians might also fault a documentary for weak research, its length or its jargon, but none of those is what the word means." },
+
+  { id:"vx33", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:9,
+    prompt:"Reviewers called the new biography of the senator hagiographic. Which word is closest in meaning to \"hagiographic\" as used here?",
+    options:["Exhaustive","Scholarly","Revealing","Idolizing"], correctIndex:3,
+    explanation:"\"Hagiographic\" means excessively flattering, as if the subject were a saint, so \"idolizing\" is closest. A biography can be exhaustive, scholarly or revealing, but none of those is what the word means." },
+
+  { id:"vx34", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:8,
+    prompt:"The senator's truculent reply to the committee was replayed on every evening newscast. What is the opposite of \"truculent\" as used here?",
+    options:["aggressively defiant","conciliatory and mild","evasive and vague","rambling and long-winded"], correctIndex:1,
+    explanation:"\"Truculent\" means aggressively self-assertive or scathingly harsh, so its opposite is conciliatory and mild. \"Aggressively defiant\" is close to the word itself, not its opposite, and evasive or rambling replies are faults of a different kind." },
+
+  { id:"vx35", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
+    prompt:"Foreign investors had complained for years about the country's sclerotic bureaucracy. As used here, \"sclerotic\" most nearly means:",
+    options:["deeply corrupt","secretive and closed","rigid and slow to change","swollen and costly to run"], correctIndex:2,
+    explanation:"\"Sclerotic\" comes from \"sclerosis,\" the hardening of body tissue, and here means grown rigid and unable to adapt. Corruption, secrecy and bloat are other common complaints about bureaucracies, but none is what the word means." },
 
   /* ---- Reading comprehension (50, across 10 shared passages) ---- */
   { id:"rc1", type:"reading", category:"reading", sub:"Main Idea", difficulty:5, passageId:"RP1",
@@ -1962,6 +1997,26 @@ const PLACEMENT_POOL = [
     prompt:"A good copy editor is ______ to any serious newsroom.",
     options:["indispensible","indespensable","indispensiable","indispensable"], correctIndex:3,
     explanation:"\"Indispensable\" ends in \"-able,\" like \"dispensable.\" \"Indispensible\" is the common error, and the other options misspell the middle." },
+
+  { id:"sx32", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:9,
+    prompt:"After years of blurry vision, she finally made an appointment with an ______.",
+    options:["opthalmologist","ophthalmologist","ophthamologist","ophthalmmologist"], correctIndex:1,
+    explanation:"\"Ophthalmologist\" comes from the Greek word for eye, \"ophthalmos\": \"ph\" then \"th,\" with an \"l\" before the second \"m.\" \"Opthalmologist\" drops the first h, the most common error; the others drop the l or double the m." },
+
+  { id:"sx33", type:"spelling", category:"spelling", sub:"Prefixes & Suffixes", difficulty:9,
+    prompt:"Wearing two different socks every day was the professor's best-known ______.",
+    options:["idiosyncrasy","idiosyncracy","idiosincrasy","idiosyncrassy"], correctIndex:0,
+    explanation:"\"Idiosyncrasy\" ends in \"-crasy,\" not the \"-cracy\" of words like \"democracy,\" which is the usual error. The other options misspell the middle or double the s." },
+
+  { id:"sx34", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:8,
+    prompt:"The garage was crammed with old fishing rods, tackle boxes and other ______.",
+    options:["paraphenalia","paraphanalia","paraphernalia","paraphernallia"], correctIndex:2,
+    explanation:"\"Paraphernalia\" has an \"r\" before the \"n\": para-pher-nal-ia. Many people drop that r in speech, which leads to \"paraphenalia\"; the other options change a vowel or double the l." },
+
+  { id:"sx35", type:"spelling", category:"spelling", sub:"Homophones", difficulty:8,
+    prompt:"Analysts treat the state's primary as a ______ for how the rest of the country will vote.",
+    options:["bellweather","belwether","bellwhether","bellwether"], correctIndex:3,
+    explanation:"A \"bellwether\" is something that leads or indicates a trend; the word has nothing to do with weather. \"Bellweather\" is the common homophone error; the other options drop an l or add an h." },
 ];
 
 /* =================== GRAMMAR & PUNCTUATION LESSON BANK =================== */
