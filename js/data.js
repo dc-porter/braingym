@@ -721,8 +721,8 @@ const PLACEMENT_POOL = [
 
   { id:"wx4", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:6,
     prompt:"From the report's careful phrasing, the analysts _____ that layoffs were being considered, even though the document never said so directly.",
-    options:["implied","preferred","inferred","ensured"], correctIndex:2,
-    explanation:"\"Infer\" means to reach a conclusion from evidence, which is what readers of the report did. \"Imply\" is what the report itself did, while \"preferred\" means liked better and \"ensured\" means made certain; neither describes drawing a conclusion from careful phrasing." },
+    options:["implied","insisted","inferred","ensured"], correctIndex:2,
+    explanation:"\"Infer\" means to reach a conclusion from evidence, which is what readers of the report did. \"Imply\" is what the report itself did, while \"insisted\" means stated firmly and \"ensured\" means made certain; neither describes drawing a conclusion from careful phrasing." },
 
   { id:"wx5", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:9,
     prompt:"His apology seemed _____, sincere and without any hidden agenda, which won back the trust of his teammates.",
