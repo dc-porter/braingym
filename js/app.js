@@ -100,9 +100,19 @@
       return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
     });
   }
+  // The sentence-combining questions open with this instruction in their
+  // text; it is shown on its own line above the underlined sentences. Display
+  // only: the stored question text is unchanged.
+  const COMBINE_INSTRUCTION = "Which choice most effectively combines the sentences?";
   function renderPrompt(text){
-    const parts = String(text).split(/⟦|⟧/);
-    return parts.map(function(p, i){ return i % 2 === 1 ? "<mark>" + esc(p) + "</mark>" : esc(p); }).join("");
+    let body = String(text);
+    let lead = "";
+    if(body.indexOf(COMBINE_INSTRUCTION) === 0){
+      lead = '<span class="prompt-instruction">' + esc(COMBINE_INSTRUCTION) + "</span>";
+      body = body.slice(COMBINE_INSTRUCTION.length).replace(/^\s+/, "");
+    }
+    const parts = body.split(/⟦|⟧/);
+    return lead + parts.map(function(p, i){ return i % 2 === 1 ? "<mark>" + esc(p) + "</mark>" : esc(p); }).join("");
   }
   function uid(){ return "id_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2,8); }
   function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
