@@ -926,7 +926,7 @@ const PLACEMENT_POOL = [
     options:["close similarity to other works","the appearance of being real","strict accuracy of every fact","a vivid, poetic writing style"], correctIndex:1,
     explanation:"\"Verisimilitude\" is the appearance of being true or real, which is why readers forgot they were reading fiction. \"Strict accuracy of every fact\" is actual truth rather than the appearance of it, \"close similarity to other works\" misreads the \"-similitude\" part, and \"a vivid, poetic writing style\" is about style, not realism." },
 
-  { id:"vc20", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:8,
+  { id:"vc20", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
     prompt:"The perspicacious junior analyst noticed a subtle accounting discrepancy that had slipped past three senior auditors. As used here, \"perspicacious\" most nearly means:",
     options:["persistent and hardworking","clear and easy to understand","cautious and suspicious by nature","keenly perceptive and discerning"], correctIndex:3,
     explanation:"\"Perspicacious\" means keenly perceptive, matching an analyst who noticed what three seniors missed. \"Clear and easy to understand\" is the meaning of the look-alike \"perspicuous,\" \"persistent and hardworking\" borrows the sound, and \"suspicious\" mistakes insight for distrust." },
@@ -1141,7 +1141,7 @@ const PLACEMENT_POOL = [
     options:["legally binding","financially reckless","publicly controversial","actively doing good for others"], correctIndex:3,
     explanation:"Beneficent joins the prefix \"bene-\" (good) with the root \"-fic-\" (to do or make), meaning \"doing good\" — the opposite construction of \"maleficent,\" which uses \"mal-\" (bad)." },
 
-  { id:"vx13", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
+  { id:"vx13", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:9,
     prompt:"As a peripatetic diplomat, she spent barely two weeks in any single country before packing her bags for the next assignment. As used here, \"peripatetic\" most nearly means:",
     options:["traveling from place to place","skilled in foreign languages","easily bored and restless","kept at the edge of events"], correctIndex:0,
     explanation:"\"Peripatetic\" means traveling from place to place, matching a diplomat who moved every two weeks. \"Kept at the edge of events\" confuses it with \"peripheral,\" while \"skilled in foreign languages\" and \"easily bored and restless\" describe traits a diplomat might have, not what the word means." },
