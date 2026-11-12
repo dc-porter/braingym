@@ -489,10 +489,10 @@ const PLACEMENT_POOL = [
     options:["deprecate","depreciate","depredate","deplete"], correctIndex:1,
     explanation:"To \"depreciate\" is to fall in value. \"Deprecate\" means to disapprove of, \"depredate\" means to plunder, and \"deplete\" needs an object (\"deplete the reserves\"), so it can't stand alone here." },
 
-  { id:"wb8", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:8,
+  { id:"wb8", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:6,
     prompt:"The oppressive humidity seemed to _____ even the most energetic hikers by midafternoon.",
-    options:["enervate","energize","invigorate","enliven"], correctIndex:0,
-    explanation:"\"Enervate\" means to drain of energy or weaken, fitting humidity that slows hikers down. \"Energize\" looks and sounds similar but means precisely the opposite, to give energy, contradicting the described fatigue." },
+    options:["energize","enervate","exonerate","elevate"], correctIndex:1,
+    explanation:"\"Enervate\" means to drain of energy, matching oppressive humidity. \"Energize\" looks alike but means the opposite, \"exonerate\" means to clear of blame, and \"elevate\" means to raise." },
 
   { id:"wb9", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:10,
     prompt:"The tannery's _____ runoff had, for generations, kept property values along the creek depressed.",
@@ -504,15 +504,15 @@ const PLACEMENT_POOL = [
     options:["resentful","reticent","restless","reminiscent"], correctIndex:1,
     explanation:"\"Reticent\" means inclined to be silent or uncommunicative in speech, matching a talkative witness who suddenly says little. \"Resentful\" and \"restless\" describe feelings that don't contrast with \"normally talkative,\" and \"reminiscent\" means given to remembering." },
 
-  { id:"wb11", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
+  { id:"wb11", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"Long after the data had disproven his hypothesis, the researcher's _____ refusal to revise the paper baffled his colleagues.",
-    options:["resolute","steadfast","tenacious","obstinate"], correctIndex:3,
-    explanation:"\"Obstinate\" carries the negative connotation of stubbornness against good reason, matching a refusal that \"baffled\" colleagues despite disproving evidence. \"Resolute\" and \"steadfast\" both praise firmness as admirable, the wrong charge given the critical tone here." },
+    options:["resolute","obstinate","obsolete","sheepish"], correctIndex:1,
+    explanation:"\"Obstinate\" means stubbornly holding to a position in spite of reason, matching a refusal to revise after the data disproved the hypothesis. \"Resolute\" casts firmness as admirable, which clashes with \"baffled\"; \"obsolete\" sounds alike but means out of date; and \"sheepish\" means meek or embarrassed." },
 
   { id:"wb12", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"Even as a young partner, she was celebrated for her _____ management of the firm's budget, stretching every dollar without ever shortchanging clients.",
-    options:["miserly","frugal","cheap","stingy"], correctIndex:1,
-    explanation:"\"Frugal\" is the neutral-to-positive term for careful spending, matching the admiring \"celebrated.\" \"Miserly\" describes the same behavior but with a strongly negative connotation of ungenerous hoarding, which clashes with the sentence's praise." },
+    options:["miserly","frivolous","frugal","fretful"], correctIndex:2,
+    explanation:"\"Frugal\" is the approving word for careful spending, matching \"celebrated\" and \"stretching every dollar.\" \"Miserly\" describes the same thrift as mean-spirited, \"frivolous\" means the opposite, and \"fretful\" means worried." },
 
   { id:"wb13", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"Regulators alleged that the three airlines had engaged in _____ price-fixing rather than simply responding independently to the same market pressures.",
@@ -526,33 +526,33 @@ const PLACEMENT_POOL = [
 
   { id:"wb15", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"The board praised the CFO's _____ approach to expansion, which kept the company solvent through two recessions that bankrupted its rivals.",
-    options:["timid","cowardly","hesitant","prudent"], correctIndex:3,
-    explanation:"\"Prudent\" casts caution as wise judgment, matching the board's praise and the positive outcome. \"Timid\" and \"cowardly\" describe the same caution as a character flaw born of fear, which contradicts a sentence praising the result." },
+    options:["timid","prudish","impulsive","prudent"], correctIndex:3,
+    explanation:"\"Prudent\" casts caution as wise judgment, matching the board's praise and a company that survived two recessions. \"Timid\" casts the same caution as fear, \"prudish\" sounds alike but means easily shocked, and \"impulsive\" is the opposite of the careful approach described." },
 
   { id:"wb16", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
     prompt:"Smoke from the burning tires filled the neighborhood with _____ fumes that stung residents' eyes for hours.",
     options:["acrid","fragrant","musty","bland"], correctIndex:0,
     explanation:"\"Acrid\" means sharp and unpleasantly irritating to the smell or taste, matching fumes that sting the eyes. \"Fragrant\" means sweet-smelling, \"musty\" means smelling of damp and decay, and \"bland\" means not irritating, the opposite of what the sentence describes." },
 
-  { id:"wb17", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:9,
+  { id:"wb17", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:7,
     prompt:"The defense's _____ argument that the confession was coerced collapsed once jurors watched the full, uninterrupted interrogation video.",
-    options:["specious","cogent","compelling","persuasive"], correctIndex:0,
-    explanation:"\"Specious\" means superficially plausible but actually false, matching an argument that \"collapsed\" under scrutiny. \"Cogent,\" \"compelling,\" and \"persuasive\" all describe genuinely sound reasoning, the opposite of what the sentence reveals the argument to be." },
+    options:["specious","cogent","spacious","irrefutable"], correctIndex:0,
+    explanation:"\"Specious\" means having a false look of truth, matching an argument that collapsed once jurors saw the video. \"Cogent\" and \"irrefutable\" describe arguments that hold up, the opposite of collapsing, and \"spacious\" sounds alike but means roomy." },
 
-  { id:"wb18", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
+  { id:"wb18", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"After months of chemotherapy, he emerged _____, his cheeks hollow and his frame swallowed by clothes that once fit.",
-    options:["slender","svelte","gaunt","lithe"], correctIndex:2,
-    explanation:"\"Gaunt\" connotes an unhealthy, haggard thinness, matching the \"hollow\" cheeks and illness. \"Svelte\" and \"lithe\" both carry a positive, attractive connotation of slimness, jarringly inappropriate for someone wasted by chemotherapy." },
+    options:["slender","gaunt","bloated","jaunty"], correctIndex:1,
+    explanation:"\"Gaunt\" means excessively thin and haggard, matching hollow cheeks after chemotherapy. \"Slender\" describes thinness approvingly, \"bloated\" is the opposite, and \"jaunty\" means lively and cheerful, which doesn't fit." },
 
   { id:"wb19", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:7,
     prompt:"Historians still struggle to convey the moral _____ of the famine, in which officials knowingly let millions die.",
     options:["enormousness","triviality","enormity","duration"], correctIndex:2,
     explanation:"\"Enormity\" denotes the moral monstrousness of an act, not merely its size, which suits a catastrophe in which officials knowingly let millions die. \"Enormousness\" is the tempting lookalike, but it describes sheer scale and does not pair with \"moral\"; \"triviality\" contradicts the sentence, since knowingly letting millions die is not a minor matter, and \"duration\" names how long the famine lasted, which cannot carry a moral quality." },
 
-  { id:"wb20", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
+  { id:"wb20", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"The toddler's _____ nature delighted her parents, who found her constant questions about how things worked more charming than exhausting.",
-    options:["nosy","inquisitive","prying","meddlesome"], correctIndex:1,
-    explanation:"\"Inquisitive\" casts curiosity as endearing and intellectually engaged, matching \"delighted\" and \"charming.\" \"Nosy,\" \"prying,\" and \"meddlesome\" all describe curiosity as an intrusive character flaw, clashing with the affectionate tone." },
+    options:["intrusive","acquisitive","inquisitive","indecisive"], correctIndex:2,
+    explanation:"\"Inquisitive\" casts curiosity as charming, matching parents who delighted in her questions. \"Intrusive\" casts curiosity as unwelcome, \"acquisitive\" sounds alike but means eager to own things, and \"indecisive\" means unable to decide." },
 
   { id:"wb21", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:1,
     prompt:"The committee voted to _____ the redundant approval step that had slowed every purchase order by nearly a week.",
@@ -591,8 +591,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb28", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:3,
     prompt:"Because the two witnesses gave accounts that flatly _____ each other, the jury doubted both of their testimonies.",
-    options:["corroborated","paralleled","echoed","contradicted"], correctIndex:3,
-    explanation:"\"Contradicted\" means directly stated the opposite, matching testimonies flatly at odds that made the jury doubt both. \"Corroborated\" means confirmed or supported, the reverse of what's described; \"paralleled\" and \"echoed\" both mean closely resembled or matched, again the opposite of two accounts in conflict." },
+    options:["corroborated","contacted","complemented","contradicted"], correctIndex:3,
+    explanation:"\"Contradicted\" means asserted the opposite, matching two accounts so at odds that the jury doubted both. \"Corroborated\" means supported and \"complemented\" means completed, both the reverse of conflict, while \"contacted\" only sounds alike and has nothing to do with disagreement." },
 
   { id:"wb29", type:"blank", category:"blank", sub:"Wordiness & Redundancy", difficulty:6,
     prompt:"The new escrow arrangement was designed to _____ any need for the parties to renegotiate terms if the currency fluctuated.",
@@ -654,10 +654,10 @@ const PLACEMENT_POOL = [
     options:["prone for","prone with","prone at","prone to"], correctIndex:3,
     explanation:"\"Prone to\" is the required idiom for being likely to suffer something. \"Prone for\" is a plausible-sounding but non-idiomatic substitution that does not occur in standard usage." },
 
-  { id:"wb41", type:"blank", category:"blank", sub:"Register", difficulty:2,
+  { id:"wb41", type:"blank", category:"blank", sub:"Register", difficulty:3,
     prompt:"The quarterly report noted that consumer demand had _____ sharply following the price increase.",
-    options:["declined","tanked","gone downhill","taken a nosedive"], correctIndex:0,
-    explanation:"\"Declined\" is the neutral, formal term expected in a quarterly report. \"Tanked,\" \"gone downhill,\" and \"taken a nosedive\" are vivid but colloquial idioms inappropriate for formal business writing." },
+    options:["tanked","declined","inclined","plateaued"], correctIndex:1,
+    explanation:"\"Declined\" is the standard, formal word for a fall in demand in a quarterly report. \"Tanked\" is too informal, \"inclined\" means to slope or lean, and \"plateaued\" means leveled off, which contradicts \"sharply.\"" },
 
   { id:"wb42", type:"blank", category:"blank", sub:"Register", difficulty:3,
     prompt:"The authors _____ that their sample size may have limited the statistical power of the study.",
@@ -676,13 +676,13 @@ const PLACEMENT_POOL = [
 
   { id:"wb45", type:"blank", category:"blank", sub:"Register", difficulty:2,
     prompt:"The patient was instructed to _____ strenuous activity for at least six weeks following surgery to protect the healing incision.",
-    options:["intensify","attempt","avoid","schedule"], correctIndex:2,
-    explanation:"To protect a healing incision, the patient must \"avoid\" strenuous activity. Intensifying, attempting or scheduling it would risk the incision." },
+    options:["avoid","begin","increase","document"], correctIndex:0,
+    explanation:"To protect a healing incision, the patient must \"avoid\" strenuous activity. Beginning, increasing or documenting it would not protect anything." },
 
-  { id:"wb46", type:"blank", category:"blank", sub:"Register", difficulty:4,
-    prompt:"Effective immediately, your employment with the company will be _____.",
-    options:["cut loose","let go","terminated","axed"], correctIndex:2,
-    explanation:"\"Terminated\" is the neutral, formal term used in official HR correspondence. \"Cut loose,\" \"let go,\" and \"axed\" are casual expressions that would be jarringly informal in a legal termination letter; \"let go\" is common enough as a workplace euphemism that it takes a moment to recognize it still isn't the register of a formal notice." },
+  { id:"wb46", type:"blank", category:"blank", sub:"Register", difficulty:3,
+    prompt:"Effective immediately, your employment with the company will be _____, and your final paycheck will be mailed to you.",
+    options:["canned","transferred","terminated","extended"], correctIndex:2,
+    explanation:"\"Terminated\" is the formal term for ending someone's employment, matching a letter that mentions a final paycheck. \"Canned\" is slang, and \"transferred\" and \"extended\" contradict a final paycheck." },
 
   { id:"wb47", type:"blank", category:"blank", sub:"Register", difficulty:6,
     prompt:"After decades of confusion, researchers finally _____ the mechanism by which the enzyme catalyzes the reaction, publishing a model that settled the debate.",
@@ -721,23 +721,23 @@ const PLACEMENT_POOL = [
 
   { id:"wx4", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:6,
     prompt:"From the report's careful phrasing, the analysts _____ that layoffs were being considered, even though the document never said so directly.",
-    options:["implied","inferred","insinuated","intimated"], correctIndex:1,
-    explanation:"\"Infer\" means to draw a conclusion from evidence, which is what a reader does. \"Imply\" describes what the writer of the document would be doing by hinting at something, not what the analysts did in reading it." },
+    options:["implied","preferred","inferred","ensured"], correctIndex:2,
+    explanation:"\"Infer\" means to reach a conclusion from evidence, which is what readers of the report did. \"Imply\" is what the report itself did, while \"preferred\" means liked better and \"ensured\" means made certain; neither describes drawing a conclusion from careful phrasing." },
 
   { id:"wx5", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:9,
     prompt:"His apology seemed _____, sincere and without any hidden agenda, which won back the trust of his teammates.",
     options:["ingenious","disingenuous","ingenuous","unctuous"], correctIndex:2,
     explanation:"\"Ingenuous\" means sincere, innocent, and without deception. It is easily confused with \"ingenious\" (clever, inventive) and \"disingenuous\" (insincere, deceptive), which mean something quite different or nearly opposite." },
 
-  { id:"wx6", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:2,
+  { id:"wx6", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
     prompt:"When the waiter brought the wrong order a third time, the customer _____ at him without saying a word.",
-    options:["glanced","glared","peeked","gazed"], correctIndex:1,
-    explanation:"\"Glared\" conveys an angry, intense look that matches the customer's silent frustration. \"Glanced,\" \"peeked,\" and \"gazed\" all describe a neutral or gentle look, not an angry one." },
+    options:["glanced","gleamed","winked","glared"], correctIndex:3,
+    explanation:"\"Glared\" means stared angrily, matching a customer's silent frustration at a third wrong order. \"Glanced\" is a quick, neutral look, \"gleamed\" means shone, and \"winked\" is a playful signal." },
 
-  { id:"wx7", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
+  { id:"wx7", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"Unlike her rivals, who gave up after the first rejection, Maya kept submitting her manuscript for five years, a trait her mentor called admirably _____.",
-    options:["stubborn","persistent","pigheaded","willful"], correctIndex:1,
-    explanation:"\"Persistent\" casts continued effort in a positive light, matching \"admirably.\" \"Stubborn,\" \"pigheaded,\" and \"willful\" describe similar behavior but carry a negative or critical connotation." },
+    options:["persistent","stubborn","persuasive","pertinent"], correctIndex:0,
+    explanation:"\"Persistent\" casts years of resubmitting as admirable, matching the mentor's praise. \"Stubborn\" casts the same behavior negatively, while \"persuasive\" and \"pertinent\" only share the opening sound." },
 
   { id:"wx8", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
     prompt:"The merger talks were not merely difficult but _____, dragging on for over a year without any resolution.",
@@ -819,10 +819,10 @@ const PLACEMENT_POOL = [
     options:["raise","exaggerate","escalate","conceal"], correctIndex:0,
     explanation:"To \"raise\" a concern is to bring it up for discussion, the first step before escalating. Exaggerating or concealing concerns undermines the memo's aim, and \"escalate\" contradicts \"before escalating the issue further\"." },
 
-  { id:"wx24", type:"blank", category:"blank", sub:"Register", difficulty:7,
+  { id:"wx24", type:"blank", category:"blank", sub:"Register", difficulty:4,
     prompt:"Texting his roommate about running late, he wrote: \"Sorry, stuck in traffic, I'll be there _____.\"",
-    options:["anon","forthwith","presently","shortly"], correctIndex:3,
-    explanation:"\"Shortly\" fits the casual register of a text message. \"Presently,\" \"forthwith,\" and especially the archaic \"anon\" are stiffly formal or old-fashioned choices that would sound oddly stilted in an informal text." },
+    options:["forthwith","lately","formerly","shortly"], correctIndex:3,
+    explanation:"\"Shortly\" means soon and fits the casual register of a text. \"Forthwith\" means immediately but is stiffly formal, while \"lately\" and \"formerly\" point to the past, not to arriving soon." },
 
   { id:"wx25", type:"blank", category:"blank", sub:"Register", difficulty:8,
     prompt:"In the joint communique, the two nations agreed to _____ their ongoing border dispute through continued dialogue.",
