@@ -376,6 +376,10 @@ button{ font-family:inherit; }
   line-height:1.55;
   color: var(--ink);
 }
+.prompt-box .prompt-instruction{
+  display:block;
+  margin-bottom:.5rem;
+}
 .prompt-box mark{
   background: var(--lilac-pale);
   color: var(--amethyst-deep);

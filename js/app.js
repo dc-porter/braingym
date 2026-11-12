@@ -100,9 +100,19 @@
       return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c];
     });
   }
+  // The sentence-combining questions open with this instruction in their
+  // text; it is shown on its own line above the underlined sentences. Display
+  // only: the stored question text is unchanged.
+  const COMBINE_INSTRUCTION = "Which choice most effectively combines the sentences?";
   function renderPrompt(text){
-    const parts = String(text).split(/⟦|⟧/);
-    return parts.map(function(p, i){ return i % 2 === 1 ? "<mark>" + esc(p) + "</mark>" : esc(p); }).join("");
+    let body = String(text);
+    let lead = "";
+    if(body.indexOf(COMBINE_INSTRUCTION) === 0){
+      lead = '<span class="prompt-instruction">' + esc(COMBINE_INSTRUCTION) + "</span>";
+      body = body.slice(COMBINE_INSTRUCTION.length).replace(/^\s+/, "");
+    }
+    const parts = body.split(/⟦|⟧/);
+    return lead + parts.map(function(p, i){ return i % 2 === 1 ? "<mark>" + esc(p) + "</mark>" : esc(p); }).join("");
   }
   function uid(){ return "id_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2,8); }
   function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
@@ -244,12 +254,16 @@
   const PLACEMENT_ACTUAL_STEP = 2;
   const PLACEMENT_DISPLAY_STEP = 1;
 
+  // A question marked active:false stays in the pool (lessons and saved
+  // records still know it) but the placement test never draws it. Every
+  // question without the flag is active.
+  function isPlacementActive(q){ return q.active !== false; }
   function buildPlacementSequence(){
     const seq = [];
     Object.keys(PLACEMENT_DRAW_COUNTS).forEach(function(cat){
       // Defensive: skip a category with no pool items yet rather than crash
       // (also self-heals if a category's pool is ever fully exhausted).
-      const available = PLACEMENT_POOL.some(function(q){ return q.category === cat; });
+      const available = PLACEMENT_POOL.some(function(q){ return q.category === cat && isPlacementActive(q); });
       if(!available) return;
       for(let i = 0; i < PLACEMENT_DRAW_COUNTS[cat]; i++) seq.push(cat);
     });
@@ -260,15 +274,35 @@
     // pick within the tier) for any pool item that isn't rated yet.
     return typeof q.difficulty === "number" ? q.difficulty : PLACEMENT_START_DIFFICULTY;
   }
+  // Rotates through the category's sub-skills so each one gets about the same
+  // number of questions in a test: the sub-skill with the fewest questions
+  // drawn so far in this category goes next (ties broken at random). Counts
+  // come from the questions already drawn (usedIds), so nothing extra is
+  // stored and a resumed test carries on the same way. A sub-skill with no
+  // unused question left is simply not a candidate, so the turn falls to the
+  // next one and the test never runs dry. Within the chosen sub-skill the pick
+  // is by difficulty exactly as before: nearest the target, random among ties.
   function pickAdaptiveQuestion(cat, targetDifficulty, usedIds){
-    const candidates = PLACEMENT_POOL.filter(function(q){ return q.category === cat && !usedIds[q.id]; });
+    const candidates = PLACEMENT_POOL.filter(function(q){ return q.category === cat && isPlacementActive(q) && !usedIds[q.id]; });
     if(!candidates.length) return null;
+    const drawn = {};
+    Object.keys(usedIds).forEach(function(id){
+      const u = PLACEMENT_BY_ID[id];
+      if(u && u.category === cat) drawn[u.sub] = (drawn[u.sub] || 0) + 1;
+    });
+    const subs = [];
+    candidates.forEach(function(q){ if(subs.indexOf(q.sub) === -1) subs.push(q.sub); });
+    let fewest = Infinity;
+    subs.forEach(function(s){ fewest = Math.min(fewest, drawn[s] || 0); });
+    const turn = subs.filter(function(s){ return (drawn[s] || 0) === fewest; });
+    const chosen = turn[Math.floor(Math.random() * turn.length)];
+    const inSkill = candidates.filter(function(q){ return q.sub === chosen; });
     let bestDist = Infinity;
-    candidates.forEach(function(q){
+    inSkill.forEach(function(q){
       const dist = Math.abs(questionDifficulty(q) - targetDifficulty);
       if(dist < bestDist) bestDist = dist;
     });
-    const tier = candidates.filter(function(q){ return Math.abs(questionDifficulty(q) - targetDifficulty) === bestDist; });
+    const tier = inSkill.filter(function(q){ return Math.abs(questionDifficulty(q) - targetDifficulty) === bestDist; });
     return tier[Math.floor(Math.random() * tier.length)];
   }
   function startPlacement(){
