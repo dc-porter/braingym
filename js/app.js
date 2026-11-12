@@ -407,6 +407,40 @@
     });
     return out;
   }
+  /* ---- per-question record of each finished placement test ----
+     One record per finished test, appended to the list saved as
+     "placementRecords"; a retake adds a record and never replaces an earlier
+     one. There is no skip in the placement test (Next stays disabled until an
+     option is picked), so every entry has a pick. Questions and options are
+     copied as they were shown, so a later edit to the pool can't change what a
+     record says. recordVersion changes only if this shape changes. */
+  const PLACEMENT_RECORD_KEY = "placementRecords";
+  const PLACEMENT_RECORD_VERSION = 1;
+  function buildPlacementRecord(completedAt){
+    const entries = placementProgress.order.map(function(id, i){
+      const q = PLACEMENT_BY_ID[id];
+      const picked = placementProgress.answers[i];
+      return {
+        id: q.id,
+        category: q.category,
+        sub: q.sub,
+        prompt: q.prompt,
+        options: q.options.slice(),
+        picked: picked,
+        correctIndex: q.correctIndex,
+        correct: picked === q.correctIndex
+      };
+    });
+    return { recordVersion: PLACEMENT_RECORD_VERSION, date: new Date(completedAt).toISOString(), entries: entries };
+  }
+  function appendPlacementRecord(record){
+    const existing = load(PLACEMENT_RECORD_KEY, []);
+    // Anything that is not a list (a damaged value) is kept out of the way by
+    // starting a new list rather than throwing in the middle of finishing.
+    const list = Array.isArray(existing) ? existing.slice() : [];
+    list.push(record);
+    save(PLACEMENT_RECORD_KEY, list);
+  }
   function finishPlacement(){
     const byCat = {};
     const itemsByCat = {};
@@ -447,6 +481,7 @@
       };
     });
 
+    const completedAt = Date.now();
     placementResult = {
       level: level,
       levelName: LEVEL_NAMES[level],
@@ -455,8 +490,13 @@
       total: placementProgress.order.length,
       breakdown: breakdown,
       categoryScores: categoryScores,
-      completedAt: Date.now()
+      completedAt: completedAt
     };
+    // Saved at the same moment as the totals, and only here, so a test that is
+    // quit halfway leaves nothing behind. Never displayed and never read back
+    // by the app; it is kept for later review and travels with Export, Import
+    // and the server copy like any other record under the storage prefix.
+    appendPlacementRecord(buildPlacementRecord(completedAt));
     save("placementResult", placementResult);
     placementProgress = null;
     save("placementProgress", null);
