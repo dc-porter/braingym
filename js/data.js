@@ -561,8 +561,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb22", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"Investigators needed to _____ with certainty why the alarm had failed to trigger during the drill.",
-    options:["hypothesize","presume","theorize","ascertain"], correctIndex:3,
-    explanation:"\"Ascertain\" means to find out with certainty, which matches \"with certainty.\" \"Hypothesize,\" \"presume\" and \"theorize\" all mean to suppose something without proof, so none can be done \"with certainty.\"" },
+    options:["presume","extrapolate","allege","ascertain"], correctIndex:3,
+    explanation:"\"Ascertain\" means to find out with certainty, which matches \"with certainty.\" \"Presume\" means to suppose without proof, \"extrapolate\" means to infer beyond the known data, and \"allege\" means to claim something without proof; none of them can be done \"with certainty.\"" },
 
   { id:"wb23", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:2,
     prompt:"Rather than rewrite section four, the lawyers added a glossary meant to _____ its vague language by defining each key term.",
@@ -596,8 +596,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb29", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
     prompt:"The new escrow arrangement was designed to _____ any need for the parties to renegotiate terms if the currency fluctuated.",
-    options:["create","obviate","prolong","heighten"], correctIndex:1,
-    explanation:"\"Obviate\" means to make something unnecessary, so the arrangement removes any need to renegotiate. \"Create,\" \"prolong\" and \"heighten\" would each make the need exist, last longer or grow, the opposite of what an escrow arrangement is for." },
+    options:["exacerbate","verify","disguise","obviate"], correctIndex:3,
+    explanation:"\"Obviate\" means to make something unnecessary, so the arrangement removes any need to renegotiate. \"Exacerbate\" would make the need worse, \"verify\" would only confirm that the need exists, and \"disguise\" would hide it; none of them is what an escrow arrangement is for." },
 
   { id:"wb30", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"Passing through three layers of insulation was enough to _____ the signal until it was barely detectable.",
@@ -838,8 +838,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc2", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:3,
     prompt:"Smartphones have become so ubiquitous in the modern workplace that many employers no longer bother listing them among standard equipment. As used here, \"ubiquitous\" most nearly means:",
-    options:["highly dependable","widely admired","seen everywhere","quite affordable"], correctIndex:2,
-    explanation:"\"Ubiquitous\" means found everywhere, which is why employers no longer bother listing smartphones. Being dependable, admired or affordable wouldn't explain why a device goes unlisted." },
+    options:["always switched on","a passing fad","seen everywhere","highly useful"], correctIndex:2,
+    explanation:"\"Ubiquitous\" means found everywhere, which is why employers no longer bother listing smartphones: everyone already has one. \"Always switched on\" describes how phones are used, not how widespread they are; \"a passing fad\" would not explain leaving them off a list; and a highly useful device is exactly the kind employers would list." },
 
   { id:"vc3", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"Despite the defense attorney's dramatic delivery, the prosecutor's cogent argument, built on a clear chain of verifiable evidence, ultimately persuaded the jury. As used here, \"cogent\" most nearly means:",
@@ -858,8 +858,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc6", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:3,
     prompt:"Decades after being dismissed by her peers, the geologist was finally vindicated when new satellite data confirmed her theory of continental drift. As used here, \"vindicate\" most nearly means:",
-    options:["publicly honored","quietly forgiven","formally promoted","proved right"], correctIndex:3,
-    explanation:"\"Vindicate\" means to show that someone was right, matching new data that confirmed her theory after decades of dismissal. Public honor or a promotion might follow, but neither is what the word means, and \"forgiven\" assumes she had done something wrong." },
+    options:["forgiven for her error","publicly praised","paid compensation","proved right"], correctIndex:3,
+    explanation:"\"Vindicate\" means to show that someone was right, matching new data that confirmed her theory after decades of dismissal. \"Forgiven for her error\" gets it backwards, since there was no error to forgive. Praise or compensation might follow, but neither is what the word means." },
 
   { id:"vc7", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
     prompt:"The startup founder was famously parsimonious, reusing paper clips and refusing to replace the office furniture even after the company turned profitable. As used here, \"parsimonious\" most nearly means:",
@@ -1138,8 +1138,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx12", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:4,
     prompt:"Locals still speak of the beneficent landlord who, in hard winters, quietly forgave months of unpaid rent. As used here, \"beneficent\" most nearly means:",
-    options:["very wealthy","doing good","easily fooled","well connected"], correctIndex:1,
-    explanation:"\"Beneficent\" joins \"bene-\" (good) with the root \"-fic-\" (to do or make), meaning \"doing good,\" as forgiving a tenant's rent does. \"Very wealthy\" and \"well connected\" describe status, and \"easily fooled\" is the trap for someone who lets rent go." },
+    options:["receiving favors","easily fooled","from a wealthy family","doing good"], correctIndex:3,
+    explanation:"\"Beneficent\" joins \"bene-\" (good) with the root \"-fic-\" (to do or make), meaning \"doing good,\" as forgiving a tenant's rent does. \"Receiving favors\" confuses it with \"beneficiary,\" the person who receives. \"Easily fooled\" is the trap for someone who lets rent go, and \"from a wealthy family\" describes background, not conduct." },
 
   { id:"vx13", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:9,
     prompt:"As a peripatetic diplomat, she spent barely two weeks in any single country before packing her bags for the next assignment. As used here, \"peripatetic\" most nearly means:",
