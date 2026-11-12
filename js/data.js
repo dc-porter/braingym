@@ -110,8 +110,8 @@ const PLACEMENT_POOL = [
 
   { id:"ge7", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:4,
     prompt:"When the surgeon consulted with the resident before the procedure, ⟦she⟧ reviewed the imaging results one final time.",
-    options:["NO CHANGE","he","the surgeon","the surgeon, she,"], correctIndex:2,
-    explanation:"Since either the surgeon or the resident could be the person who reviewed the imaging, \"she\" is an ambiguous pronoun reference. Replacing it with \"the surgeon\" removes the ambiguity. \"He\" has the same problem and adds a guess about gender, and \"the surgeon, she,\" repeats the unclear pronoun." },
+    options:["NO CHANGE","they","the surgeon","the surgeon, she,"], correctIndex:2,
+    explanation:"Since either the surgeon or the resident could be the person who reviewed the imaging, \"she\" is an ambiguous pronoun reference. Replacing it with \"the surgeon\" removes the ambiguity. \"They\" has the same problem and can also be read as both people, and \"the surgeon, she,\" repeats the unclear pronoun after the noun." },
 
   { id:"ge8", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:1,
     prompt:"The nonprofit organization announced that ⟦they⟧ would expand its outreach program to three additional counties next year.",
@@ -551,8 +551,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb12", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
     prompt:"Even as a young partner, she was celebrated for her _____ management of the firm's budget.",
-    options:["frugal","miserly","fretful","austere"], correctIndex:0,
-    explanation:"\"Frugal\" means careful and economical, a quality worth celebrating. \"Miserly\" is tempting but carries a negative sense of stinginess, and \"fretful\" and \"austere\" describe worry and severity rather than careful spending." },
+    options:["frugal","miserly","fretful","prodigal"], correctIndex:0,
+    explanation:"\"Frugal\" means careful and economical, a quality worth celebrating. \"Miserly\" is tempting but carries a negative sense of stinginess, \"prodigal\" means wastefully extravagant and is often confused with \"prodigious,\" and \"fretful\" means anxious." },
 
   { id:"wb13", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"Regulators alleged that the three airlines had engaged in _____ price-fixing.",
@@ -560,9 +560,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Collusive\" means involving a secret agreement between parties, here to set prices together. \"Conclusive\" is the lookalike, \"coercive\" is tempting because price-fixing can harm customers, and \"competitive\" is the opposite of price-fixing." },
 
   { id:"wb14", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
-    prompt:"Employees rolled their eyes at the CEO's _____ tribute to himself in the annual report.",
-    options:["fulsome","wholesome","gruesome","lonesome"], correctIndex:0,
-    explanation:"\"Fulsome\" means excessively flattering or lavish. \"Wholesome,\" \"gruesome\" and \"lonesome\" share the \"-some\" ending, but none describes overdone praise." },
+    prompt:"Several board members found the CEO's _____ tribute to the retiring chairman embarrassing.",
+    options:["fulsome","handsome","winsome","gracious"], correctIndex:0,
+    explanation:"\"Fulsome\" means flattering to the point of excess or insincerity, which is why board members found it embarrassing. It is often misread as simply \"generous\" or \"full,\" which is the trap in \"handsome\" (generous) and \"gracious.\" \"Winsome\" is the lookalike and means charming, and none of those would embarrass anyone." },
 
   { id:"wb15", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
     prompt:"The board praised the CFO's _____ approach to expansion over the past decade.",
@@ -789,10 +789,10 @@ const PLACEMENT_POOL = [
     options:["candid","effusive","indignant","equivocal"], correctIndex:3,
     explanation:"\"Equivocal\" means deliberately open to more than one interpretation, so it reveals little. \"Candid\" and \"effusive\" are the opposite of revealing little, and \"indignant\" is tempting because a CEO under pressure might sound angry, but it does not describe a carefully vague statement." },
 
-  { id:"wx10", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
-    prompt:"When the interviewer asked an unexpectedly personal question, the candidate looked _____ for a moment.",
+  { id:"wx10", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:5,
+    prompt:"When the interviewer asked an unexpectedly personal question, the candidate looked _____ for a moment, then asked her to repeat it.",
     options:["nonplussed","unfazed","sanctimonious","wistful"], correctIndex:0,
-    explanation:"\"Nonplussed\" means so surprised and confused that one is unsure how to react. \"Unfazed\" is tempting because the word is often misused to mean unbothered, but a nonplussed person is exactly the opposite." },
+    explanation:"\"Nonplussed\" means so surprised and confused that one is unsure how to react, which is why the candidate needs the question repeated. \"Unfazed\" is tempting because many people now use \"nonplussed\" to mean unbothered, but an unfazed candidate would not need to hear the question again. \"Sanctimonious\" and \"wistful\" describe moral superiority and longing." },
 
   { id:"wx11", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:1,
     prompt:"_____ employee must badge in before entering the server room.",
@@ -879,10 +879,10 @@ const PLACEMENT_POOL = [
     options:["credible","creditable","incredulous","credulous"], correctIndex:3,
     explanation:"\"Credulous\" means ready to believe on slight evidence, which describes investors who accepted an impossible claim. \"Credible\" and \"creditable\" mean believable or praiseworthy, which describe a claim or a record, not a willingness to believe. \"Incredulous\" means unwilling to believe, the opposite." },
 
-  { id:"wx28", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:6,
-    prompt:"After three hours on the tarmac with no explanation, the passengers grew _____.",
+  { id:"wx28", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:5,
+    prompt:"After three hours on the tarmac with no explanation, the passengers grew _____, and several stood up in the aisle.",
     options:["restive","restful","reticent","remiss"], correctIndex:0,
-    explanation:"\"Restive\" means restless and unable to stay still or quiet, especially because of impatience. \"Restful\" is the lookalike and means the opposite, and \"reticent\" and \"remiss\" describe reluctance to speak and carelessness." },
+    explanation:"\"Restive\" means restless and impatient, unable to stay still, which fits passengers who stand up in the aisle. \"Restful\" is the lookalike and means the opposite, \"reticent\" means reluctant to speak and \"remiss\" means careless about one's duties." },
 
   { id:"wx29", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"The _____ clerk insisted on stamping every page twice and lecturing each visitor on procedure.",
@@ -913,18 +913,18 @@ const PLACEMENT_POOL = [
 
   { id:"vc2", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"By the mid-2010s, smartphones were ubiquitous in most offices. As used here, \"ubiquitous\" most nearly means:",
-    options:["in constant daily use","extremely useful to workers","unique to one era","present everywhere at once"], correctIndex:3,
-    explanation:"\"Ubiquitous\" means present or found everywhere. \"In constant daily use\" and \"extremely useful to workers\" describe how people use something, not how widespread it is, and \"unique to one era\" borrows the look of \"unique\" without the meaning." },
+    options:["newly fashionable at work","extremely useful to workers","unique to one era","present everywhere at once"], correctIndex:3,
+    explanation:"\"Ubiquitous\" means present or found everywhere. \"Newly fashionable at work\" is tempting because things that spread quickly often look like a trend, and \"extremely useful to workers\" explains why something might spread, but neither means found everywhere. \"Unique to one era\" borrows the look of \"unique\" without the meaning." },
 
   { id:"vc3", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
-    prompt:"The committee praised the prosecutor's cogent closing argument. As used here, \"cogent\" most nearly means:",
+    prompt:"Several jurors later described the prosecutor's closing argument as cogent. As used here, \"cogent\" most nearly means:",
     options:["lengthy and detailed","passionate and moving","cautious and balanced","clear and convincing"], correctIndex:3,
-    explanation:"\"Cogent\" describes an argument that is clear, logical and convincing. A long, detailed argument is not necessarily convincing, and \"passionate and moving\" describes emotional appeal rather than the strength of the reasoning." },
+    explanation:"\"Cogent\" describes an argument that is clear, logical and convincing. A long, detailed argument is not necessarily convincing, \"passionate and moving\" describes emotional appeal rather than the strength of the reasoning and \"cautious and balanced\" describes tone." },
 
   { id:"vc4", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:7,
     prompt:"The union leader remained intransigent throughout the talks. As used here, \"intransigent\" most nearly means:",
-    options:["unwilling to change a position","unable to make up his mind","quick to lose his temper","slow to trust other people"], correctIndex:0,
-    explanation:"\"Intransigent\" means refusing to change one's position or compromise. \"Unable to make up his mind\" is the opposite of that firmness, while \"quick to lose his temper\" and \"slow to trust other people\" describe attitudes a negotiator might show, but not the refusal to budge." },
+    options:["unwilling to compromise","unable to make up his mind","moving from post to post","slow to trust other people"], correctIndex:0,
+    explanation:"\"Intransigent\" means refusing to change one's position or compromise. \"Unable to make up his mind\" is the opposite of that firmness, \"moving from post to post\" is tempting because the word looks like \"in transit\" or \"transient\" and \"slow to trust other people\" describes a negotiator's attitude, not a refusal to budge." },
 
   { id:"vc5", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:8,
     prompt:"The senator was criticized for a pusillanimous response to the crisis. As used here, \"pusillanimous\" most nearly means:",
@@ -938,8 +938,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc7", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:7,
     prompt:"The startup founder was famously parsimonious. As used here, \"parsimonious\" most nearly means:",
-    options:["secretive about his finances","fond of simple, plain things","poor at managing money","extremely unwilling to spend money"], correctIndex:3,
-    explanation:"\"Parsimonious\" means extremely unwilling to spend money. \"Fond of simple, plain things\" is tempting because frugal people often live simply, but it describes taste rather than reluctance to spend, and \"poor at managing money\" is the opposite problem." },
+    options:["secretive about his finances","fond of simple, plain things","poor at managing money","reluctant to spend money"], correctIndex:3,
+    explanation:"\"Parsimonious\" means extremely unwilling to spend money. \"Fond of simple, plain things\" is tempting because frugal people often live simply, but it describes taste rather than reluctance to spend, and \"poor at managing money\" is a different problem." },
 
   { id:"vc8", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
     prompt:"The garrulous cab driver took us across town. As used here, \"garrulous\" most nearly means:",
@@ -953,7 +953,7 @@ const PLACEMENT_POOL = [
 
   { id:"vc10", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
     prompt:"Analysts described the drone-delivery industry as nascent. As used here, \"nascent\" most nearly means:",
-    options:["lightly regulated","heavily funded","just beginning to develop","unusually secretive"], correctIndex:2,
+    options:["lightly regulated","heavily funded","newly emerging","unusually secretive"], correctIndex:2,
     explanation:"\"Nascent\" means just coming into existence and still developing. A young industry may also be lightly regulated or heavily funded, which makes those options tempting, but neither describes its stage of growth." },
 
   { id:"vc11", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
@@ -968,7 +968,7 @@ const PLACEMENT_POOL = [
 
   { id:"vc13", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:7,
     prompt:"Several colleagues found the new associate's obsequious manner tiresome. As used here, \"obsequious\" most nearly means:",
-    options:["boastful about his own talents","too eager to please those in power","politely distant with everyone","relentlessly cheerful at work"], correctIndex:1,
+    options:["boastful about his own talents","overeager to please superiors","politely distant with everyone","relentlessly cheerful at work"], correctIndex:1,
     explanation:"\"Obsequious\" means excessively eager to please or obey, especially toward people with power. \"Boastful\" is a different annoying trait, and \"relentlessly cheerful\" is tempting because it can accompany flattery, but it does not involve currying favor." },
 
   { id:"vc14", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
@@ -1003,8 +1003,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc20", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
     prompt:"Colleagues described the junior analyst as perspicacious. As used here, \"perspicacious\" most nearly means:",
-    options:["keenly perceptive and insightful","persistent and hardworking","clear and easy to follow","suspicious by nature"], correctIndex:0,
-    explanation:"\"Perspicacious\" means having a ready insight into things. \"Clear and easy to follow\" is tempting because it belongs to the lookalike \"perspicuous,\" which describes writing or speech, not people who notice things." },
+    options:["sharply perceptive","persistent and hardworking","clear and easy to follow","suspicious by nature"], correctIndex:0,
+    explanation:"\"Perspicacious\" means having a ready insight into things, noticing what others miss. \"Clear and easy to follow\" is tempting because it belongs to the lookalike \"perspicuous,\" which describes writing or speech, not people who notice things." },
 
   { id:"vc21", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:4,
     prompt:"Everyone knew her as a committed bibliophile. As used here, \"bibliophile\" most nearly means:",
@@ -1178,18 +1178,18 @@ const PLACEMENT_POOL = [
 
   { id:"vx5", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:4,
     prompt:"The wording of the delivery clause was ambiguous. As used here, \"ambiguous\" most nearly means:",
-    options:["highly technical","deliberately misleading","poorly translated","open to more than one reading"], correctIndex:3,
-    explanation:"\"Ambiguous\" means open to more than one interpretation. \"Deliberately misleading\" is tempting because unclear wording is sometimes meant to deceive, but an ambiguous clause may be unclear by accident." },
+    options:["highly technical","deliberately misleading","poorly translated","unclear in meaning"], correctIndex:3,
+    explanation:"\"Ambiguous\" means open to more than one interpretation, so its meaning is unclear. \"Deliberately misleading\" is tempting because unclear wording is sometimes meant to deceive, but an ambiguous clause may be unclear by accident." },
 
   { id:"vx6", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"The new manager took a pragmatic approach to the schedule. As used here, \"pragmatic\" most nearly means:",
-    options:["focused on practical results","guided by fixed rules","quick to make hasty choices","concerned with fairness to all"], correctIndex:0,
-    explanation:"\"Pragmatic\" means dealing with things in a practical, results-focused way. \"Guided by fixed rules\" is nearly the opposite, and \"quick to make hasty choices\" is tempting because a practical person may act fast, but pragmatic people weigh outcomes rather than rush." },
+    options:["focused on practical results","guided by fixed rules","quick to make hasty choices","based on careful long-term planning"], correctIndex:0,
+    explanation:"\"Pragmatic\" means dealing with things in a practical, results-focused way. \"Guided by fixed rules\" is nearly the opposite, \"quick to make hasty choices\" is tempting because a practical person may act fast and \"based on careful long-term planning\" is tempting because it sounds sensible and businesslike, but pragmatism is about what works now, not a long-range plan." },
 
   { id:"vx7", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"The billionaire's new mansion was described as ostentatious. As used here, \"ostentatious\" most nearly means:",
-    options:["large and costly to build","showy and meant to impress","oddly designed and eccentric","carefully hidden from view"], correctIndex:1,
-    explanation:"\"Ostentatious\" means designed to attract attention and impress. \"Large and costly to build\" is tempting because showy mansions usually are, but a big, expensive house can be quiet and tasteful." },
+    options:["large and costly to build","showy and meant to impress","oddly designed and eccentric","filled with costly artwork"], correctIndex:1,
+    explanation:"\"Ostentatious\" means designed to attract attention and impress. \"Large and costly to build\" and \"filled with costly artwork\" are tempting because showy mansions often are both, but a big house full of expensive art can still be quiet and tasteful. \"Oddly designed and eccentric\" describes strangeness, not display." },
 
   { id:"vx8", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:3,
     prompt:"For her school assignment, Elena wrote a biography. As used here, \"biography\" most nearly means:",
@@ -1198,7 +1198,7 @@ const PLACEMENT_POOL = [
 
   { id:"vx9", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:3,
     prompt:"The witness gave a credible account of the accident. As used here, \"credible\" most nearly means:",
-    options:["extremely emotional","highly detailed","difficult to follow","believable and trustworthy"], correctIndex:3,
+    options:["extremely emotional","highly detailed","difficult to follow","easy to believe"], correctIndex:3,
     explanation:"\"Credible\" means able to be believed. A detailed account can still be false, so \"highly detailed\" is tempting but describes how much information is given, not whether it can be trusted." },
 
   { id:"vx10", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:5,
@@ -1218,7 +1218,7 @@ const PLACEMENT_POOL = [
 
   { id:"vx13", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
     prompt:"She spent her career as a peripatetic diplomat. As used here, \"peripatetic\" most nearly means:",
-    options:["skilled in negotiation","well known abroad","reluctant to take sides","moving from place to place"], correctIndex:3,
+    options:["skilled in negotiation","well known abroad","reluctant to take sides","always on the move"], correctIndex:3,
     explanation:"\"Peripatetic\" means traveling from place to place, from the Greek for \"walking about.\" \"Skilled in negotiation\" is tempting because it describes what diplomats do, but it has nothing to do with travel." },
 
   { id:"vx14", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:2,
@@ -1263,8 +1263,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx22", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"The CEO sounded sanguine in her address to shareholders. What is the opposite of \"sanguine\" as used here?",
-    options:["gloomy and hopeless","cheerful and hopeful","bloody and violent","calm and unemotional"], correctIndex:0,
-    explanation:"\"Sanguine\" means optimistic, especially in a difficult situation, so its opposite is gloomy and hopeless. \"Cheerful and hopeful\" is the word's own meaning, and \"bloody and violent\" reflects its older sense from the Latin for blood." },
+    options:["gloomy and hopeless","cheerful and hopeful","pale and sickly","calm and unemotional"], correctIndex:0,
+    explanation:"\"Sanguine\" means optimistic, especially in a difficult situation, so its opposite is gloomy and hopeless. \"Cheerful and hopeful\" is the word's own meaning. \"Pale and sickly\" is the opposite of the word's other sense, a ruddy, healthy complexion, which does not apply to a speech. \"Calm and unemotional\" is tempting because a sanguine speaker sounds composed." },
 
   { id:"vx23", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"The detective was famously laconic on the stand. What is the opposite of \"laconic\" as used here?",
@@ -1278,8 +1278,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx25", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"The general remained obdurate. What is the opposite of \"obdurate\" as used here?",
-    options:["rigid and set in his ways","cautious and slow to decide","calm and untroubled","yielding and open to persuasion"], correctIndex:3,
-    explanation:"\"Obdurate\" means stubbornly refusing to change one's opinion, so its opposite is yielding and open to persuasion. \"Rigid and set in his ways\" is the word's own meaning, and \"cautious and slow to decide\" is tempting because it also involves not acting quickly." },
+    options:["rigid and set in his ways","cautious and slow to decide","calm and untroubled","flexible and yielding"], correctIndex:3,
+    explanation:"\"Obdurate\" means stubbornly refusing to change one's opinion, so its opposite is flexible and yielding. \"Rigid and set in his ways\" is the word's own meaning, and \"cautious and slow to decide\" is tempting because it also involves not acting quickly." },
 
   { id:"vx26", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:7,
     prompt:"Students found the professor's lectures recondite. As used here, \"recondite\" most nearly means:",
@@ -1293,7 +1293,7 @@ const PLACEMENT_POOL = [
 
   { id:"vx28", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:6,
     prompt:"At the company, the founder's original design was considered sacrosanct. As used here, \"sacrosanct\" most nearly means:",
-    options:["badly outdated","kept secret from staff","beyond criticism or change","widely copied"], correctIndex:2,
+    options:["badly outdated","kept secret from staff","beyond question","widely copied"], correctIndex:2,
     explanation:"\"Sacrosanct\" means too important or sacred to be challenged or changed. \"Kept secret from staff\" is tempting because protected things are often guarded, but a secret and a sacrosanct design are different things." },
 
   { id:"vx29", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
@@ -1313,7 +1313,7 @@ const PLACEMENT_POOL = [
 
   { id:"vx32", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
     prompt:"Several historians described the documentary as tendentious. As used here, \"tendentious\" most nearly means:",
-    options:["poorly sourced","too long for its subject","slanted toward one point of view","overly technical in tone"], correctIndex:2,
+    options:["poorly sourced","too long for its subject","slanted to one side","overly technical in tone"], correctIndex:2,
     explanation:"\"Tendentious\" means promoting a particular cause or point of view, often unfairly. \"Poorly sourced\" is tempting because historians often criticize weak research, but a documentary can be well researched and still be tendentious." },
 
   { id:"vx33", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:9,
@@ -1828,7 +1828,7 @@ const PLACEMENT_POOL = [
     options:["matress","matres","mattress","mattres"], correctIndex:2,
     explanation:"\"Mattress\" doubles both the t and the s. The frequent mistake drops one of these doubled letters, writing \"matress.\"" },
 
-  { id:"sp48", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:8,
+  { id:"sp48", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:6,
     prompt:"Choose the correctly spelled word that fits: \"As a true ______ of fine wine, she could identify the vineyard from a single sip.\"",
     options:["connoisseur","connoiseur","conoisseur","connaisseur"], correctIndex:0,
     explanation:"\"Connoisseur\" doubles both the n and the s (con-n-oi-ss-eur), an irregular French-derived pattern with an \"oi\" that doesn't sound the way it looks. Each doubled letter is a separate place to slip, which is why even strong spellers often hesitate." },
@@ -1858,7 +1858,7 @@ const PLACEMENT_POOL = [
     options:["necesary","nessecary","necessary","neccessary"], correctIndex:2,
     explanation:"'Necessary' has one 'c' and two 's's — remember 'one collar, two socks.' The frequent error doubles the 'c' instead, as in 'neccessary.'" },
 
-  { id:"sx4", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:7,
+  { id:"sx4", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:6,
     prompt:"The crowd was in a state of pure ______ when the team scored the winning goal.",
     options:["ecstacy","extasy","ecstasey","ecstasy"], correctIndex:3,
     explanation:"'Ecstasy' ends in '-asy,' not '-acy' — the misspelling 'ecstacy' is extremely common because it mirrors how the word sounds." },
@@ -1883,7 +1883,7 @@ const PLACEMENT_POOL = [
     options:["complament","compliment","complemant","complement"], correctIndex:3,
     explanation:"'Complement' (something that completes) has an 'e' in the middle, unlike its homophone 'compliment' (praise), which has an 'i' — a classic mix-up." },
 
-  { id:"sx9", type:"spelling", category:"spelling", sub:"Homophones", difficulty:7,
+  { id:"sx9", type:"spelling", category:"spelling", sub:"Homophones", difficulty:6,
     prompt:"She made a ______ exit from the party so no one would notice she had left.",
     options:["discreet","discrete","discreat","descreet"], correctIndex:0,
     explanation:"'Discreet' (tactful, careful) has a doubled 'ee,' while its homophone 'discrete' (separate, distinct) ends in '-ete' — the two are frequently swapped." },
@@ -1908,7 +1908,7 @@ const PLACEMENT_POOL = [
     options:["foreign","foriegn","forein","foregin"], correctIndex:0,
     explanation:"'Foreign' is a notorious exception to 'i before e' — it's spelled 'e-i,' not 'i-e' as many writers guess with 'foriegn.'" },
 
-  { id:"sx14", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:7,
+  { id:"sx14", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:6,
     prompt:"The doctor said the cough was caused by a buildup of ______ in his throat.",
     options:["flegm","phlegm","phlem","phlegme"], correctIndex:1,
     explanation:"'Phlegm' ends in a silent 'g' before the 'm' (from Greek 'phlegma') — the natural phonetic spelling 'flem' or 'phlem' leaves it out entirely." },
@@ -1933,7 +1933,7 @@ const PLACEMENT_POOL = [
     options:["accesible","accessible","assessible","accessable"], correctIndex:1,
     explanation:"'Accessible' takes the '-ible' suffix, not '-able,' and doubles the 'c' — 'accessable' gets the ending wrong, a very frequent slip." },
 
-  { id:"sx19", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:8,
+  { id:"sx19", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:6,
     prompt:"The clinic offered to ______ every child against the seasonal illness.",
     options:["innoculate","inocculate","inoculate","enoculate"], correctIndex:2,
     explanation:"'Inoculate' takes only a single 'n,' unlike similar-sounding words such as 'innocent' — most people wrongly double it as 'innoculate.'" },
@@ -1968,7 +1968,7 @@ const PLACEMENT_POOL = [
     options:["colonel","kernel","colonnel","kernal"], correctIndex:0,
     explanation:"'Colonel' is pronounced identically to the real word 'kernel' but keeps its Italian-derived spelling with an 'o' and a single 'n' — the pronunciation gives almost no clue to the correct letters." },
 
-  { id:"sx26", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:8,
+  { id:"sx26", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:6,
     prompt:"Some villagers considered it ______ to hold a rock concert inside the old cathedral.",
     options:["sacrilegious","sacreligious","sacriligious","sacrilidgious"], correctIndex:0,
     explanation:"\"Sacrilegious\" comes from \"sacrilege,\" not \"religious,\" so it is spelled sacr-i-leg-ious. \"Sacreligious\" is the common error because it looks like \"religious\"; the other two misplace a vowel or add a \"d.\"" },
