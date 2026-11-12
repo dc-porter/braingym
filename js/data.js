@@ -209,14 +209,14 @@ const PLACEMENT_POOL = [
     explanation:"\"Almost\" should modify the number \"two hundred,\" not the verb \"sees\"; as written, \"almost sees\" illogically suggests the clinic nearly fails to see patients at all. \"nearly sees\" is tempting because it's a synonym swap, but it repeats the exact same misplacement." },
 
   { id:"ge27", type:"error", category:"error", sub:"Modifier Placement", difficulty:4,
-    prompt:"⟦Students who miss class often⟧ struggle to keep pace with the coursework.",
-    options:["NO CHANGE","Students often who miss class","Students who often miss class","Students, who miss class often,"], correctIndex:2,
-    explanation:"In the original, \"often\" could describe either \"miss class\" or \"struggle\". Placing it before \"miss\" makes clear the sentence is about students who frequently miss class. Adding commas wrongly suggests all students miss class." },
+    prompt:"⟦Tired after the long hike, the tent was pitched by the campers⟧ before dark.",
+    options:["NO CHANGE","After the long hike, tired, the tent was pitched by the campers","Tired after the long hike, the tent was pitched","Tired after the long hike, the campers pitched the tent"], correctIndex:3,
+    explanation:"\"Tired after the long hike\" describes people, so the subject right after the comma must be the campers. In the original and in the first two alternatives, the tent comes next, so the tent is literally the tired one, which is a dangling modifier." },
 
   { id:"ge28", type:"error", category:"error", sub:"Modifier Placement", difficulty:10,
-    prompt:"⟦Its budget approved unanimously⟧, the task force began hiring additional staff the following week.",
-    options:["NO CHANGE","Having approved its budget unanimously","Approving its budget unanimously","With its budget, approved unanimously"], correctIndex:0,
-    explanation:"\"Its budget approved unanimously\" is an absolute phrase with its own built-in subject, \"budget,\" so it doesn't need to match \"the task force\" and is already correct. \"Having approved its budget unanimously\" looks like a fix but actually creates a dangling modifier, since it would now be the task force, not the budget, that grammatically did the approving." },
+    prompt:"⟦Its budget approved unanimously by the board⟧, the task force began hiring additional staff the following week.",
+    options:["NO CHANGE","Having approved its budget unanimously by the board","Approving its budget unanimously by the board","Its budget was approved unanimously by the board"], correctIndex:0,
+    explanation:"\"Its budget approved unanimously by the board\" is an absolute phrase with its own subject, \"budget,\" so it does not have to describe \"the task force\" and is already correct. \"Having approved\" and \"Approving\" would make the task force the one approving, which contradicts \"by the board,\" and the last option joins two full clauses with only a comma." },
 
   { id:"ge29", type:"error", category:"error", sub:"Modifier Placement", difficulty:3,
     prompt:"The startup ⟦nearly lost⟧ half of its workforce during the economic downturn, a blow from which it never fully recovered.",
@@ -294,9 +294,9 @@ const PLACEMENT_POOL = [
     explanation:"A colon must follow a grammatically complete independent clause, but \"the chef needed\" is incomplete without its object, so the colon is misused here; removing it lets the list complete the verb \"needed\" directly. A semicolon has the same independent-clause requirement as a colon and fails for the same reason; a comma is tempting since it's a lighter mark, but it still wrongly separates the verb \"needed\" from its direct object." },
 
   { id:"ge44", type:"error", category:"error", sub:"Punctuation", difficulty:9,
-    prompt:"Regulators fined the bank $50 million for the violation⟦: the agency also opened a separate investigation into its lending practices⟧.",
-    options:["NO CHANGE",", the agency also opened a separate investigation into its lending practices","; the agency also opened a separate investigation into its lending practices",", and also the agency opened a separate investigation into its lending practices"], correctIndex:2,
-    explanation:"A colon promises that what follows will explain or elaborate on what came before, but the second clause here doesn't explain the fine — it reports a separate, additional action the agency took, so a semicolon joining the two related independent clauses is correct instead. The colon in the original is tempting because both clauses concern the same regulatory action and a colon often precedes a related follow-up, but the specific explanatory relationship a colon requires just isn't present here, since \"also\" itself signals an additional fact rather than a cause or elaboration." },
+    prompt:"Regulators fined the bank $50 million for the violation⟦, the agency also opened a separate investigation into its lending practices⟧.",
+    options:["NO CHANGE","; the agency also opened a separate investigation into its lending practices","the agency also opened a separate investigation into its lending practices",", also the agency has opened a separate investigation into its lending practices"], correctIndex:1,
+    explanation:"The two halves are complete sentences, and a comma alone cannot join them, which creates a comma splice. A semicolon joins them correctly. With no punctuation at all the clauses run together, and putting \"also\" after the comma still leaves a comma splice." },
 
   { id:"ge45", type:"error", category:"error", sub:"Punctuation", difficulty:8,
     prompt:"\"The results were inconclusive⟦.⟧\" the lead researcher explained, \"but they point toward a promising direction for future study.\"",
@@ -394,9 +394,9 @@ const PLACEMENT_POOL = [
     explanation:"As written, \"Barking loudly all night\" grammatically describes \"the neighbors,\" absurdly suggesting they were the ones barking; rephrasing with \"Because the dog was barking loudly all night\" gives the modifier its correct, explicit subject. The last option is tempting since it repositions the phrase, but placing it right before \"about the dog\" still leaves it ambiguously attached to \"the police\" or the act of calling, not to the dog." },
 
   { id:"gx14", type:"error", category:"error", sub:"Modifier Placement", difficulty:4,
-    prompt:"⟦Students who study consistently improve⟧ their retention of new material over the course of a semester.",
-    options:["NO CHANGE","Students consistently who study improve","Students, who study consistently, improve","Students who consistently study improve"], correctIndex:3,
-    explanation:"In the original, \"consistently\" sits between \"study\" and \"improve,\" so it could modify either verb. Placing it before \"study\" makes the sentence clearly about students who study consistently. \"Students consistently who study\" misplaces the adverb, and the commas in the other option wrongly imply that all students study consistently." },
+    prompt:"⟦Hanging crookedly on the wall, we noticed the painting⟧ as soon as we walked into the gallery.",
+    options:["NO CHANGE","Hanging crookedly on the wall, the painting caught our attention","Hanging crookedly on the wall, our attention was caught by the painting","Having hung crookedly on the wall, we noticed the painting"], correctIndex:1,
+    explanation:"\"Hanging crookedly on the wall\" must describe the painting, so \"the painting\" has to come right after the comma. In the original and in the other options, \"we\" or \"our attention\" comes next, so the modifier dangles and seems to describe people or attention." },
 
   { id:"gx15", type:"error", category:"error", sub:"Modifier Placement", difficulty:10,
     prompt:"⟦Its findings corroborated by three independent laboratories⟧, the research team's paper was accepted for publication without further peer review.",
@@ -405,8 +405,8 @@ const PLACEMENT_POOL = [
 
   { id:"gx16", type:"error", category:"error", sub:"Run-ons & Comma Splices", difficulty:2,
     prompt:"The experiment produced unexpected results⟦, the researchers repeated it twice to confirm accuracy⟧.",
-    options:["NO CHANGE",": the researchers repeated it twice to confirm accuracy","; the researchers repeated it twice to confirm accuracy","the researchers repeated it twice to confirm accuracy"], correctIndex:2,
-    explanation:"Both halves are independent clauses, so a semicolon is needed to join them without a coordinating conjunction; the original comma alone creates a splice. A colon is tempting since it too can join independent clauses, but a colon signals that the second clause explains the first, which doesn't fit here since repeating the experiment isn't an explanation of the results." },
+    options:["NO CHANGE","the researchers repeated it twice to confirm accuracy","; the researchers repeated it twice to confirm accuracy",", then the researchers repeated it twice to confirm accuracy"], correctIndex:2,
+    explanation:"Both halves are independent clauses, so a semicolon is needed to join them without a coordinating conjunction. The original comma creates a splice, leaving out punctuation runs the clauses together, and \"then\" after a comma is still a splice." },
 
   { id:"gx17", type:"error", category:"error", sub:"Run-ons & Comma Splices", difficulty:6,
     prompt:"The clinical trial met its enrollment target ahead of schedule⟦, the results nonetheless disappointed the pharmaceutical company's investors⟧.",
@@ -455,9 +455,9 @@ const PLACEMENT_POOL = [
 
   /* ---- Word choice (75) ---- */
   { id:"wb1", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:4,
-    prompt:"Rather than quietly seeking a legal opinion, the startup chose to openly _____ the licensing requirement, daring regulators to intervene.",
-    options:["flaunt","endorse","flout","uphold"], correctIndex:2,
-    explanation:"\"Flout\" means to openly disregard or scorn a rule, matching the defiant \"daring regulators.\" \"Flaunt\" is the classic confusable — it means to show off, not to defy — which would describe boastfulness rather than open defiance." },
+    prompt:"After winning the lottery, he liked to _____ his new wealth by driving a different sports car to work every day.",
+    options:["flaunt","flout","flounder","flatter"], correctIndex:0,
+    explanation:"\"Flaunt\" means to display something showily, which is what driving a different sports car every day to show off wealth does. \"Flout\" is the classic confusable: it means to openly disregard a rule or convention, and a person doesn't flout their wealth. \"Flounder\" means to struggle clumsily and \"flatter\" means to praise someone, so neither fits." },
 
   { id:"wb2", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:2,
     prompt:"With the storm now _____, the harbor master ordered every vessel back to port within the hour.",
@@ -465,9 +465,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Imminent\" means about to happen, matching the urgent order to return within the hour. \"Eminent\" sounds nearly identical but means distinguished or prominent, describing a person's stature rather than a storm's timing." },
 
   { id:"wb3", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:5,
-    prompt:"The mountain road's _____ switchbacks forced drivers to slow to a crawl for nearly an hour.",
-    options:["torturous","fragrant","punctual","tortuous"], correctIndex:3,
-    explanation:"\"Tortuous\" describes something winding and full of twists, fitting a road of switchbacks. \"Torturous\" means excruciatingly painful — a tempting mix-up given the shared root, but it describes suffering, not physical shape." },
+    prompt:"Seen from the air, the creek's _____ course doubled back on itself more than a dozen times in a single mile.",
+    options:["torturous","torpid","torrential","tortuous"], correctIndex:3,
+    explanation:"\"Tortuous\" means full of twists and turns, which describes a creek that doubles back on itself. \"Torturous\" is the classic mix-up: it means causing great pain or distress, not winding. \"Torpid\" means sluggish and \"torrential\" means rushing violently, and neither describes the shape of a course." },
 
   { id:"wb4", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:8,
     prompt:"The inspector's _____ acceptance of bribes to overlook safety violations ultimately cost several workers their lives.",
@@ -496,8 +496,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb9", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:10,
     prompt:"The tannery's _____ runoff had, for generations, kept property values along the creek depressed.",
-    options:["noisome","noisy","odious","obnoxious"], correctIndex:0,
-    explanation:"\"Noisome\" means offensive, especially foul-smelling, despite its resemblance to \"noisy\" — a classic trap, since the word actually derives from \"annoy,\" not \"noise.\" \"Noisy\" fits the sound-alike temptation exactly wrong; \"odious\" and \"obnoxious\" both describe general hatefulness or unpleasantness but don't specifically denote a bad smell, the quality the runoff calls for." },
+    options:["noisome","noisy","benign","harmless"], correctIndex:0,
+    explanation:"\"Noisome\" means offensive, especially foul-smelling, and it comes from \"annoy,\" not \"noise.\" \"Noisy\" is the sound-alike trap. \"Benign\" and \"harmless\" describe runoff that would not have kept property values down for generations." },
 
   { id:"wb10", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:3,
     prompt:"Though normally talkative, the witness grew strangely _____ the moment the defendant's name was mentioned.",
@@ -560,14 +560,14 @@ const PLACEMENT_POOL = [
     explanation:"\"Eliminate\" means to remove something completely, matching the committee's vote to do away with the step entirely. \"Reduce\" implies only a partial decrease rather than full removal, \"postpone\" delays the step rather than removing it, and \"suspend\" pauses it temporarily rather than ending it for good." },
 
   { id:"wb22", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
-    prompt:"Investigators could not _____ why the alarm had failed to trigger during the drill.",
-    options:["surmise","verify","ascertain","speculate"], correctIndex:2,
-    explanation:"\"Ascertain\" means to discover something through investigation until it is known for certain, matching investigators who \"could not\" find the cause despite trying. \"Surmise\" and \"speculate\" both mean to guess without solid evidence, the opposite of the certainty \"ascertain\" implies, while \"verify\" means to confirm something already known or believed, not to discover an unknown cause from scratch." },
+    prompt:"Investigators needed to _____ with certainty why the alarm had failed to trigger during the drill.",
+    options:["hypothesize","presume","theorize","ascertain"], correctIndex:3,
+    explanation:"\"Ascertain\" means to find out with certainty, which matches \"with certainty.\" \"Hypothesize,\" \"presume\" and \"theorize\" all mean to suppose something without proof, so none can be done \"with certainty.\"" },
 
   { id:"wb23", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:1,
-    prompt:"The revised contract will _____ the vague language that had led to years of disputes between the two firms.",
-    options:["amend","clarify","simplify","qualify"], correctIndex:1,
-    explanation:"\"Clarify\" means to make something's meaning clearer without changing its substance, exactly what's needed to fix vague contract language. \"Amend\" means to formally change or revise the terms themselves, \"simplify\" means to make something less complex, which could strip out needed nuance rather than clarify it, and \"qualify\" means to add limiting conditions, not to remove ambiguity." },
+    prompt:"Rather than rewrite section four, the lawyers added a glossary meant to _____ its vague language by defining each key term.",
+    options:["repeal","disguise","duplicate","clarify"], correctIndex:3,
+    explanation:"\"Clarify\" means to make something understandable, which is what defining key terms does for vague language. \"Repeal\" means to cancel a law, \"disguise\" means to hide or falsify, and \"duplicate\" means to copy; none of them describes a glossary that explains terms." },
 
   { id:"wb24", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:1,
     prompt:"Rather than list every possible outcome, the report simply tried to _____ the three most likely scenarios.",
@@ -596,8 +596,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb29", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"The new escrow arrangement was designed to _____ any need for the parties to renegotiate terms if the currency fluctuated.",
-    options:["increase","reduce","obviate","postpone"], correctIndex:2,
-    explanation:"\"Obviate\" means to preemptively remove the need for something altogether, exactly what the escrow arrangement accomplishes regarding renegotiation. \"Increase\" would mean the arrangement makes renegotiation more likely, the opposite effect; \"reduce\" implies only a partial lessening of that need, not its complete removal; and \"postpone\" would merely delay when renegotiation might become necessary, not eliminate the underlying need for it." },
+    options:["create","obviate","prolong","heighten"], correctIndex:1,
+    explanation:"\"Obviate\" means to make something unnecessary, so the arrangement removes any need to renegotiate. \"Create,\" \"prolong\" and \"heighten\" would each make the need exist, last longer or grow, the opposite of what an escrow arrangement is for." },
 
   { id:"wb30", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:8,
     prompt:"Passing through three layers of insulation was enough to _____ the signal until it was barely detectable.",
@@ -701,8 +701,8 @@ const PLACEMENT_POOL = [
 
   { id:"wb50", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:2,
     prompt:"I _____ this candidate for the position without reservation.",
-    options:["nominate","second","recommend","champion"], correctIndex:2,
-    explanation:"\"Recommend\" is the standard, formal verb used in a letter of recommendation to endorse a candidate's suitability. \"Nominate\" means to formally put someone forward as a candidate for a role or honor, not to vouch for them once already under consideration; \"second\" means to formally support a motion someone else has already proposed, a parliamentary sense that doesn't fit this context; and \"champion,\" while enthusiastic, carries a more informal, crusading connotation ill-suited to the understated register of formal academic correspondence." },
+    options:["recommend","recuse","reconsider","recount"], correctIndex:0,
+    explanation:"\"Recommend\" means to endorse someone as fit for a role, the standard verb in a reference. \"Reconsider\" means to think again, which clashes with \"without reservation.\" \"Recuse\" means to remove oneself from a case, and \"recount\" means to narrate or to count again; neither fits." },
 
   { id:"wx1", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:1,
     prompt:"The startup revamped _____ entire onboarding process last quarter.",
@@ -796,8 +796,8 @@ const PLACEMENT_POOL = [
 
   { id:"wx19", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:9,
     prompt:"Given how clearly the pre-election polling had predicted the result, the final outcome felt like something of a _____.",
-    options:["moot point","self-fulfilling prophecy","foregone conclusion","fait accompli"], correctIndex:2,
-    explanation:"A \"foregone conclusion\" is an outcome that was predictable and certain in advance, matching the clear polling data. A \"fait accompli\" refers to something already done and unchangeable, a \"self-fulfilling prophecy\" is a prediction that causes its own fulfillment, and a \"moot point\" is an issue no longer worth debating." },
+    options:["blessing in disguise","red herring","foregone conclusion","wild-goose chase"], correctIndex:2,
+    explanation:"A \"foregone conclusion\" is an outcome that was certain in advance, matching the clear polling. A \"blessing in disguise\" is a misfortune that turns out well, a \"red herring\" is a distraction from the real issue, and a \"wild-goose chase\" is a pointless search; none describes a predicted result." },
 
   { id:"wx20", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:10,
     prompt:"The senator, who had built his career prosecuting corrupt officials, was _____ when investigators uncovered his own decades of bribery.",
