@@ -1,6 +1,6 @@
 # active-memory handoff: Bloom placement-question cleanup
 
-**Handoff #1** · 2026-11-12 · Lineage: #1 (2026-11-12): continued Bloom from a pasted summary; audited and rewrote the placement question pool in js/data.js (PRs #39–#43); #43 is open and not merged.
+**Handoff #1** · 2026-11-12 · Lineage: #1 (2026-11-12): continued Bloom from a pasted summary; audited and rewrote the placement question pool in js/data.js (PRs #39–#43); #43 was merged (main at 8082468).
 
 ## 0. Instructions for Claude (read first)
 
@@ -82,12 +82,12 @@ You are continuing work from a previous chat. That chat is gone; this file is th
 
 ## 8. Data & facts (exact)
 **Pool:** 350 questions in `PLACEMENT_POOL` (`js/data.js`): 75 each of Grammar & Sentence Errors (`error`), Word Choice (`blank`), Vocabulary (`vocab`), Spelling (`spelling`) = 300 active, plus 50 Reading (`reading`, not used). The test draws 40 (12 error, 10 blank, 8 vocab, 10 spelling); the "Difficulty N/10" pill is a running counter, not the question's rating. Placement shows options in stored order; lessons shuffle all but `error` questions.
-**PRs:** #39 (10 rewrites) merged; #40 (re-rating) merged; #41 (35 rewrites) merged; #42 (15 rewrites) merged (main at `fe24c00`); **#43 open, not merged:** `claude/placement-giveaway-fixes`, 54 rewrites, 3 commits, https://github.com/dc-porter/braingym/pull/43.
-**Correct-answer positions A/B/C/D across the 300:** on main now 64 / 99 / 83 / 54; with #43 68 / 92 / 84 / 56. The 54 in #43: 8 / 21 / 13 / 12 before, 12 / 14 / 14 / 14 after.
-**Correct answer is the longest option (300 active):** now (main) Grammar 6 of 62, Word Choice 17 of 75, Vocabulary 50 of 75, Spelling 7 of 75; with #43 Grammar 3, Word Choice 15, Vocabulary 30 (40%), Spelling 7. Chance 25% (33% for grammar, NO CHANGE set aside).
-**Difficulty counts, 1-10, on main now:** Grammar 7 6 10 13 12 7 8 4 4 4; Word Choice 9 9 11 9 9 9 5 6 5 3; Vocabulary 7 7 9 13 7 9 9 5 6 3; Spelling 6 8 9 8 9 9 10 5 6 5.
-**With #43:** Grammar 6 5 12 13 13 7 7 4 4 4; Word Choice 9 7 12 12 8 11 5 4 4 3; Vocabulary 5 7 9 16 9 11 9 5 **1** 3; Spelling unchanged. Vocabulary level 10 = vc17, vc19, vx19; level 9 = vc5 only.
-**Giveaway re-run (main at `fe24c00`, before #43):** 84 flagged (Grammar 16, Word Choice 21, Vocabulary 47, Spelling 0); High 54 (all rewritten in #43), Medium 26, Low 4.
+**PRs:** #39 (10 rewrites) merged; #40 (re-rating) merged; #41 (35 rewrites) merged; #42 (15 rewrites) merged; #43 (54 giveaway rewrites, branch `claude/placement-giveaway-fixes`, 3 commits) merged; main is at `8082468`. https://github.com/dc-porter/braingym/pull/43
+**Correct-answer positions A/B/C/D across the 300:** on main now (includes #43) 68 / 92 / 84 / 56; before #43 it was 64 / 99 / 83 / 54. The 54 in #43: 8 / 21 / 13 / 12 before, 12 / 14 / 14 / 14 after.
+**Correct answer is the longest option (300 active):** now (main, includes #43) Grammar 3 of 62, Word Choice 15 of 75, Vocabulary 30 of 75 (40%), Spelling 7 of 75; before #43 Grammar 6, Word Choice 17, Vocabulary 50 (67%), Spelling 7. Chance 25% (33% for grammar, NO CHANGE set aside).
+**Difficulty counts, 1-10, before #43:** Grammar 7 6 10 13 12 7 8 4 4 4; Word Choice 9 9 11 9 9 9 5 6 5 3; Vocabulary 7 7 9 13 7 9 9 5 6 3; Spelling 6 8 9 8 9 9 10 5 6 5.
+**On main now (includes #43):** Grammar 6 5 12 13 13 7 7 4 4 4; Word Choice 9 7 12 12 8 11 5 4 4 3; Vocabulary 5 7 9 16 9 11 9 5 **1** 3; Spelling unchanged. Vocabulary level 10 = vc17, vc19, vx19; level 9 = vc5 only.
+**Giveaway re-run (main at `fe24c00`, before #43; #43 has since rewritten the 54 High ones):** 84 flagged (Grammar 16, Word Choice 21, Vocabulary 47, Spelling 0); High 54 (all rewritten in #43), Medium 26, Low 4.
 - Medium (26): wb24, wx15, vc5, vc2, vc9, vc6, vx18, vc32, wb42, wb48, wx10, vx12, vc14, vx5, vx8, ge40, vc10, vc39, vx1, ge1, ge2, ge3, ge4, ge5, gx1, gx2.
 - Low (4): wb47, ge20, gx23, vc30.
 **Bloom architecture (from the first summary; only PR states and `sw.js` cache name `bloom-shell-v3` re-checked):** device ID `bloom-device-id` (UUID), header `X-Bloom-Device-Id`; `api/ping.js`, `api/setup.js` (table `bloom_progress`), `api/progress.js` (GET, GET ?check=1, POST with optimistic concurrency, 4 MB limit, fingerprint = SHA-256 of canonical JSON cut to 32 hex); sync keys outside the prefix: `bloom-sync-version`, `bloom-sync-changed`, `bloom-sync-fingerprint`, `bloom-sync-import`; PRs #29–#38 merged (Import replaces the server copy: #38).
@@ -102,18 +102,17 @@ You are continuing work from a previous chat. That chat is gone; this file is th
 | Item | Status | Version / location | Notes |
 |---|---|---|---|
 | Placement rewrites #39–#42 | merged | main `fe24c00` | |
-| PR #43 (54 giveaway rewrites) | open, not merged | branch `claude/placement-giveaway-fixes`, commits e232956, 0d54996, b6eefe0 | Vocabulary level 9 now only vc5 |
+| PR #43 (54 giveaway rewrites) | merged | branch `claude/placement-giveaway-fixes`, commits e232956, 0d54996, b6eefe0; main `8082468` | Vocabulary level 9 now only vc5 |
 | Remaining giveaways | not started | 26 Medium, 4 Low (section 8) | next batch candidates |
 | Download-from-server (Bloom sync) | planned only | no code | dry run first, then empty-phone, then phone-behind; user has not answered whether to pair it with email sign-in |
-| This handoff file | saved, untracked | `/home/user/braingym/handoff-bloom.md` | do not commit |
+| This handoff file | committed, no PR | branch `claude/bloom-handoff`, `handoff-bloom.md` | a stop hook asked for it to be committed and pushed; no PR opened |
 
 ## 11. Next steps
-1. **Next action:** run `git fetch origin main` and `mcp__github__list_pull_requests` to see whether #43 was merged, then ask the user how to fix Vocabulary level 9 (only vc5).
+1. **Next action:** run `git fetch origin main`, then ask the user how to fix Vocabulary level 9 (only vc5).
 2. Draft rewrites for the 26 Medium and 4 Low giveaway questions (draft only, same format as before).
 3. Later: add true register questions; resume the download-from-server planning.
 
 ## 12. Open questions ⚠️
-- Is PR #43 merged, and does the user want changes before merging?
 - Vocabulary level 9 has 1 question: re-rate some vocabulary questions to 9, write new level-9 ones, or leave it?
 - Are grammar rewrites that now test agreement, case, word form or prepositions as well as fragments acceptable under "Sentence Fragments" and "Modifier Placement"?
 - Next batch: rewrite the 26 Medium and 4 Low giveaways?
