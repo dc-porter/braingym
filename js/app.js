@@ -264,15 +264,35 @@
     // pick within the tier) for any pool item that isn't rated yet.
     return typeof q.difficulty === "number" ? q.difficulty : PLACEMENT_START_DIFFICULTY;
   }
+  // Rotates through the category's sub-skills so each one gets about the same
+  // number of questions in a test: the sub-skill with the fewest questions
+  // drawn so far in this category goes next (ties broken at random). Counts
+  // come from the questions already drawn (usedIds), so nothing extra is
+  // stored and a resumed test carries on the same way. A sub-skill with no
+  // unused question left is simply not a candidate, so the turn falls to the
+  // next one and the test never runs dry. Within the chosen sub-skill the pick
+  // is by difficulty exactly as before: nearest the target, random among ties.
   function pickAdaptiveQuestion(cat, targetDifficulty, usedIds){
     const candidates = PLACEMENT_POOL.filter(function(q){ return q.category === cat && isPlacementActive(q) && !usedIds[q.id]; });
     if(!candidates.length) return null;
+    const drawn = {};
+    Object.keys(usedIds).forEach(function(id){
+      const u = PLACEMENT_BY_ID[id];
+      if(u && u.category === cat) drawn[u.sub] = (drawn[u.sub] || 0) + 1;
+    });
+    const subs = [];
+    candidates.forEach(function(q){ if(subs.indexOf(q.sub) === -1) subs.push(q.sub); });
+    let fewest = Infinity;
+    subs.forEach(function(s){ fewest = Math.min(fewest, drawn[s] || 0); });
+    const turn = subs.filter(function(s){ return (drawn[s] || 0) === fewest; });
+    const chosen = turn[Math.floor(Math.random() * turn.length)];
+    const inSkill = candidates.filter(function(q){ return q.sub === chosen; });
     let bestDist = Infinity;
-    candidates.forEach(function(q){
+    inSkill.forEach(function(q){
       const dist = Math.abs(questionDifficulty(q) - targetDifficulty);
       if(dist < bestDist) bestDist = dist;
     });
-    const tier = candidates.filter(function(q){ return Math.abs(questionDifficulty(q) - targetDifficulty) === bestDist; });
+    const tier = inSkill.filter(function(q){ return Math.abs(questionDifficulty(q) - targetDifficulty) === bestDist; });
     return tier[Math.floor(Math.random() * tier.length)];
   }
   function startPlacement(){
