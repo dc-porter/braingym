@@ -80,28 +80,28 @@ const PLACEMENT_POOL = [
   /* ---- Grammar & sentence structure (50) ---- */
   { id:"ge1", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:5,
     prompt:"Patronage, as practiced in small municipalities where budgets are tight and rivalries run deep, ⟦often determine⟧ which infrastructure projects receive funding.",
-    options:["NO CHANGE","have often determined","often determines","are often determining"], correctIndex:2,
-    explanation:"The subject is the singular noun \"patronage,\" so the verb must be singular: \"often determines.\" The plural nouns \"municipalities,\" \"budgets\" and \"rivalries\" sit between the subject and the verb and don't change that. The other options are plural forms that would agree with one of those nouns." },
+    options:["NO CHANGE","has often been determined","often determines","have often determined"], correctIndex:2,
+    explanation:"The subject is the singular noun \"patronage,\" so the verb must be singular and active: \"often determines.\" \"has often been determined\" is singular but passive, which leaves \"which infrastructure projects receive funding\" with nothing to complete. The plural nouns \"municipalities,\" \"budgets\" and \"rivalries\" sit between the subject and the verb and don't change that, so \"determine\" and \"have often determined\" are wrong." },
 
   { id:"ge2", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:3,
     prompt:"Each of the proposed amendments ⟦require⟧ a two-thirds majority vote before it can take effect.",
-    options:["NO CHANGE","requires","are requiring","have required"], correctIndex:1,
-    explanation:"\"Each\" is the true subject of the verb and is always singular, so it takes \"requires\" even though the nearby noun \"amendments\" is plural. \"have required\" is tempting because it agrees with the plural \"amendments,\" but that noun is only the object of the preposition \"of,\" not the subject." },
+    options:["NO CHANGE","is required","have required","requires"], correctIndex:3,
+    explanation:"\"Each\" is the true subject and is always singular, so it takes \"requires.\" \"is required\" is singular but passive, which leaves \"a two-thirds majority vote\" without a role. \"require\" and \"have required\" agree with the plural \"amendments,\" but that noun is only the object of \"of.\"" },
 
   { id:"ge3", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:5,
-    prompt:"Neither the plaintiffs nor the defendant ⟦were⟧ willing to settle before the trial date.",
-    options:["NO CHANGE","have been","was","are"], correctIndex:2,
-    explanation:"With a \"neither...nor\" subject, the verb agrees with the nearer noun, the singular \"defendant,\" so \"was\" is correct. \"were\" is the tempting original because it matches the farther, plural \"plaintiffs,\" but proximity to the verb, not the first noun, governs agreement here." },
+    prompt:"Neither the plaintiffs nor the defendant ⟦were⟧ willing to settle before last month's trial date.",
+    options:["NO CHANGE","have been","is","was"], correctIndex:3,
+    explanation:"With \"neither...nor,\" the verb agrees with the nearer subject, the singular \"defendant,\" and \"last month's trial date\" puts the action in the past, so \"was\" is correct. \"is\" is singular but present, which clashes with a date that has already passed. \"were\" and \"have been\" agree with the farther, plural \"plaintiffs.\"" },
 
   { id:"ge4", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:6,
     prompt:"The number of students enrolled in online degree programs ⟦have doubled⟧ over the past decade.",
-    options:["NO CHANGE","were doubling","had been doubled","has doubled"], correctIndex:3,
-    explanation:"\"The number of\" is treated as a singular subject and takes a singular verb, \"has doubled\"; this differs from \"a number of,\" which takes a plural verb. \"were doubling\" wrongly keeps the plural agreement suggested by \"students\" and also shifts to an ongoing past action rather than a completed change." },
+    options:["NO CHANGE","is doubling","had been doubled","has doubled"], correctIndex:3,
+    explanation:"\"The number of\" is a singular subject, and \"over the past decade\" calls for the present perfect: \"has doubled.\" \"is doubling\" is singular but the wrong tense for a span that has already passed, and \"had been doubled\" is passive and implies someone doubled the number. \"have doubled\" is plural and does not agree with \"number.\"" },
 
   { id:"ge5", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:4,
-    prompt:"The senator, along with several aides and a security detail, ⟦were escorted⟧ through the rear entrance to avoid the protesters.",
-    options:["NO CHANGE","was escorted","have been escorted","are being escorted"], correctIndex:1,
-    explanation:"\"Along with several aides and a security detail\" is a parenthetical phrase, not part of the grammatical subject, so the verb must agree with the singular \"senator\" alone: \"was escorted.\" \"were escorted\" is tempting because the sentence mentions several people, but only \"senator\" actually controls the verb." },
+    prompt:"The senator, along with several aides and a security detail, ⟦were escorted⟧ through the rear entrance late last night to avoid the protesters.",
+    options:["NO CHANGE","is being escorted","have been escorted","was escorted"], correctIndex:3,
+    explanation:"\"Along with several aides and a security detail\" is a parenthetical phrase, not part of the subject, so the verb agrees with the singular \"senator,\" and \"late last night\" calls for the simple past: \"was escorted.\" \"is being escorted\" is singular but present. \"were escorted\" and \"have been escorted\" are plural." },
 
   { id:"ge6", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:6,
     prompt:"When the committee opened the file last March, attached to the grant proposal ⟦was⟧ several appendices detailing the project's budget and timeline.",
@@ -175,8 +175,8 @@ const PLACEMENT_POOL = [
 
   { id:"ge20", type:"error", category:"error", sub:"Parallel Structure", difficulty:7,
     prompt:"The contract stipulates that the vendor must either ⟦deliver the goods by June 1 or a penalty will be assessed⟧.",
-    options:["NO CHANGE","deliver the goods by June 1 or the assessment of a penalty","deliver the goods by June 1 or face a penalty","deliver the goods by June 1, or a penalty will have been assessed"], correctIndex:2,
-    explanation:"After \"must either,\" both branches need matching verb forms, so \"face a penalty\" correctly parallels the base verb \"deliver.\" \"the assessment of a penalty\" is tempting because it's grammatically smooth, but it shifts to a noun phrase that doesn't parallel a verb at all; the original's \"a penalty will be assessed\" likewise breaks the parallel with a full future-tense clause." },
+    options:["NO CHANGE","deliver the goods by June 1 or face a penalty","deliver the goods by June 1 or faces a penalty","deliver the goods by June 1 or facing a penalty"], correctIndex:1,
+    explanation:"After \"must either,\" both branches need the same verb form, so \"face a penalty\" correctly parallels the base verb \"deliver.\" \"faces\" and \"facing\" don't match \"deliver,\" and the original switches from a verb phrase to a full clause." },
 
   { id:"ge21", type:"error", category:"error", sub:"Parallel Structure", difficulty:6,
     prompt:"Negotiating a peace settlement proved far more difficult than ⟦to maintain it⟧ once both sides had signed.",
@@ -275,8 +275,8 @@ const PLACEMENT_POOL = [
 
   { id:"ge40", type:"error", category:"error", sub:"Sentence Fragments", difficulty:3,
     prompt:"The proposal outlines three phases of implementation. ⟦Each phase requires separate approval from the regional board.⟧",
-    options:["NO CHANGE","Each phase requiring separate approval from the regional board","Each phase, requiring separate approval from the regional board","With each phase requiring separate approval from the regional board"], correctIndex:0,
-    explanation:"\"Each phase requires separate approval from the regional board\" already has a clear subject, \"Each phase,\" and a finite verb, \"requires,\" so it's a complete sentence as written. Changing \"requires\" to the participle \"requiring,\" as in the other options, removes the finite verb and turns the sentence into a fragment." },
+    options:["NO CHANGE","Each phase requiring separate approval from the regional board.","Each phase require separate approval from the regional board.","Each of which requires separate approval from the regional board."], correctIndex:0,
+    explanation:"\"Each phase requires separate approval from the regional board\" has a clear subject, \"Each phase,\" and a finite verb, \"requires,\" so it is already a complete sentence. \"Each phase requiring…\" has no finite verb, \"Each phase require…\" breaks subject-verb agreement, and \"Each of which requires…\" is a relative clause that cannot stand alone." },
 
   { id:"ge41", type:"error", category:"error", sub:"Punctuation", difficulty:5,
     prompt:"The company revised ⟦it's employees⟧ health insurance plan after receiving dozens of complaints about rising premiums.",
@@ -329,14 +329,14 @@ const PLACEMENT_POOL = [
     explanation:"The oven breaking down is why the orders were cancelled, so \"Because\" states the real cause-and-effect link. \"Although\" signals a contrast that doesn't exist, the second option joins two independent clauses with only a comma, and \"Having broken down…\" dangles, making the owner the thing that broke." },
 
   { id:"gx1", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:1,
-    prompt:"The dog and the cat ⟦chases⟧ each other around the yard every afternoon, much to the neighbors' amusement.",
-    options:["NO CHANGE","chase","is chasing","has chased"], correctIndex:1,
-    explanation:"The compound subject \"the dog and the cat,\" joined by \"and,\" is plural and requires the plural verb \"chase.\" \"is chasing\" and \"has chased\" are both singular-agreeing forms, so they repeat essentially the same agreement error as the original \"chases.\"" },
+    prompt:"The dog and the cat ⟦chases⟧ each other around the yard every afternoon nowadays, much to the neighbors' amusement.",
+    options:["NO CHANGE","were chasing","has chased","chase"], correctIndex:3,
+    explanation:"The compound subject \"the dog and the cat,\" joined by \"and,\" is plural, and \"nowadays\" calls for the present, so \"chase\" is correct. \"were chasing\" is plural but past, which clashes with \"nowadays.\" \"chases\" and \"has chased\" are singular, so they repeat the agreement error." },
 
   { id:"gx2", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:5,
-    prompt:"The findings of the report, compiled after years of painstaking fieldwork, ⟦remains⟧ controversial among specialists.",
-    options:["NO CHANGE","remain","is remaining","has remained"], correctIndex:1,
-    explanation:"The true subject is the plural \"findings,\" not the nearer singular nouns \"report\" or \"fieldwork,\" so the plural verb \"remain\" is required. \"has remained\" is tempting because it echoes the nearby singular \"report,\" but that noun is only part of a prepositional phrase and cannot govern the verb." },
+    prompt:"The findings of the report, compiled after years of painstaking fieldwork, ⟦remains⟧ controversial among specialists today.",
+    options:["NO CHANGE","were remaining","has remained","remain"], correctIndex:3,
+    explanation:"The true subject is the plural \"findings,\" not the nearer singular nouns \"report\" or \"fieldwork,\" and \"today\" calls for the present, so \"remain\" is correct. \"were remaining\" is plural but past. \"remains\" and \"has remained\" echo the nearby singular \"report,\" but that noun is only part of a prepositional phrase." },
 
   { id:"gx3", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:7,
     prompt:"The biggest worry for regulators reviewing the proposed merger ⟦is⟧ the potential job losses and the resulting drop in regional tax revenue.",
@@ -440,8 +440,8 @@ const PLACEMENT_POOL = [
 
   { id:"gx23", type:"error", category:"error", sub:"Sentence Variety", difficulty:3,
     prompt:"Which choice most effectively combines the sentences? ⟦The chef prepared the sauce first. She then seared the scallops.⟧",
-    options:["Although the chef prepared the sauce first, she seared the scallops.","Preparing the sauce first, the scallops were then seared by the chef.","The chef prepared the sauce first, she seared the scallops after that.","After preparing the sauce, the chef seared the scallops."], correctIndex:3,
-    explanation:"\"After preparing the sauce\" shows the order of steps in one tight sentence. \"Although\" signals a contrast that isn't there, \"Preparing the sauce first\" dangles because the scallops prepared nothing, and the third option joins two independent clauses with only a comma." },
+    options:["Before preparing the sauce, the chef seared the scallops.","After preparing the sauce, the scallops were seared.","After preparing the sauce, the chef seared the scallops.","The chef prepared the sauce first, she then seared the scallops."], correctIndex:2,
+    explanation:"\"After preparing the sauce, the chef seared the scallops\" keeps the order of the steps and names the chef as the one doing both. \"Before\" reverses the order, \"After preparing the sauce, the scallops were seared\" dangles because the scallops prepared nothing, and the last option joins two sentences with only a comma." },
 
   { id:"gx24", type:"error", category:"error", sub:"Sentence Variety", difficulty:4,
     prompt:"Which choice most effectively combines the sentences? ⟦The startup switched to a four-day workweek last year. Productivity metrics have remained essentially unchanged since then.⟧",
@@ -570,9 +570,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Clarify\" means to make something understandable, which is what defining key terms does for vague language. \"Repeal\" means to cancel a law, \"disguise\" means to hide or falsify, and \"duplicate\" means to copy; none of them describes a glossary that explains terms." },
 
   { id:"wb24", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:1,
-    prompt:"Rather than list every possible outcome, the report simply tried to _____ the three most likely scenarios.",
-    options:["inflate","invent","obscure","summarize"], correctIndex:3,
-    explanation:"\"Summarize\" means to give a brief account, matching a report that avoided listing every outcome. Inflating, inventing or obscuring the scenarios would do the opposite." },
+    prompt:"The report ran to two hundred pages, so the board asked the analyst to _____ its findings in a single paragraph.",
+    options:["summarize","expand","annotate","re-examine"], correctIndex:0,
+    explanation:"\"Summarize\" means to reduce to a summary, which fits squeezing a two-hundred-page report into one paragraph. \"Expand\" would make the findings longer, \"annotate\" means to add explanatory notes, and \"re-examine\" means to look at them again; none of these shortens anything." },
 
   { id:"wb25", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:2,
     prompt:"The editor asked the reporter to _____ the article, which had ballooned to twice its assigned length.",
@@ -660,9 +660,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Declined\" is the standard, formal word for a fall in demand in a quarterly report. \"Tanked\" is too informal, \"inclined\" means to slope or lean, and \"plateaued\" means leveled off, which contradicts \"sharply.\"" },
 
   { id:"wb42", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
-    prompt:"The authors _____ that their sample size may have limited the statistical power of the study.",
-    options:["insinuate","trumpet","acknowledge","grumble"], correctIndex:2,
-    explanation:"\"Acknowledge\" means to openly accept that something is true, as authors do with a study's limits. \"Insinuate\" suggests a sly hint, \"trumpet\" a loud boast, and \"grumble\" a complaint." },
+    prompt:"In the limitations section, the authors _____ that their small sample size may have reduced the study's statistical power.",
+    options:["concede","boast","insist","complain"], correctIndex:0,
+    explanation:"\"Concede\" means to admit something, often reluctantly, which is what authors do in a limitations section. \"Boast\" and \"insist\" claim strength rather than admit a weakness, and \"complain\" voices a grievance, which is not an author's stance toward their own study design." },
 
   { id:"wb43", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:3,
     prompt:"Counsel advised the client to _____ from making any public statement until the investigation concluded.",
@@ -686,13 +686,13 @@ const PLACEMENT_POOL = [
 
   { id:"wb47", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:6,
     prompt:"After decades of confusion, researchers finally _____ the mechanism by which the enzyme catalyzes the reaction, publishing a model that settled the debate.",
-    options:["obfuscated","conjectured","overlooked","elucidated"], correctIndex:3,
-    explanation:"To \"elucidate\" is to make something clear by explanation, which ended decades of confusion. A conjecture is unproven, obfuscating makes things murkier, and overlooking the mechanism would settle nothing." },
+    options:["elucidated","hypothesized","overlooked","obfuscated"], correctIndex:0,
+    explanation:"To \"elucidate\" is to make something clear by explanation, which ended decades of confusion. To \"hypothesize\" is to propose an idea without settling it, to \"overlook\" is to miss something, and to \"obfuscate\" is to make something harder to understand; none of them could produce a model that settled the debate." },
 
   { id:"wb48", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:2,
     prompt:"In its formal apology, the airline _____ the inconvenience caused to passengers during the three-day system outage.",
-    options:["disputes","regrets","overlooks","celebrates"], correctIndex:1,
-    explanation:"In a formal apology, a company \"regrets\" the inconvenience: it expresses sorrow for it. Disputing, overlooking or celebrating it would contradict an apology." },
+    options:["resents","rebuts","relishes","regrets"], correctIndex:3,
+    explanation:"In a formal apology, a company \"regrets\" the inconvenience: it expresses sorrow for it. \"Resents\" means feels annoyed at, \"rebuts\" means argues against, and \"relishes\" means enjoys, and none of them can be part of an apology." },
 
   { id:"wb49", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:5,
     prompt:"The board voted to _____ the labor agreement that management had already signed with the union, making it binding on both sides.",
@@ -751,8 +751,8 @@ const PLACEMENT_POOL = [
 
   { id:"wx10", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:10,
     prompt:"When the interviewer asked an unexpectedly personal question, the candidate looked _____ for a moment, unsure how to respond.",
-    options:["unfazed","blase","nonplussed","indifferent"], correctIndex:2,
-    explanation:"\"Nonplussed\" means so surprised or confused that one doesn't know how to react, the opposite of the common misuse suggesting calm indifference. \"Unfazed,\" \"blase,\" and \"indifferent\" all describe someone unbothered, which contradicts being \"unsure how to respond.\"" },
+    options:["unfazed","sanctimonious","wistful","nonplussed"], correctIndex:3,
+    explanation:"\"Nonplussed\" means so surprised or confused that one doesn't know what to do, which matches \"unsure how to respond.\" \"Unfazed\" means not bothered, which contradicts being unsure. \"Sanctimonious\" means hypocritically pious and \"wistful\" means full of yearning, and neither describes being caught off guard." },
 
   { id:"wx11", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:1,
     prompt:"_____ employee must badge in before entering the server room.",
@@ -775,9 +775,9 @@ const PLACEMENT_POOL = [
     explanation:"A \"consensus\" is general agreement within a group, the natural result of a long debate. A census is a count, a concession is one side giving ground, and a majority is a number, not something a board \"reaches\" to decide." },
 
   { id:"wx15", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:4,
-    prompt:"Given the sensitive nature of the data, the auditors were asked to _____ every transaction from the past year.",
-    options:["skim","overlook","scrutinize","delegate"], correctIndex:2,
-    explanation:"\"Scrutinize\" means to examine closely and critically, matching sensitive data that calls for a thorough check of every transaction. \"Skim\" and \"overlook\" mean the opposite, and \"delegate\" means to hand a task to someone else." },
+    prompt:"Because several invoices had been altered, the auditors were asked to _____ every transaction from the past year.",
+    options:["authorize","reimburse","extrapolate","scrutinize"], correctIndex:3,
+    explanation:"\"Scrutinize\" means to examine closely, which fits altered invoices that call for a thorough check. \"Authorize\" means to approve, \"reimburse\" means to pay back, and \"extrapolate\" means to project from known data; none of them is what an auditor does about tampering." },
 
   { id:"wx16", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:4,
     prompt:"She has always had a knack _____ languages, picking up French and Mandarin with surprising ease.",
@@ -838,8 +838,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc2", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:3,
     prompt:"Smartphones have become so ubiquitous in the modern workplace that many employers no longer bother listing them among standard equipment. As used here, \"ubiquitous\" most nearly means:",
-    options:["extremely durable","present absolutely everywhere","overly complicated","recently invented"], correctIndex:1,
-    explanation:"\"Ubiquitous\" means found everywhere, matching the idea that employers take smartphones for granted as standard equipment. \"Recently invented\" is a trap since it wrongly links ubiquity to novelty rather than widespread presence." },
+    options:["highly dependable","widely admired","seen everywhere","quite affordable"], correctIndex:2,
+    explanation:"\"Ubiquitous\" means found everywhere, which is why employers no longer bother listing smartphones. Being dependable, admired or affordable wouldn't explain why a device goes unlisted." },
 
   { id:"vc3", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"Despite the defense attorney's dramatic delivery, the prosecutor's cogent argument, built on a clear chain of verifiable evidence, ultimately persuaded the jury. As used here, \"cogent\" most nearly means:",
@@ -847,19 +847,19 @@ const PLACEMENT_POOL = [
     explanation:"\"Cogent\" describes reasoning that is clear and compelling, supported by \"a clear chain of verifiable evidence.\" \"Emotionally manipulative\" is a trap because that dramatic quality is attributed to the defense, not to the cogent argument." },
 
   { id:"vc4", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
-    prompt:"Negotiations stalled for months because the union leader remained intransigent, refusing to accept even the smallest compromise on wages. As used here, \"intransigent\" most nearly means:",
-    options:["unable to make up his mind","constantly on the move","refusing to compromise","openly hostile and rude"], correctIndex:2,
-    explanation:"\"Intransigent\" means refusing to compromise, matching a leader who wouldn't accept the smallest concession. \"Constantly on the move\" confuses it with \"transient,\" \"unable to make up his mind\" is indecision rather than stubbornness, and \"openly hostile and rude\" describes manner, not refusal to compromise." },
+    prompt:"Despite three rounds of concessions from management, the union leader remained intransigent, and the strike entered its third month. As used here, \"intransigent\" most nearly means:",
+    options:["unable to make up his mind","constantly on the move","openly hostile and rude","refusing to compromise"], correctIndex:3,
+    explanation:"\"Intransigent\" means refusing to compromise, matching a leader who held firm through three rounds of concessions. \"Unable to make up his mind\" is indecision, the opposite of holding firm. \"Constantly on the move\" confuses it with \"transient,\" and \"openly hostile and rude\" describes manner, not refusal to compromise." },
 
   { id:"vc5", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
-    prompt:"Though he had sworn to confront his rival directly, at the last moment his resolve crumbled and his pusillanimous retreat left his allies stunned. As used here, \"pusillanimous\" most nearly means:",
-    options:["cowardly and lacking resolve","surprisingly calm","quietly strategic","deeply regretful"], correctIndex:0,
-    explanation:"\"Pusillanimous\" means showing a shameful lack of courage, matching his broken resolve and sudden retreat after swearing to confront his rival. \"Deeply regretful\" is a trap because it names an emotion that might follow cowardly behavior, not the cowardice itself." },
+    prompt:"Though he had sworn to confront his rival directly, at the last moment he made a pusillanimous retreat, slipping out a side door before the meeting began. As used here, \"pusillanimous\" most nearly means:",
+    options:["deeply ashamed","carefully planned","lacking courage","secretly hostile"], correctIndex:2,
+    explanation:"\"Pusillanimous\" means lacking courage, matching a man who swore to confront his rival and then slipped out a side door. \"Deeply ashamed\" is a feeling that might follow cowardly behavior, not the cowardice itself, and \"carefully planned\" and \"secretly hostile\" describe the retreat in ways the sentence doesn't support." },
 
   { id:"vc6", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:3,
     prompt:"Decades after being dismissed by her peers, the geologist was finally vindicated when new satellite data confirmed her theory of continental drift. As used here, \"vindicate\" most nearly means:",
-    options:["reward financially","promote to a higher position","prove someone was right after doubt","criticize harshly"], correctIndex:2,
-    explanation:"\"Vindicate\" means to clear someone of blame or prove them correct, matching \"confirmed her theory\" after she had been \"dismissed.\" \"Promote to a higher position\" is a trap because vindication concerns being proven right, not career advancement." },
+    options:["publicly honored","quietly forgiven","formally promoted","proved right"], correctIndex:3,
+    explanation:"\"Vindicate\" means to show that someone was right, matching new data that confirmed her theory after decades of dismissal. Public honor or a promotion might follow, but neither is what the word means, and \"forgiven\" assumes she had done something wrong." },
 
   { id:"vc7", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
     prompt:"The startup founder was famously parsimonious, reusing paper clips and refusing to replace the office furniture even after the company turned profitable. As used here, \"parsimonious\" most nearly means:",
@@ -872,14 +872,14 @@ const PLACEMENT_POOL = [
     explanation:"\"Garrulous\" means talking excessively, confirmed by \"talked nonstop... without pausing for a reply.\" \"Quietly nervous\" is a trap since nervous chatter is different from the confident, uninterrupted talk described here." },
 
   { id:"vc9", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:2,
-    prompt:"Although the patient had been confused throughout the morning, she became remarkably lucid by evening, answering every question clearly and accurately. As used here, \"lucid\" most nearly means:",
-    options:["physically energetic","clear and coherent in thought","emotionally calm","medically stable"], correctIndex:1,
-    explanation:"\"Lucid\" means clear-minded and easy to understand, matching \"answering every question clearly and accurately.\" \"Emotionally calm\" is a trap because lucidity concerns mental clarity, not mood." },
+    prompt:"Although the patient had been confused throughout the morning, by evening she was lucid enough to recognize her family and recall the date. As used here, \"lucid\" most nearly means:",
+    options:["thinking clearly","feeling calmer","fully awake","physically stronger"], correctIndex:0,
+    explanation:"\"Lucid\" means having full use of one's faculties, matching a patient who can recognize her family and recall the date after hours of confusion. \"Fully awake\" is the trap, since a person can be awake and still confused. \"Feeling calmer\" and \"physically stronger\" describe mood and body, not mental clarity." },
 
   { id:"vc10", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:4,
-    prompt:"Investors were cautious about the nascent industry, since commercial drone delivery had only existed for a few months and its regulations were still being written. As used here, \"nascent\" most nearly means:",
-    options:["financially risky","poorly regulated","just beginning to develop","rapidly declining"], correctIndex:2,
-    explanation:"\"Nascent\" means newly emerging or just starting to exist, supported by \"only existed for a few months.\" \"Financially risky\" is a trap, since newness does not necessarily equal risk, even though the two are often associated." },
+    prompt:"Investors were wary of the nascent drone-delivery industry, whose largest company had yet to make its first delivery. As used here, \"nascent\" most nearly means:",
+    options:["loosely regulated","highly profitable","rapidly shrinking","just emerging"], correctIndex:3,
+    explanation:"\"Nascent\" means just coming into existence, matching an industry whose biggest company hasn't made a first delivery. \"Loosely regulated\" is the trap, since new industries often are, but that isn't what the word means. \"Highly profitable\" and \"rapidly shrinking\" don't fit an industry that hasn't started." },
 
   { id:"vc11", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:6,
     prompt:"The poker champion's inscrutable expression gave nothing away, leaving opponents unable to tell whether she held a winning hand or a losing one. As used here, \"inscrutable\" most nearly means:",
@@ -892,14 +892,14 @@ const PLACEMENT_POOL = [
     explanation:"\"Profligate\" means recklessly extravagant or wasteful, confirmed by spending on projects \"with no clear public benefit.\" \"Carefully budgeted\" is the near-opposite trap, describing responsible rather than wasteful spending." },
 
   { id:"vc13", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:7,
-    prompt:"The junior associate's obsequious flattery of every partner in the office, agreeing with opinions he had contradicted the week before, made his colleagues visibly uncomfortable. As used here, \"obsequious\" most nearly means:",
-    options:["boastful about his own talents","quick to change his opinions","too eager to please or flatter","openly rude to his superiors"], correctIndex:2,
-    explanation:"\"Obsequious\" means too eager to please or flatter, matching an associate who agrees with every partner. \"Quick to change his opinions\" describes what he did, not the fawning motive the word names; \"boastful\" flatters oneself rather than others, and \"openly rude\" is the opposite." },
+    prompt:"The junior associate's obsequious manner, laughing at every partner's jokes and adopting opinions he had mocked the week before, made his colleagues visibly uncomfortable. As used here, \"obsequious\" most nearly means:",
+    options:["boastful about his own talents","unusually well informed","too eager to win favor","openly rude to his superiors"], correctIndex:2,
+    explanation:"\"Obsequious\" means too eager to win favor, matching an associate who laughs at every partner's jokes and adopts opinions he had mocked the week before. \"Boastful\" would mean praising himself, \"unusually well informed\" has nothing to do with flattery, and \"openly rude\" is the opposite." },
 
   { id:"vc14", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
     prompt:"Rather than admit the merger had failed, the CEO resorted to circumlocution, describing it only as a strategic realignment of resources. As used here, \"circumlocution\" most nearly means:",
-    options:["outright dishonesty","indirect, wordy way of speaking","formal legal language","persuasive rhetoric"], correctIndex:1,
-    explanation:"\"Circumlocution\" combines circum- (\"around\") with the root -loc-/-loqu- (\"to speak\"), literally \"speaking around\" a topic instead of addressing it directly — exactly what describing failure as a \"realignment\" does. \"Outright dishonesty\" is a trap because circumlocution avoids a direct statement without necessarily being a lie." },
+    options:["outright lying","legal jargon","evasive wordiness","forceful persuasion"], correctIndex:2,
+    explanation:"\"Circumlocution\" combines circum- (\"around\") with the root loc- (\"to speak\"), literally \"speaking around\" a topic. Calling a failure a \"strategic realignment\" avoids the word \"failed\" without stating anything false, so it is evasive wordiness, not outright lying, and it is neither legal jargon nor persuasion." },
 
   { id:"vc15", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:1,
     prompt:"The novel is narrated by an omniscient voice that reveals every character's private thoughts, even ones the characters hide from each other. As used here, \"omniscient\" most nearly means:",
@@ -978,8 +978,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc30", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:4,
     prompt:"Looking through old photographs, he grew wistful, smiling faintly at memories of a childhood he could never get back. Which word is closest in meaning to \"wistful\" as used here:",
-    options:["resentful","longing","watchful","restless"], correctIndex:1,
-    explanation:"\"Wistful\" is a quiet yearning for something out of reach, closest to \"longing\". \"Resentful\" is bitterness, \"watchful\" is alertness, and \"restless\" is unease." },
+    options:["watchful","bitter","amused","longing"], correctIndex:3,
+    explanation:"\"Wistful\" means full of quiet yearning, here for a childhood he can't get back, which is \"longing.\" \"Amused\" is the trap set by \"smiling.\" \"Bitter\" means resentful and \"watchful\" means alert; neither fits fond memories." },
 
   { id:"vc31", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:3,
     prompt:"The attorney was tenacious, refiling the appeal three times after each rejection until the court finally agreed to hear the case. Which word is closest in meaning to \"tenacious\" as used here:",
@@ -988,8 +988,8 @@ const PLACEMENT_POOL = [
 
   { id:"vc32", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:5,
     prompt:"Reviewers called the critic's takedown vitriolic, noting that he seemed less interested in evaluating the film than in humiliating its director with personal insults. Which word is closest in meaning to \"vitriolic\" as used here:",
-    options:["measured","glowing","rigorous","venomous"], correctIndex:3,
-    explanation:"\"Vitriolic\" criticism is bitterly hostile, like \"venomous\" criticism. \"Rigorous\" means thorough, while \"measured\" and \"glowing\" are the opposite of a vicious takedown." },
+    options:["flippant","venomous","rigorous","dismissive"], correctIndex:1,
+    explanation:"\"Vitriolic\" criticism is bitter and caustic, like \"venomous\" criticism. \"Dismissive\" means waving something aside, which is milder than humiliating someone with insults. \"Flippant\" means treating something too lightly, and \"rigorous\" means strict or thorough." },
 
   { id:"vc33", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:4,
     prompt:"The new volunteer coordinator was zealous, recruiting members at every community event and calling supporters late into the night. Which word is closest in meaning to \"zealous\" as used here:",
@@ -1022,9 +1022,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Prudent\" means showing good judgment and restraint, closest to \"judicious\". \"Prudish\" sounds alike but means easily shocked; \"reckless\" and \"hasty\" are opposites." },
 
   { id:"vc39", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:3,
-    prompt:"Once known as the most gregarious member of the firm, always organizing group lunches and after-work gatherings, he grew increasingly _____ after the merger, avoiding colleagues entirely. Which word best completes the sentence?",
-    options:["sociable","reclusive","boastful","jovial"], correctIndex:1,
-    explanation:"A once-gregarious man who now avoids colleagues has become \"reclusive\". \"Sociable\" and \"jovial\" describe his old self, and \"boastful\" doesn't fit." },
+    prompt:"Once known as the most gregarious member of the firm, always organizing group lunches, he grew increasingly _____ after the merger, eating alone at his desk most days. Which word best completes the sentence?",
+    options:["irritable","reclusive","ambitious","complacent"], correctIndex:1,
+    explanation:"A once-gregarious man who now eats alone has become \"reclusive,\" the opposite of sociable. \"Irritable\" would describe a mood, not withdrawing from people. \"Ambitious\" and \"complacent\" have no link to avoiding colleagues." },
 
   { id:"vc40", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:8,
     prompt:"The head chef was famously fastidious about plate presentation, but the new line cook working the grill station was almost comically _____, splattering sauce carelessly across every dish. Which word best completes the sentence?",
@@ -1083,8 +1083,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx1", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:1,
     prompt:"After the storm destroyed dozens of homes, the town's wealthiest resident made a generous donation to help rebuild the shelter. As used here, \"generous\" most nearly means:",
-    options:["giving freely and abundantly","done out of guilt","legally required","kept secret from others"], correctIndex:0,
-    explanation:"Generous describes willingly giving more than is expected, as with the large donation described." },
+    options:["freely given","made in secret","legally required","given just once"], correctIndex:0,
+    explanation:"\"Generous\" means giving freely and abundantly, as a large donation to rebuild a shelter does. Nothing in the sentence says the gift was secret, required or a one-time act." },
 
   { id:"vx2", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:1,
     prompt:"When she discovered that someone had scratched her brand-new car in the parking lot, Maria was furious. As used here, \"furious\" most nearly means:",
@@ -1102,9 +1102,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Diligent\" means showing steady, careful effort, matching Priya rechecking every calculation. \"Naturally gifted at math\" is talent, not effort; \"stubborn and hard to persuade\" mistakes persistence for obstinacy; and \"quick and efficient\" stresses speed over care." },
 
   { id:"vx5", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:4,
-    prompt:"The contract's wording was so ambiguous that both companies interpreted the delivery deadline differently. As used here, \"ambiguous\" most nearly means:",
-    options:["open to more than one interpretation","written in a foreign language","deliberately dishonest","extremely detailed"], correctIndex:0,
-    explanation:"Ambiguous means having more than one possible meaning, which is why the two companies disagreed." },
+    prompt:"The contract's wording on delivery was so ambiguous that both companies' lawyers spent a week arguing about it. As used here, \"ambiguous\" most nearly means:",
+    options:["unclear in meaning","overly technical","deliberately misleading","badly translated"], correctIndex:0,
+    explanation:"\"Ambiguous\" means open to more than one reading, which is why two sets of lawyers could argue over one deadline. The wording may have been technical or badly translated, but the sentence doesn't say so, and \"deliberately misleading\" adds an intent the word doesn't carry." },
 
   { id:"vx6", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"Rather than debate ideals for another hour, the new manager took a pragmatic approach and simply assigned tasks based on who was available. As used here, \"pragmatic\" most nearly means:",
@@ -1118,8 +1118,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx8", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:1,
     prompt:"For her school assignment, Elena wrote a biography of her grandmother, describing her childhood in Portugal and her journey to becoming a nurse. As used here, \"biography\" most nearly means:",
-    options:["a collection of family recipes","a letter of complaint","a set of photographs","a written account of a person's life"], correctIndex:3,
-    explanation:"Biography combines the Greek root \"bio-\" (life) with \"-graphy\" (writing), literally meaning \"life writing\" — an account of someone's life." },
+    options:["a life story told by its own subject","a life story told by someone else","a record of a family's ancestry","a study of living things"], correctIndex:1,
+    explanation:"\"Biography\" joins \"bio-\" (life) with \"-graphy\" (writing): a written account of a person's life. Elena writes about her grandmother, so the story is told by someone else; a life story told by its own subject is an autobiography. A record of ancestry is a genealogy, and a study of living things is biology." },
 
   { id:"vx9", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:3,
     prompt:"The witness gave such a credible account of the accident that the jury had no trouble believing her version of events. As used here, \"credible\" most nearly means:",
@@ -1137,9 +1137,9 @@ const PLACEMENT_POOL = [
     explanation:"\"Malleable\" means able to be shaped, especially by hammering, without breaking, matching gold hammered into thin sheets. The other options name other real properties of gold (value, shine, softness), but none means malleable." },
 
   { id:"vx12", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:7,
-    prompt:"The foundation's beneficent work funded hospitals, schools, and clean-water projects across the region for decades. As used here, \"beneficent\" most nearly means:",
-    options:["legally binding","financially reckless","publicly controversial","actively doing good for others"], correctIndex:3,
-    explanation:"Beneficent joins the prefix \"bene-\" (good) with the root \"-fic-\" (to do or make), meaning \"doing good\" — the opposite construction of \"maleficent,\" which uses \"mal-\" (bad)." },
+    prompt:"Locals still speak of the beneficent landlord who, in hard winters, quietly forgave months of unpaid rent. As used here, \"beneficent\" most nearly means:",
+    options:["very wealthy","doing good","easily fooled","well connected"], correctIndex:1,
+    explanation:"\"Beneficent\" joins \"bene-\" (good) with the root \"-fic-\" (to do or make), meaning \"doing good,\" as forgiving a tenant's rent does. \"Very wealthy\" and \"well connected\" describe status, and \"easily fooled\" is the trap for someone who lets rent go." },
 
   { id:"vx13", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:9,
     prompt:"As a peripatetic diplomat, she spent barely two weeks in any single country before packing her bags for the next assignment. As used here, \"peripatetic\" most nearly means:",
@@ -1168,8 +1168,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx18", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:8,
     prompt:"As the plane began its descent through the storm, she felt a rising trepidation she couldn't quite explain to the passenger beside her. Which word is closest in meaning to \"trepidation\" as used here?",
-    options:["Mild curiosity","A vague, apprehensive dread","Sudden excitement","Physical exhaustion"], correctIndex:1,
-    explanation:"Trepidation names a nervous, anxious dread about what may happen, stronger than curiosity and distinct from general fear that has an obvious cause." },
+    options:["Exhilaration","Disorientation","Apprehension","Indifference"], correctIndex:2,
+    explanation:"\"Trepidation\" is a nervous, fearful uncertainty about what may happen, which is close to \"apprehension.\" \"Disorientation\" is confusion about where one is, and \"exhilaration\" and \"indifference\" don't fit a frightening descent through a storm." },
 
   { id:"vx19", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:10,
     prompt:"The negotiator's final offer seemed designed less to resolve the dispute than to propitiate the angrier of the two board members long enough to get his signature. Which word is closest in meaning to \"propitiate\" as used here?",
