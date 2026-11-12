@@ -1145,7 +1145,9 @@
 
     let placement = "none";
     if(result){
-      const parts = [typeof result.level === "number" ? "Level " + result.level : "Result restored"];
+      // Only results without category scores (saved before the scoring
+      // engine) still describe themselves by the overall level.
+      const parts = [!result.categoryScores && typeof result.level === "number" ? "Level " + result.level : "Result restored"];
       if(validDate(result.completedAt)) parts.push("completed " + formatDate(result.completedAt));
       placement = parts.join(", ");
     }
@@ -1560,8 +1562,10 @@
     let greetTitle, greetBody;
     if(placementResult){
       greetTitle = "Ready for today's practice?";
-      greetBody = "Level " + placementResult.level + " · " + esc(LEVEL_NAMES[placementResult.level]) +
-        (streak > 0 ? " — " + streak + " day" + (streak === 1 ? "" : "s") + " in a row" : "");
+      // The overall level is not shown: each category has its own level on the
+      // results screen. It is still kept in the code as the fallback for old
+      // results that have no category scores.
+      greetBody = streak > 0 ? streak + " day" + (streak === 1 ? "" : "s") + " in a row" : "Your placement results are in.";
     } else if(placementProgress){
       greetTitle = "Pick up where you left off";
       greetBody = "Your placement test is waiting for you.";
@@ -1580,7 +1584,7 @@
 
     let placementSub, placementBtnLabel, placementExtra = "";
     if(placementResult){
-      placementSub = "Level " + placementResult.level + " · " + esc(placementResult.levelName) + " · completed " + formatDate(placementResult.completedAt);
+      placementSub = "Completed " + formatDate(placementResult.completedAt);
       placementBtnLabel = "Review results";
       placementExtra = '<button type="button" class="btn-ghost btn-sm" data-action="retake-placement" style="margin:0 auto;">Retake test</button>';
     } else if(placementProgress){
@@ -1602,7 +1606,7 @@
       title: "2 · My lessons",
       subtitle: lessonsLocked
         ? "Complete your placement test to unlock this module."
-        : "Adaptive practice · Level " + moduleLevel + " · " + esc(LEVEL_NAMES[moduleLevel]),
+        : "Adaptive practice",
       buttonLabel: lessonsLocked ? "Locked for now" : "Start a lesson",
       action: "open-lessons", primary: true, locked: lessonsLocked
     });
@@ -1918,7 +1922,7 @@
 
     return atmosphere() + headerBar({}) +
       '<main id="app-main" class="app-main screen">' +
-        '<div class="stack-sm"><span class="eyebrow">Adaptive practice · Level ' + moduleLevel + "</span><h1 class=\"title-lg\">Set up your lesson</h1></div>" +
+        '<div class="stack-sm"><span class="eyebrow">Adaptive practice</span><h1 class="title-lg">Set up your lesson</h1></div>' +
         '<div class="card stack">' +
           '<div class="field">' +
             '<label for="focus-select">What do you want to work on?</label>' +
@@ -1987,15 +1991,15 @@
     let suggestion = "";
     if(r.scorePercent >= 90 && moduleLevel < 5){
       suggestion = '<div class="card-soft stack-sm" style="border-color:var(--lime-deep);">' +
-        '<p style="font-weight:800;">You’re crushing Level ' + moduleLevel + "!</p>" +
-        '<p class="sub">Ready to try Level ' + (moduleLevel + 1) + " — " + esc(LEVEL_NAMES[moduleLevel + 1]) + "?</p>" +
-        '<button class="btn btn-secondary btn-sm" data-action="level-up">Level up to ' + (moduleLevel + 1) + "</button>" +
+        '<p style="font-weight:800;">You’re crushing these lessons!</p>' +
+        '<p class="sub">Ready for harder questions?</p>' +
+        '<button class="btn btn-secondary btn-sm" data-action="level-up">Make lessons harder</button>' +
       "</div>";
     } else if(r.scorePercent < 45 && moduleLevel > 1){
       suggestion = '<div class="card-soft stack-sm" style="border-color:var(--rose-deep);">' +
         '<p style="font-weight:800;">This level is stretching you right now.</p>' +
-        '<p class="sub">Want to drop back to Level ' + (moduleLevel - 1) + " for a bit to build confidence?</p>" +
-        '<button class="btn btn-secondary btn-sm" data-action="level-down">Try Level ' + (moduleLevel - 1) + "</button>" +
+        '<p class="sub">Want to drop back to easier questions for a bit to build confidence?</p>' +
+        '<button class="btn btn-secondary btn-sm" data-action="level-down">Make lessons easier</button>' +
       "</div>";
     }
     return atmosphere() + headerBar({}) +
@@ -2034,7 +2038,7 @@
         '<div class="list">' + history.map(function(h){
           return '<button type="button" class="list-item" data-action="open-history-detail" data-id="' + h.id + '">' +
             '<div class="avatar">' + h.scorePercent + "%</div>" +
-            '<div class="meta"><div class="top">Level ' + h.level + " · " + h.durationMinutes + " min lesson</div>" +
+            '<div class="meta"><div class="top">' + h.durationMinutes + " min lesson</div>" +
             '<div class="bottom">' + formatDate(h.date) + " at " + formatTime(h.date) + " · " + h.correct + "/" + h.total + " correct</div></div>" +
             '<span class="chev">' + svgIcon("chev") + "</span>" +
           "</button>";
@@ -2047,7 +2051,7 @@
     return atmosphere() + headerBar({}) +
       '<main id="app-main" class="app-main screen">' +
         '<div class="stack-sm">' +
-          '<span class="eyebrow">' + formatDate(r.date) + " · Level " + r.level + "</span>" +
+          '<span class="eyebrow">' + formatDate(r.date) + "</span>" +
           '<h1 class="title-lg">' + r.scorePercent + "% · " + r.correct + "/" + r.total + " correct</h1>" +
         "</div>" +
         '<div>' + r.questions.map(function(q, i){

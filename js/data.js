@@ -916,10 +916,10 @@ const PLACEMENT_POOL = [
     options:["always switched on","a passing fad","seen everywhere","highly useful"], correctIndex:2,
     explanation:"\"Ubiquitous\" means found everywhere, which is why employers no longer bother listing smartphones: everyone already has one. \"Always switched on\" describes how phones are used, not how widespread they are; \"a passing fad\" would not explain leaving them off a list; and a highly useful device is exactly the kind employers would list." },
 
-  { id:"vc3", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
+  { id:"vc3", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:4,
     prompt:"Despite the defense attorney's dramatic delivery, the prosecutor's cogent argument, built on a clear chain of verifiable evidence, ultimately persuaded the jury. As used here, \"cogent\" most nearly means:",
-    options:["clearly logical and convincing","emotionally manipulative","needlessly aggressive","legally questionable"], correctIndex:0,
-    explanation:"\"Cogent\" describes reasoning that is clear and compelling, supported by \"a clear chain of verifiable evidence.\" \"Emotionally manipulative\" is a trap because that dramatic quality is attributed to the defense, not to the cogent argument." },
+    options:["logically compelling","emotionally manipulative","briefly stated","legally questionable"], correctIndex:0,
+    explanation:"\"Cogent\" means appealing forcibly to the mind or reason: convincing, which fits an argument built on verifiable evidence that won over the jury. \"Emotionally manipulative\" is a trap because the dramatic delivery belongs to the defense. A cogent argument need not be brief, and nothing suggests it was legally questionable." },
 
   { id:"vc4", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:5,
     prompt:"Despite three rounds of concessions from management, the union leader remained intransigent, and the strike entered its third month. As used here, \"intransigent\" most nearly means:",
@@ -1196,10 +1196,10 @@ const PLACEMENT_POOL = [
     options:["a life story told by its own subject","a life story told by someone else","a record of a family's ancestry","a study of living things"], correctIndex:1,
     explanation:"\"Biography\" joins \"bio-\" (life) with \"-graphy\" (writing): a written account of a person's life. Elena writes about her grandmother, so the story is told by someone else; a life story told by its own subject is an autobiography. A record of ancestry is a genealogy, and a study of living things is biology." },
 
-  { id:"vx9", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:3,
-    prompt:"The witness gave such a credible account of the accident that the jury had no trouble believing her version of events. As used here, \"credible\" most nearly means:",
-    options:["believable and trustworthy","extremely emotional","legally required","difficult to understand"], correctIndex:0,
-    explanation:"Credible comes from the Latin root \"cred-\" (to believe) plus the suffix \"-ible\" (able to be), meaning \"able to be believed.\"" },
+  { id:"vx9", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:2,
+    prompt:"The witness gave such a credible account of the accident that the defense decided not to challenge it. As used here, \"credible\" most nearly means:",
+    options:["convincing and sound","extremely emotional","vividly detailed","difficult to understand"], correctIndex:0,
+    explanation:"Credible comes from the Latin root \"cred-\" (to believe) plus the suffix \"-ible\" (able to be), meaning \"able to be believed.\" An account the defense won't challenge is convincing and sound. A vivid or emotional account is not necessarily believable, and a hard-to-understand one would invite a challenge." },
 
   { id:"vx10", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:4,
     prompt:"Rather than follow the lengthy approval process, the manager found a way to circumvent the rule entirely. As used here, \"circumvent\" most nearly means:",
@@ -1323,8 +1323,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx34", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:8,
     prompt:"The senator's truculent reply to the committee was replayed on every evening newscast. What is the opposite of \"truculent\" as used here?",
-    options:["aggressively defiant","conciliatory and mild","evasive and vague","rambling and long-winded"], correctIndex:1,
-    explanation:"\"Truculent\" means aggressively self-assertive or scathingly harsh, so its opposite is conciliatory and mild. \"Aggressively defiant\" is close to the word itself, not its opposite, and evasive or rambling replies are faults of a different kind." },
+    options:["smug and self-satisfied","conciliatory and mild","evasive and vague","rambling and long-winded"], correctIndex:1,
+    explanation:"\"Truculent\" means aggressively self-assertive or scathingly harsh, so its opposite is conciliatory and mild. A smug reply is self-satisfied rather than gentle, and evasive or rambling replies are faults of a different kind; none of them is the opposite of an aggressive one." },
 
   { id:"vx35", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
     prompt:"Foreign investors had complained for years about the country's sclerotic bureaucracy. As used here, \"sclerotic\" most nearly means:",
@@ -1998,22 +1998,22 @@ const PLACEMENT_POOL = [
     options:["indispensible","indespensable","indispensiable","indispensable"], correctIndex:3,
     explanation:"\"Indispensable\" ends in \"-able,\" like \"dispensable.\" \"Indispensible\" is the common error, and the other options misspell the middle." },
 
-  { id:"sx32", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:9,
-    prompt:"After years of blurry vision, she finally made an appointment with an ______.",
-    options:["opthalmologist","ophthalmologist","ophthamologist","ophthalmmologist"], correctIndex:1,
-    explanation:"\"Ophthalmologist\" comes from the Greek word for eye, \"ophthalmos\": \"ph\" then \"th,\" with an \"l\" before the second \"m.\" \"Opthalmologist\" drops the first h, the most common error; the others drop the l or double the m." },
+  { id:"sx32", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:6,
+    prompt:"Before the expedition set out, two scouts were sent ahead on a ______ of the mountain pass.",
+    options:["reconaissance","reconnaissance","reconnaisance","recconnaissance"], correctIndex:1,
+    explanation:"\"Reconnaissance\" has a double n and a double s: re-con-nais-sance. \"Reconaissance\" and \"reconnaisance\" each drop one of the doubled letters, and \"recconnaissance\" doubles the c instead." },
 
-  { id:"sx33", type:"spelling", category:"spelling", sub:"Prefixes & Suffixes", difficulty:9,
+  { id:"sx33", type:"spelling", category:"spelling", sub:"Prefixes & Suffixes", difficulty:6,
     prompt:"Wearing two different socks every day was the professor's best-known ______.",
     options:["idiosyncrasy","idiosyncracy","idiosincrasy","idiosyncrassy"], correctIndex:0,
     explanation:"\"Idiosyncrasy\" ends in \"-crasy,\" not the \"-cracy\" of words like \"democracy,\" which is the usual error. The other options misspell the middle or double the s." },
 
-  { id:"sx34", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:8,
+  { id:"sx34", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:6,
     prompt:"The garage was crammed with old fishing rods, tackle boxes and other ______.",
     options:["paraphenalia","paraphanalia","paraphernalia","paraphernallia"], correctIndex:2,
     explanation:"\"Paraphernalia\" has an \"r\" before the \"n\": para-pher-nal-ia. Many people drop that r in speech, which leads to \"paraphenalia\"; the other options change a vowel or double the l." },
 
-  { id:"sx35", type:"spelling", category:"spelling", sub:"Homophones", difficulty:8,
+  { id:"sx35", type:"spelling", category:"spelling", sub:"Homophones", difficulty:6,
     prompt:"Analysts treat the state's primary as a ______ for how the rest of the country will vote.",
     options:["bellweather","belwether","bellwhether","bellwether"], correctIndex:3,
     explanation:"A \"bellwether\" is something that leads or indicates a trend; the word has nothing to do with weather. \"Bellweather\" is the common homophone error; the other options drop an l or add an h." },
