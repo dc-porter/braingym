@@ -681,3 +681,15 @@ input.text-input::placeholder{ color: var(--ink-soft); font-weight:600; }
   .stat-grid{ gap:8px; }
   .card{ padding:18px; }
 }
+
+/* ---------- placement result: per-category answer breakdown ---------- */
+.answer-breakdown{ display:flex; flex-direction:column; gap:8px; }
+.answer-facts{ display:flex; flex-direction:column; gap:2px; font-size:.9rem; color:var(--ink-soft); }
+.answer-facts b{ color:var(--ink); }
+.answer-bands{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:6px; }
+.answer-band{
+  display:flex; flex-direction:column; gap:2px;
+  background:var(--lilac-pale); border-radius:10px; padding:8px 10px;
+  font-size:.82rem; color:var(--ink);
+}
+.answer-band-label{ font-weight:800; color:var(--amethyst-deep); }

@@ -420,6 +420,45 @@
       : Math.min.apply(null, lateItems.map(function(i){ return i.difficulty; }));
     return clamp(fallback, 1, 10);
   }
+  // Category score for tests that have a per-question record (every test
+  // finished from this version on). Every answer in the category counts: each
+  // question contributes its rated level, plus 1 if answered right or minus 1
+  // if missed (half the picker's step of 2), and later questions weigh more
+  // (the 1st counts 1, the 2nd 2, and so on), because the picker has homed in
+  // by then. In simulated tests this landed closer to the true level than
+  // categoryCeiling, which looks only at the later half and returns a single
+  // question's level. categoryCeiling stays for scoring without a record.
+  function staircaseScore(items){
+    if(!items.length) return PLACEMENT_START_DIFFICULTY;
+    let sum = 0, weights = 0;
+    items.forEach(function(i, k){
+      const w = k + 1;
+      sum += w * (i.difficulty + (i.correct ? 1 : -1));
+      weights += w;
+    });
+    return clamp(Math.round(sum / weights), 1, 10);
+  }
+  // A record's answers for one category, in the order shown, with each
+  // question's rating looked up by ID (the record stores IDs, not ratings).
+  // Entries whose question is no longer in the pool are left out.
+  function recordItems(record, cat){
+    if(!record || !Array.isArray(record.entries)) return [];
+    return record.entries.filter(function(e){
+      return e && e.category === cat && PLACEMENT_BY_ID[e.id];
+    }).map(function(e){
+      return { difficulty: questionDifficulty(PLACEMENT_BY_ID[e.id]), correct: e.correct === true };
+    });
+  }
+  // The record saved with a result, matched by the finish time both carry.
+  function recordForResult(result){
+    if(!result || typeof result.completedAt !== "number") return null;
+    let iso;
+    try{ iso = new Date(result.completedAt).toISOString(); }catch(e){ return null; }
+    const list = load(PLACEMENT_RECORD_KEY, []);
+    if(!Array.isArray(list)) return null;
+    for(let i = list.length - 1; i >= 0; i--){ if(list[i] && list[i].date === iso) return list[i]; }
+    return null;
+  }
   function subSkillBreakdown(items){
     const bySkill = {};
     items.forEach(function(i){
@@ -498,6 +537,11 @@
       return { category:c, name:CATEGORY_NAMES[c], correct:b.correct, total:b.total, pct: b.total ? Math.round((b.correct / b.total) * 100) : 0 };
     }).sort(function(a,b){ return b.pct - a.pct; });
 
+    // The per-question record is built first so the category scores below are
+    // computed from it; it is saved with the result further down.
+    const completedAt = Date.now();
+    const record = buildPlacementRecord(completedAt);
+
     // Deeper, structured scoring for later use (detailed results display,
     // personalized curriculum) — additive to the summary fields above,
     // which the current results screen already relies on unchanged.
@@ -505,9 +549,10 @@
     Object.keys(itemsByCat).forEach(function(c){
       const items = itemsByCat[c];
       if(!items.length) return;
+      const fromRecord = recordItems(record, c);
       categoryScores[c] = {
         name: CATEGORY_NAMES[c],
-        ceiling: categoryCeiling(items),
+        ceiling: fromRecord.length ? staircaseScore(fromRecord) : categoryCeiling(items),
         correct: byCat[c].correct,
         total: byCat[c].total,
         pct: byCat[c].total ? Math.round((byCat[c].correct / byCat[c].total) * 100) : 0,
@@ -515,7 +560,6 @@
       };
     });
 
-    const completedAt = Date.now();
     placementResult = {
       level: level,
       levelName: LEVEL_NAMES[level],
@@ -527,10 +571,11 @@
       completedAt: completedAt
     };
     // Saved at the same moment as the totals, and only here, so a test that is
-    // quit halfway leaves nothing behind. Never displayed and never read back
-    // by the app; it is kept for later review and travels with Export, Import
-    // and the server copy like any other record under the storage prefix.
-    appendPlacementRecord(buildPlacementRecord(completedAt));
+    // quit halfway leaves nothing behind. The category scores above come from
+    // it, and the results screen reads it back for each category's breakdown;
+    // it travels with Export, Import and the server copy like any other record
+    // under the storage prefix.
+    appendPlacementRecord(record);
     save("placementResult", placementResult);
     placementProgress = null;
     save("placementProgress", null);
@@ -1692,11 +1737,38 @@
     return '<div class="card-soft stack-sm">' +
         '<span class="eyebrow">Rough context</span>' +
         '<p class="sub">Age ' + esc(profile.age) + " · " + esc(profile.education) + " — a loose expectation would land around levels " +
-          lo + "–" + hi + ". Your average ceiling of " + avgCeiling + " " + where + ".</p>" +
+          lo + "–" + hi + ". Your average category level of " + avgCeiling + " " + where + ".</p>" +
         '<p class="sub" style="font-size:.8rem;">A rough sketch drawn from two data points, not a validated benchmark — context, not a verdict.</p>' +
       "</div>";
   }
-  function categoryCardHTML(key, c){
+  // Easy / middle / hard groups for the per-category breakdown, by rated level.
+  const ANSWER_BANDS = [
+    { label: "Easy", lo: 1, hi: 3 },
+    { label: "Middle", lo: 4, hi: 7 },
+    { label: "Hard", lo: 8, hi: 10 }
+  ];
+  // What the record shows for one category: how many questions, the hardest
+  // level answered right, the lowest level missed, and right/wrong counts per
+  // band. Shown so the score reads as the rough measure it is.
+  function categoryBreakdownHTML(items){
+    const right = items.filter(function(i){ return i.correct; }).map(function(i){ return i.difficulty; });
+    const wrong = items.filter(function(i){ return !i.correct; }).map(function(i){ return i.difficulty; });
+    const hardest = right.length ? "level " + Math.max.apply(null, right) : "none answered right";
+    const missFrom = wrong.length ? "level " + Math.min.apply(null, wrong) : "no misses";
+    const bands = ANSWER_BANDS.map(function(b){
+      const inBand = items.filter(function(i){ return i.difficulty >= b.lo && i.difficulty <= b.hi; });
+      const ok = inBand.filter(function(i){ return i.correct; }).length;
+      return '<div class="answer-band"><span class="answer-band-label">' + b.label + " " + b.lo + "–" + b.hi + "</span>" +
+        "<span>" + ok + " right · " + (inBand.length - ok) + " wrong</span></div>";
+    }).join("");
+    return '<div class="answer-breakdown">' +
+        '<div class="answer-facts"><span>Hardest level answered right: <b>' + esc(hardest) + "</b></span>" +
+        "<span>Misses began at: <b>" + esc(missFrom) + "</b></span></div>" +
+        '<div class="answer-bands">' + bands + "</div>" +
+        '<p class="sub" style="font-size:.8rem;">Based on ' + items.length + " question" + (items.length === 1 ? "" : "s") + " — a rough reading, not an exact score.</p>" +
+      "</div>";
+  }
+  function categoryCardHTML(key, c, items){
     const band = ceilingBand(c.ceiling);
     const insights = CATEGORY_INSIGHTS[key];
     const insight = insights ? insights[band] : "";
@@ -1706,11 +1778,13 @@
           '<span class="pill pill-amethyst" style="white-space:nowrap;">Level ' + c.ceiling + " · " + esc(CEILING_BANDS[band].name) + "</span>" +
         "</div>" +
         levelMeterHTML(c.ceiling) +
+        (items && items.length ? categoryBreakdownHTML(items) : "") +
         (insight ? '<p class="sub">' + esc(insight) + "</p>" : "") +
         subSkillChipsHTML(c.subSkills) +
       "</div>";
   }
   function detailedResultHTML(r){
+    const record = recordForResult(r);
     const keys = Object.keys(r.categoryScores).sort(function(a, b){
       return r.categoryScores[b].ceiling - r.categoryScores[a].ceiling;
     });
@@ -1720,12 +1794,14 @@
     const bottom = cats[cats.length - 1];
     return '<div class="card stack-sm">' +
         '<h3 class="title-md">Your snapshot</h3>' +
-        '<p class="sub">Each category is scored 1–10 by the hardest level you were still answering correctly at the end of the test — your ceiling, not your percentage.</p>' +
+        (record
+          ? '<p class="sub">Each category is scored 1–10 from every answer you gave in it: the level of each question, nudged up for a right answer and down for a miss, with later questions counting more.</p>'
+          : '<p class="sub">Each category is scored 1–10 by the hardest level you were still answering correctly at the end of the test — your ceiling, not your percentage.</p>') +
         '<p class="sub">Strongest: <strong style="color:var(--ink)">' + esc(top.name) + "</strong> (level " + top.ceiling + ")" +
           (cats.length > 1 ? ' · Focus next on <strong style="color:var(--ink)">' + esc(bottom.name) + "</strong> (level " + bottom.ceiling + ")" : "") + "</p>" +
       "</div>" +
       benchmarkHTML(avgCeiling) +
-      keys.map(function(k){ return categoryCardHTML(k, r.categoryScores[k]); }).join("") +
+      keys.map(function(k){ return categoryCardHTML(k, r.categoryScores[k], record ? recordItems(record, k) : null); }).join("") +
       '<p class="sub" style="font-size:.8rem;">Sub-skill counts come from a light sample across 40 questions — a 1/1 or 0/1 is a hint, not a verdict.</p>';
   }
   // Results saved before the scoring engine existed have no categoryScores,
@@ -1740,8 +1816,26 @@
         '<p class="sub">Retake the test to see your level-by-level breakdown.</p>' +
       "</div>";
   }
+  // The overall 1-5 level is shown only for results saved before category
+  // scores existed, where it is all there is; otherwise each category's own
+  // score stands on its own.
   function renderPlacementResult(){
     const r = placementResult;
+    if(r.categoryScores){
+      return atmosphere() + headerBar({}) +
+        '<main id="app-main" class="app-main screen">' +
+          '<div class="hero-card center">' +
+            '<div class="eyebrow">Placement complete</div>' +
+            '<h1 class="title-lg">Your results by category</h1>' +
+            '<p style="margin-top:14px; font-weight:800; color:#fff;">' + r.correct + " / " + r.total + " correct (" + r.scorePercent + "%)</p>" +
+          "</div>" +
+          detailedResultHTML(r) +
+          '<div class="btn-row">' +
+            '<button class="btn btn-outline" data-action="retake-placement">Retake test</button>' +
+            '<button class="btn btn-primary" data-action="go-home">Back to home</button>' +
+          "</div>" +
+        "</main>";
+    }
     const pct = Math.round((r.level / 5) * 100);
     return atmosphere() + headerBar({}) +
       '<main id="app-main" class="app-main screen">' +
@@ -1754,7 +1848,7 @@
           '<p class="sub" style="color:rgba(255,255,255,.92); margin-top:6px;">' + esc(LEVEL_BLURB[r.level]) + "</p>" +
           '<p style="margin-top:14px; font-weight:800; color:#fff;">' + r.correct + " / " + r.total + " correct (" + r.scorePercent + "%)</p>" +
         "</div>" +
-        (r.categoryScores ? detailedResultHTML(r) : legacyResultHTML(r)) +
+        legacyResultHTML(r) +
         '<div class="btn-row">' +
           '<button class="btn btn-outline" data-action="retake-placement">Retake test</button>' +
           '<button class="btn btn-primary" data-action="go-home">Back to home</button>' +
