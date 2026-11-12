@@ -200,8 +200,8 @@ const PLACEMENT_POOL = [
 
   { id:"ge25", type:"error", category:"error", sub:"Modifier Placement", difficulty:6,
     prompt:"⟦Having reviewed the quarterly figures⟧, several new expense controls were implemented by the finance committee.",
-    options:["NO CHANGE","Reviewing the quarterly figures","To review the quarterly figures","Following a review of the quarterly figures"], correctIndex:3,
-    explanation:"\"Having reviewed\" is a participial phrase that must logically refer to the sentence's subject, but the subject here is \"expense controls,\" which didn't do any reviewing — a dangling modifier. \"Following a review of the quarterly figures\" uses a prepositional phrase instead, which requires no agreeing agent, so it fixes the problem; \"Reviewing the quarterly figures\" is tempting but keeps the same dangling participle issue." },
+    options:["NO CHANGE","After reviewing the quarterly figures","Following a review of the quarterly figures","Followed by a review of the quarterly figures"], correctIndex:2,
+    explanation:"\"Having reviewed the quarterly figures\" dangles, because the expense controls didn't review anything. \"Following a review of the quarterly figures\" is a prepositional phrase, so it needs no agent and fixes the problem. \"After reviewing…\" still has no one doing the reviewing, and \"Followed by a review…\" reverses the order of events." },
 
   { id:"ge26", type:"error", category:"error", sub:"Modifier Placement", difficulty:4,
     prompt:"The clinic ⟦almost sees⟧ two hundred patients a day during flu season, far more than it does in the summer.",
@@ -253,20 +253,20 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE",". The board nonetheless commissioned an independent forensic review","; the board nonetheless commissioning an independent forensic review","the board nonetheless commissioned an independent forensic review"], correctIndex:1,
     explanation:"The comma alone creates a splice between two independent clauses; ending the first with a period and starting a new sentence fixes it. The semicolon option is tempting since semicolons often join independent clauses, but \"the board...commissioning\" lacks a finite main verb and isn't itself an independent clause, so the semicolon is misused there." },
 
-  { id:"ge36", type:"error", category:"error", sub:"Sentence Fragments", difficulty:2,
+  { id:"ge36", type:"error", category:"error", sub:"Sentence Fragments", difficulty:3,
     prompt:"The committee reviewed dozens of applications. ⟦Each one carefully evaluated against a detailed rubric⟧.",
-    options:["NO CHANGE","Each one was carefully evaluated against a detailed rubric","Each one, carefully evaluated against a detailed rubric","Carefully evaluating each one against a detailed rubric"], correctIndex:1,
-    explanation:"Without an auxiliary verb, \"evaluated\" functions only as a participle modifying \"one,\" leaving the sentence without a finite main verb — a fragment. Adding \"was\" creates a complete passive-voice clause; the second option is tempting since it adds a comma, but a comma alone doesn't add the missing verb, so the fragment remains." },
+    options:["NO CHANGE","Each one was carefully evaluated against a detailed rubric","Each one were carefully evaluated against a detailed rubric","Each one was careful evaluated against a detailed rubric"], correctIndex:1,
+    explanation:"The original is a fragment because \"evaluated\" has no helping verb. \"Each one was carefully evaluated…\" supplies it. \"Each one were…\" doesn't agree with the singular \"each one,\" and \"careful evaluated\" uses an adjective where the adverb \"carefully\" is needed." },
 
-  { id:"ge37", type:"error", category:"error", sub:"Sentence Fragments", difficulty:1,
+  { id:"ge37", type:"error", category:"error", sub:"Sentence Fragments", difficulty:2,
     prompt:"The city council postponed the vote. ⟦Because several members had not yet reviewed the environmental impact report⟧.",
-    options:["NO CHANGE","Because several members had not, as of yet, reviewed the environmental impact report","Several members had not yet reviewed the environmental impact report","Several members, because they had not yet reviewed the environmental impact report"], correctIndex:2,
-    explanation:"Starting with the subordinating conjunction \"Because\" turns the clause into a dependent fragment that can't stand alone; removing \"Because\" makes it a complete independent clause. The first alternative is tempting since it just adds a phrase, but it keeps the same subordinating \"Because\" and remains a fragment." },
+    options:["NO CHANGE","Several members having not yet reviewed the environmental impact report","Several members has not yet reviewed the environmental impact report","Several members had not yet reviewed the environmental impact report"], correctIndex:3,
+    explanation:"Starting with \"Because\" makes the original a dependent clause standing alone, a fragment. \"Several members had not yet reviewed…\" is a complete sentence. \"Several members having not yet reviewed…\" is still a fragment, and \"Several members has…\" doesn't agree with the plural subject." },
 
-  { id:"ge38", type:"error", category:"error", sub:"Sentence Fragments", difficulty:2,
+  { id:"ge38", type:"error", category:"error", sub:"Sentence Fragments", difficulty:3,
     prompt:"The lab technician calibrated the equipment each morning. ⟦Ensuring that every reading stayed within tolerance⟧.",
-    options:["NO CHANGE","Ensuring every reading, which stayed within tolerance","To ensure that every reading stayed within tolerance","This ensured that every reading stayed within tolerance"], correctIndex:3,
-    explanation:"\"Ensuring that every reading stayed within tolerance\" has no subject or finite verb, making it a fragment; \"This ensured\" supplies both, creating a complete sentence. Both other alternatives are tempting since they rephrase the wording, but each keeps a participial or infinitive phrase with no finite main verb, so the fragment persists." },
+    options:["NO CHANGE","This ensuring that every reading stayed within tolerance","This ensured that every reading stayed within tolerance","This ensure that every reading stayed within tolerance"], correctIndex:2,
+    explanation:"The original has no subject or finite verb, so it is a fragment. \"This ensured that…\" supplies both. \"This ensuring…\" is still a fragment, and \"This ensure…\" doesn't agree with the singular subject \"this.\"" },
 
   { id:"ge39", type:"error", category:"error", sub:"Sentence Fragments", difficulty:6,
     prompt:"The consultant's report reached a striking conclusion. ⟦Its central claim being that automation would eliminate one in four manufacturing jobs within the decade⟧.",
@@ -415,13 +415,13 @@ const PLACEMENT_POOL = [
 
   { id:"gx18", type:"error", category:"error", sub:"Sentence Fragments", difficulty:3,
     prompt:"The archaeologists spent months excavating the site. ⟦Uncovering pottery shards, coins, and fragments of a mosaic floor⟧.",
-    options:["NO CHANGE","They uncovered pottery shards, coins, and fragments of a mosaic floor","Uncovering pottery shards, coins, and fragments of a mosaic floor, which took months","With pottery shards, coins, and fragments of a mosaic floor uncovered"], correctIndex:1,
-    explanation:"\"Uncovering pottery shards, coins, and fragments of a mosaic floor\" has no subject or finite verb, making it a fragment; adding \"They uncovered\" supplies both and creates a complete sentence. The other alternatives are tempting since they rephrase the wording, but each still lacks a finite main verb governing a subject, so the fragment remains." },
+    options:["NO CHANGE","They uncovered pottery shards, coins, and fragments of a mosaic floor","They uncovering pottery shards, coins, and fragments of a mosaic floor","Them uncovered pottery shards, coins, and fragments of a mosaic floor"], correctIndex:1,
+    explanation:"The original has no subject or finite verb, so it is a fragment. \"They uncovered…\" supplies both. \"They uncovering…\" lacks a finite verb, and \"Them uncovered…\" uses the object pronoun as a subject." },
 
-  { id:"gx19", type:"error", category:"error", sub:"Sentence Fragments", difficulty:7,
+  { id:"gx19", type:"error", category:"error", sub:"Sentence Fragments", difficulty:5,
     prompt:"The contractor missed the completion deadline by nearly six months. ⟦A delay that regulators attributed to persistent supply-chain disruptions rather than mismanagement⟧.",
-    options:["NO CHANGE","Regulators attributed the delay to persistent supply-chain disruptions rather than mismanagement","A delay, that regulators attributed to persistent supply-chain disruptions rather than mismanagement","Attributing the delay to persistent supply-chain disruptions rather than mismanagement"], correctIndex:1,
-    explanation:"\"A delay that regulators attributed to persistent supply-chain disruptions rather than mismanagement\" is just a noun phrase followed by a modifying relative clause, with no independent main verb, so it remains a fragment. \"Attributing the delay...\" is tempting because it rephrases the idea, but a participial phrase still lacks a finite verb and subject; only recasting \"regulators\" as the subject of \"attributed\" creates a complete sentence." },
+    options:["NO CHANGE","Regulators attributing the delay to persistent supply-chain disruptions rather than mismanagement","Regulators attributed the delay with persistent supply-chain disruptions rather than mismanagement","Regulators attributed the delay to persistent supply-chain disruptions rather than mismanagement"], correctIndex:3,
+    explanation:"The original is a noun phrase with a relative clause and no main verb, so it is a fragment. \"Regulators attributed the delay to…\" is a complete sentence. \"Regulators attributing…\" lacks a finite verb, and \"attributed the delay with\" uses the wrong preposition, since a delay is attributed to a cause." },
 
   { id:"gx20", type:"error", category:"error", sub:"Punctuation", difficulty:4,
     prompt:"The contractor still needed⟦: permits, inspection reports, and signed waivers⟧ before construction could begin.",
