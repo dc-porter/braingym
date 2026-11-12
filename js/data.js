@@ -1199,7 +1199,7 @@ const PLACEMENT_POOL = [
   { id:"vx9", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:2,
     prompt:"The witness gave such a credible account of the accident that the defense decided not to challenge it. As used here, \"credible\" most nearly means:",
     options:["convincing and sound","extremely emotional","vividly detailed","difficult to understand"], correctIndex:0,
-    explanation:"Credible comes from the Latin root \"cred-\" (to believe) plus the suffix \"-ible\" (able to be), meaning \"able to be believed.\" An account the defense won't challenge is convincing and sound. A vivid or emotional account is not necessarily believable, and a hard-to-understand one would invite a challenge." },
+    explanation:"\"Credible\" means believable and trustworthy. An account the defense won't challenge is convincing and sound. A vivid or emotional account is not necessarily believable, and a hard-to-understand one would invite a challenge." },
 
   { id:"vx10", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:4,
     prompt:"Rather than follow the lengthy approval process, the manager found a way to circumvent the rule entirely. As used here, \"circumvent\" most nearly means:",
@@ -1633,12 +1633,12 @@ const PLACEMENT_POOL = [
     options:["conscientous","conscienscious","consciencious","conscientious"], correctIndex:3,
     explanation:"The correct form contains \"science\" inside it and ends \"-tious.\" Many writers misplace the letters as \"consciencious\" or drop the ti entirely." },
 
-  { id:"sp9", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:7,
-    prompt:"Choose the correctly spelled word that fits: \"The dermatologist noted a yellowish discoloration of the skin, a condition known as ______.\"",
-    options:["xanthosis","zanthosis","xanthosys","xanthocis"], correctIndex:0,
-    explanation:"\"Xanthosis\" comes from the Greek \"xanthos,\" meaning yellow, and is spelled with an X even though it sounds like it should start with a Z. Almost everyone who hasn't seen the word written guesses \"zanthosis\" from the sound alone." },
+  { id:"sp9", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:6,
+    prompt:"Choose the correctly spelled word that fits: \"She left her corporate job to become an ______ and open a bakery.\"",
+    options:["entrepreneur","entreprenuer","entrepeneur","enterpreneur"], correctIndex:0,
+    explanation:"\"Entrepreneur\" is borrowed from French and keeps the French spelling: entre-pre-neur, with the \"-eur\" ending. The common errors swap the u and e at the end (\"entreprenuer\"), drop the r in the middle (\"entrepeneur\"), or rearrange the start to look like \"enterprise\" (\"enterpreneur\")." },
 
-  { id:"sp10", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:9,
+  { id:"sp10", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:7,
     prompt:"Choose the correctly spelled word that fits: \"Long exposure to the desert sun can completely ______ a plant, leaving it dry and brittle.\"",
     options:["dessicate","desiccate","dessiccate","desicate"], correctIndex:1,
     explanation:"\"Desiccate\" reverses the doubling pattern most people expect: a single s but a double c. The common error \"dessicate\" doubles the s instead, following the more familiar pattern from words like \"dessert.\"" },
@@ -1798,7 +1798,7 @@ const PLACEMENT_POOL = [
     options:["millennium","millenium","millenniumm","milennium"], correctIndex:0,
     explanation:"\"Millennium\" doubles both the l and the n, from mille (thousand) plus annus (year). The very common error drops one of the doubled letters, writing \"millenium.\"" },
 
-  { id:"sp42", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:9,
+  { id:"sp42", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:6,
     prompt:"Choose the correctly spelled word that fits: \"The patient was rushed into surgery after suffering a serious internal ______.\"",
     options:["hemorrage","hemmorhage","hemorhage","hemorrhage"], correctIndex:3,
     explanation:"\"Hemorrhage\" contains the unusual cluster \"-rrh-,\" inherited from Greek, along with an easy-to-miss h that most spellers wouldn't predict from the sound of the word. The doubled r and the extra h are both frequently dropped or misplaced." },
@@ -1863,7 +1863,7 @@ const PLACEMENT_POOL = [
     options:["ecstacy","extasy","ecstasey","ecstasy"], correctIndex:3,
     explanation:"'Ecstasy' ends in '-asy,' not '-acy' — the misspelling 'ecstacy' is extremely common because it mirrors how the word sounds." },
 
-  { id:"sx5", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:9,
+  { id:"sx5", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:6,
     prompt:"Paramedics worked quickly to ______ the patient who had stopped breathing.",
     options:["resuscitate","resucitate","ressuscitate","resussitate"], correctIndex:0,
     explanation:"'Resuscitate' has a tricky single-s / double-s / double-c pattern (re-SUS-ci-tate) that trips up even careful spellers; most people misplace the doubled letter entirely." },
@@ -1998,7 +1998,7 @@ const PLACEMENT_POOL = [
     options:["indispensible","indespensable","indispensiable","indispensable"], correctIndex:3,
     explanation:"\"Indispensable\" ends in \"-able,\" like \"dispensable.\" \"Indispensible\" is the common error, and the other options misspell the middle." },
 
-  { id:"sx32", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:6,
+  { id:"sx32", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:6,
     prompt:"Before the expedition set out, two scouts were sent ahead on a ______ of the mountain pass.",
     options:["reconaissance","reconnaissance","reconnaisance","recconnaissance"], correctIndex:1,
     explanation:"\"Reconnaissance\" has a double n and a double s: re-con-nais-sance. \"Reconaissance\" and \"reconnaisance\" each drop one of the doubled letters, and \"recconnaissance\" doubles the c instead." },
