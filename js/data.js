@@ -453,6 +453,36 @@ const PLACEMENT_POOL = [
     options:["NO CHANGE","The reservoir's water level had dropped to a record low, officials delayed imposing rationing for several more weeks, hoping seasonal rains would arrive in time.","The reservoir's water level had dropped to a record low; therefore, officials delayed imposing rationing for several more weeks, hoping seasonal rains would arrive in time.","Dropping to a record low, officials delayed imposing rationing for several more weeks at the reservoir, hoping seasonal rains would arrive in time."], correctIndex:0,
     explanation:"The original already uses effective subordination (\"Although\") to combine the contrasting ideas — a record-low water level yet delayed rationing — into one clear sentence, so it needs no change. The semicolon option is tempting since it's grammatically valid punctuation, but \"therefore\" wrongly frames the delay as a logical consequence of the low water level rather than the contrast it actually is; the last option opens with a dangling modifier, since \"Dropping to a record low\" should describe \"the reservoir's water level,\" not \"officials.\"" },
 
+  { id:"gx26", type:"error", category:"error", sub:"Subject-Verb Agreement", difficulty:8,
+    prompt:"When the auditors finally opened the locked cabinet, buried beneath the old invoices ⟦was⟧ a signed confession and two letters of resignation.",
+    options:["NO CHANGE","are","have been","were"], correctIndex:3,
+    explanation:"The sentence is inverted: the subject comes after the verb and is compound, \"a signed confession and two letters of resignation,\" so the verb must be plural. The story is in the past (\"finally opened\"), so \"were\" is correct. \"was\" agrees only with the nearest noun, \"confession\"; \"are\" and \"have been\" are plural but shift out of the past tense." },
+
+  { id:"gx27", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:10,
+    prompt:"The candidate ⟦whom⟧ the board insisted would bring stability resigned within a year.",
+    options:["NO CHANGE","which","whomever","who"], correctIndex:3,
+    explanation:"The pronoun is the subject of \"would bring\"; \"the board insisted\" is an interrupting clause. Remove it and the sentence reads \"The candidate who would bring stability,\" so \"who\" is correct. \"Whom\" sounds formal but is an object form, \"whomever\" is also an object form and doesn't fit one specific person, and \"which\" is not used for people." },
+
+  { id:"gx28", type:"error", category:"error", sub:"Verb Tense Consistency", difficulty:8,
+    prompt:"By the time the merger closes next spring, the two firms ⟦will negotiate⟧ for nearly three years.",
+    options:["NO CHANGE","would have been negotiating","had been negotiating","will have been negotiating"], correctIndex:3,
+    explanation:"\"By the time … next spring\" looks back from a future point, and \"for nearly three years\" describes an action still going on up to then, so the future perfect progressive \"will have been negotiating\" is needed. \"will negotiate\" ignores that the talks began long ago, \"had been negotiating\" is past, and \"would have been negotiating\" is conditional, as if the merger might not close." },
+
+  { id:"gx29", type:"error", category:"error", sub:"Parallel Structure", difficulty:8,
+    prompt:"The new remote-work policy ⟦not only affects full-time staff but also contractors⟧.",
+    options:["NO CHANGE","not only affects full-time staff but contractors also","affects not only full-time staff but also contractors","affects not only full-time staff but also affects contractors"], correctIndex:2,
+    explanation:"With \"not only … but also,\" the words after each part must match. In the original, \"not only\" comes before a verb (\"affects\") but \"but also\" comes before a noun (\"contractors\"). Moving \"not only\" after the verb pairs two nouns: \"full-time staff\" and \"contractors.\" \"contractors also\" keeps the original mismatch, and the last option pairs a noun with a verb phrase." },
+
+  { id:"gx30", type:"error", category:"error", sub:"Punctuation", difficulty:9,
+    prompt:"Although ⟦Lena and Marco's⟧ apartments are in the same building, each of them signed a separate lease.",
+    options:["NO CHANGE","Lena's and Marco's","Lena's and Marcos'","Lena and Marco's own"], correctIndex:1,
+    explanation:"When two people each own something separately, both names take an apostrophe: \"Lena's and Marco's apartments.\" \"Lena and Marco's\" marks joint ownership, which the separate leases rule out. \"Marcos'\" treats the name as if it ended in s, and adding \"own\" does not change the joint form." },
+
+  { id:"gx31", type:"error", category:"error", sub:"Modifier Placement", difficulty:9,
+    prompt:"⟦Having studied the evidence, the detective's conclusion was⟧ that the butler had lied.",
+    options:["NO CHANGE","Having studied the evidence, the conclusion of the detective was","After studying the evidence, the detective's conclusion was","Having studied the evidence, the detective concluded"], correctIndex:3,
+    explanation:"\"Having studied the evidence\" must describe the person who studied it, so \"the detective\" has to be the subject right after the comma. In the original the subject is \"conclusion\"; \"the detective's\" is only a possessive, so the modifier dangles. \"After studying\" and \"the conclusion of the detective\" keep the same problem." },
+
   /* ---- Word choice (75) ---- */
   { id:"wb1", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:4,
     prompt:"After winning the lottery, he liked to _____ his new wealth by driving a different sports car to work every day.",
@@ -828,6 +858,36 @@ const PLACEMENT_POOL = [
     prompt:"In the joint communique, the two nations agreed to _____ their ongoing border dispute through continued dialogue.",
     options:["escalate","concede","address","adjudicate"], correctIndex:2,
     explanation:"\"Address\" matches the formal, diplomatic register of a joint communique while accurately describing an ongoing effort to engage with the dispute through talks. \"Escalate\" would mean to intensify the conflict, the opposite of pursuing continued dialogue; \"concede\" implies one side simply yielding the disputed point, not the mutual engagement the communique describes; and \"adjudicate\" specifically means to resolve a dispute through a formal legal ruling, typically by a third party, not through the nations' own ongoing dialogue." },
+
+  { id:"wx26", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:8,
+    prompt:"In the twenty-chapter novel, the killer is unmasked in chapter nineteen, the book's _____ chapter, and chapter twenty only describes the trial.",
+    options:["penultimate","ultimate","antepenultimate","preliminary"], correctIndex:0,
+    explanation:"\"Penultimate\" means next to the last, which is chapter nineteen of twenty. \"Ultimate\" means last, which is chapter twenty. \"Antepenultimate\" means the one before the next to last, chapter eighteen. \"Preliminary\" means introductory." },
+
+  { id:"wx27", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:9,
+    prompt:"Only the most _____ investors believed the founder's claim that the device could run forever on a single battery.",
+    options:["credible","creditable","incredulous","credulous"], correctIndex:3,
+    explanation:"\"Credulous\" means ready to believe on slight evidence, which describes investors who accepted an impossible claim. \"Credible\" and \"creditable\" mean believable or praiseworthy, which describe a claim or a record, not a willingness to believe. \"Incredulous\" means unwilling to believe, the opposite." },
+
+  { id:"wx28", type:"blank", category:"blank", sub:"Commonly Confused Words", difficulty:8,
+    prompt:"After three hours on the tarmac with no explanation, the passengers grew _____, shouting questions at any crew member who passed.",
+    options:["restive","restful","reticent","remiss"], correctIndex:0,
+    explanation:"\"Restive\" means impatient and uneasy, resisting control, which fits passengers shouting after a long wait. \"Restful\" is the common mix-up and means calm and relaxing. \"Reticent\" means inclined to stay silent, the opposite of shouting, and \"remiss\" means careless about a duty." },
+
+  { id:"wx29", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:9,
+    prompt:"The _____ clerk insisted on stamping every page twice and lecturing each visitor about rules nobody had asked about.",
+    options:["obsequious","officious","auspicious","efficacious"], correctIndex:1,
+    explanation:"\"Officious\" means volunteering one's services where they are neither asked nor needed, which fits a clerk lecturing visitors who didn't ask. It is easily mistaken for \"official.\" \"Obsequious\" means fawning, \"auspicious\" means promising future success, and \"efficacious\" means effective." },
+
+  { id:"wx30", type:"blank", category:"blank", sub:"Precision & Connotation", difficulty:10,
+    prompt:"Asked directly whether the company had known about the defect, the spokesman _____, giving three different answers in as many minutes.",
+    options:["prevaricated","procrastinated","predicated","pontificated"], correctIndex:0,
+    explanation:"\"Prevaricate\" means to deviate from the truth or equivocate, which fits a spokesman giving three different answers. \"Procrastinate\" is the classic mix-up and means to put off doing something. \"Pontificate\" means to speak pompously, and \"predicate\" means to base one thing on another." },
+
+  { id:"wx31", type:"blank", category:"blank", sub:"Idiomatic Usage", difficulty:8,
+    prompt:"Critics argued that the new surveillance rules were _____ the very freedoms they claimed to protect.",
+    options:["inimical with","inimical of","inimical against","inimical to"], correctIndex:3,
+    explanation:"\"Inimical\" means harmful or hostile and is followed by \"to\": rules inimical to freedom. The other prepositions don't pair with it." },
 
 
   /* ---- Vocabulary (50) ---- */
@@ -1205,6 +1265,36 @@ const PLACEMENT_POOL = [
     prompt:"Although every advisor in the room urged him to reconsider, the general remained obdurate. What is the opposite of \"obdurate\" as used here?",
     options:["rigid and set in his own ways","yielding and open to persuasion","cautious and slow to reach a decision","calm and untroubled by pressure"], correctIndex:1,
     explanation:"Obdurate describes a stubborn refusal to change despite pressure, so its opposite is yielding and open to persuasion. \"Rigid and set in his own ways\" is a trap because it restates obdurate rather than reversing it, while \"cautious and slow to reach a decision\" and \"calm and untroubled by pressure\" describe different traits, hesitation and composure, not a willingness to be persuaded." },
+
+  { id:"vx26", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:8,
+    prompt:"The professor's lectures were notoriously recondite, packed with references to medieval logicians that few people in the room had ever read. As used here, \"recondite\" most nearly means:",
+    options:["hard to grasp","poorly organized","dull and repetitive","boldly original"], correctIndex:0,
+    explanation:"\"Recondite\" means difficult for an ordinary listener to understand, or dealing with obscure knowledge, which fits lectures full of references few had read. \"Poorly organized\" and \"dull and repetitive\" are common complaints about lectures, but neither is what the word means, and \"boldly original\" mistakes rare references for originality." },
+
+  { id:"vx27", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:7,
+    prompt:"The CEO's apology was perfunctory: two sentences read from a card before he moved on to the quarterly forecast. Which word is closest in meaning to \"perfunctory\" as used here?",
+    options:["Impolite","Belated","Tearful","Routine"], correctIndex:3,
+    explanation:"\"Perfunctory\" means done as a routine, without real interest, like an apology read off a card. \"Impolite\" and \"belated\" are faults an apology can have, but neither is what the word means, and \"tearful\" is the opposite of a mechanical apology." },
+
+  { id:"vx28", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:7,
+    prompt:"In the company's culture, the founder's original design was sacrosanct, and engineers who proposed changes to it were quietly moved to other teams. As used here, \"sacrosanct\" most nearly means:",
+    options:["beyond criticism","badly outdated","legally protected","widely copied"], correctIndex:0,
+    explanation:"\"Sacrosanct\" comes from Latin roots meaning \"holy\" and \"made sacred\": treated as if holy and immune from criticism, which is why engineers who proposed changes were moved. \"Legally protected\" is the trap, since nothing in the sentence is about law. \"Badly outdated\" and \"widely copied\" don't explain the punishment." },
+
+  { id:"vx29", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:9,
+    prompt:"Where his co-pilot fretted over every gauge, the veteran captain seemed almost _____, chatting about baseball as the storm closed in. Which word best completes the sentence?",
+    options:["indefatigable","incorrigible","insouciant","indignant"], correctIndex:2,
+    explanation:"\"Insouciant\" means lightheartedly unconcerned, the opposite of fretting, which fits a captain chatting about baseball in a storm. \"Indefatigable\" means tireless, \"incorrigible\" means impossible to reform, and \"indignant\" means angry at an injustice; none of them contrasts with fretting." },
+
+  { id:"vx30", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
+    prompt:"After the merger, the former CEO was given a sinecure on the advisory board, and colleagues joked that his calendar had never looked emptier. As used here, \"sinecure\" most nearly means:",
+    options:["a symbolic demotion","a severance agreement","a temporary consulting contract","a paid post with little work"], correctIndex:3,
+    explanation:"A \"sinecure\" is a position that requires little or no work but usually pays an income, which fits a calendar that had never looked emptier. A symbolic demotion, a severance agreement or a short consulting contract could all follow a merger, but none of them is a paid post with nothing to do." },
+
+  { id:"vx31", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:8,
+    prompt:"The obstreperous crowd at the back of the hall drowned out the first three speakers. Which word is closest in meaning to \"obstreperous\" as used here?",
+    options:["Unruly","Jubilant","Sullen","Inattentive"], correctIndex:0,
+    explanation:"\"Obstreperous\" means noisy and hard to control, closest to \"unruly.\" A jubilant crowd is joyful, not necessarily defiant; a sullen crowd is gloomily silent; and an inattentive crowd would not drown anyone out." },
 
   /* ---- Reading comprehension (50, across 10 shared passages) ---- */
   { id:"rc1", type:"reading", category:"reading", sub:"Main Idea", difficulty:5, passageId:"RP1",
@@ -1842,6 +1932,36 @@ const PLACEMENT_POOL = [
     prompt:"After fifteen years of service, she was promoted to the rank of ______ in the army.",
     options:["colonel","kernel","colonnel","kernal"], correctIndex:0,
     explanation:"'Colonel' is pronounced identically to the real word 'kernel' but keeps its Italian-derived spelling with an 'o' and a single 'n' — the pronunciation gives almost no clue to the correct letters." },
+
+  { id:"sx26", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:10,
+    prompt:"Some villagers considered it ______ to hold a rock concert inside the old cathedral.",
+    options:["sacrilegious","sacreligious","sacriligious","sacrilidgious"], correctIndex:0,
+    explanation:"\"Sacrilegious\" comes from \"sacrilege,\" not \"religious,\" so it is spelled sacr-i-leg-ious. \"Sacreligious\" is the common error because it looks like \"religious\"; the other two misplace a vowel or add a \"d.\"" },
+
+  { id:"sx27", type:"spelling", category:"spelling", sub:"Double Letters & Irregular Spellings", difficulty:9,
+    prompt:"The tomb's inscriptions praised the ______ as a living god.",
+    options:["pharoah","pharoh","pharraoh","pharaoh"], correctIndex:3,
+    explanation:"The correct spelling is \"pharaoh,\" ending in \"-aoh.\" \"Pharoah\" is the most common error because \"-oah\" looks more natural in English; \"pharoh\" drops a vowel and \"pharraoh\" doubles the r." },
+
+  { id:"sx28", type:"spelling", category:"spelling", sub:"Commonly Misspelled Words", difficulty:8,
+    prompt:"The ______ toddler hid his father's car keys inside a box of cereal.",
+    options:["mischievious","mischievous","mischevious","mischeivous"], correctIndex:1,
+    explanation:"\"Mischievous\" has three syllables and comes from \"mischief\": mis-chie-vous. \"Mischievious\" adds the extra \"i\" many people say aloud; the other two drop or swap the \"ie.\"" },
+
+  { id:"sx29", type:"spelling", category:"spelling", sub:"Silent Letters", difficulty:8,
+    prompt:"Against the sunset, the lighthouse stood out as a dark ______.",
+    options:["silhouette","silouette","silhouete","sillhouette"], correctIndex:0,
+    explanation:"\"Silhouette\" has a silent \"h\" after the first \"l\" and ends in \"-ette.\" The other options drop the h, drop a t, or double the l." },
+
+  { id:"sx30", type:"spelling", category:"spelling", sub:"Homophones", difficulty:8,
+    prompt:"The auditor spent the weekend ______ over three years of bank statements.",
+    options:["pouring","pooring","poring","porring"], correctIndex:2,
+    explanation:"To \"pore\" over something is to study it closely, so the form is \"poring.\" \"Pouring\" is the common homophone error and means making liquid flow. \"Pooring\" and \"porring\" are not words." },
+
+  { id:"sx31", type:"spelling", category:"spelling", sub:"Prefixes & Suffixes", difficulty:8,
+    prompt:"A good copy editor is ______ to any serious newsroom.",
+    options:["indispensible","indespensable","indispensiable","indispensable"], correctIndex:3,
+    explanation:"\"Indispensable\" ends in \"-able,\" like \"dispensable.\" \"Indispensible\" is the common error, and the other options misspell the middle." },
 ];
 
 /* =================== GRAMMAR & PUNCTUATION LESSON BANK =================== */
