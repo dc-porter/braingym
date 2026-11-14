@@ -75,6 +75,7 @@ Also built: reduce motion (follows the iPhone and has its own switch), automatic
 
 ## What I could not verify
 
+- **The preview link itself.** Vercel reports the build as Ready, but the address asks for your Vercel sign-in, so I could not open it from here. Everything above was measured on the same files served from a local test server.
 - **Real frame rate, heat and battery on an iPhone 14.** Only you can.
 - **How it feels under your thumb**, and whether tap targets in the scene are comfortable.
 - **Safari itself.** My test browser is Chromium. I avoided anything Safari handles differently where I knew of it, but nothing here has run in Safari.
@@ -99,7 +100,9 @@ Also built: reduce motion (follows the iPhone and has its own switch), automatic
 
 ## Phone checklist (six items)
 
-Open the preview link ending in **/world/** in Safari.
+Open this link in Safari, signed in to Vercel as you are for your other previews:
+
+**https://braingym-git-claude-world-prototype-dee-a1cf.vercel.app/world/**
 
 1. **Speed:** from tapping Begin, does the world appear within about three seconds on mobile data?
 2. **Smoothness:** open the menu, turn on Performance readout, and watch "frames/s" during the arrival, at the Gate and on the terrace. Near 60 is the goal. Tell me the lowest number you see, and the "quality" line.
