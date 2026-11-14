@@ -298,7 +298,7 @@ This fits your working assumption in the Log: treat 8 or above as an advanced st
 - Counts match the Log exactly: 332 active (83, 79, 85, 85), 3 retired, 50 Reading.
 - Answer positions match the Log: A 84, B 90, C 80, D 78. Inside Grammar they are uneven: A 15, B 29, C 20, D 19.
 - The right answer is the single longest option in 38 of 332 questions, below the 83 that chance would give. No longest-answer giveaway.
-- Nine of 21 placement skills have fewer than 12 questions, all in Grammar (7 to 11 each). Eighteen of the 19 grammar bank skills also fall short, and seven have only one or two. Your settled 12-question rule cannot be met yet.
+- Nine of 21 placement skills have fewer than 12 questions, all in Grammar (7 to 11 each). Two of them pass 12 once the grammar bank's matching questions are added. Of the 17 skills that exist only in the grammar bank, 16 fall short, and eight have only one or two questions. Your settled 12-question rule cannot be met yet.
 - Level 10 has one question and level 9 has ten, as the Log says.
 
 **Safety basics (Area 4)**
