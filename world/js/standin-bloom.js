@@ -235,10 +235,12 @@ function pickItem(task, avoidFormat){
   const varied = pool.filter(function(it){ return it.format !== avoidFormat; });
   if(varied.length) pool = varied;
   const lvl = S.level[task.focusSkill || task.skillId] || 5;
+  const jitter = {};
+  pool.forEach(function(it){ jitter[it.id] = Math.random() * 0.9; });   // so the opening item varies
   pool.sort(function(a, b){
     const sa = (S.seen[a.id] || 0), sb = (S.seen[b.id] || 0);
     if(sa !== sb) return sa - sb;                      // unseen / longest ago first
-    return Math.abs(a.d - lvl) - Math.abs(b.d - lvl);  // then closest to level
+    return (Math.abs(a.d - lvl) + jitter[a.id]) - (Math.abs(b.d - lvl) + jitter[b.id]);  // then closest to level
   });
   return pool[0];
 }

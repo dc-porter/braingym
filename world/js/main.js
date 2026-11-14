@@ -110,7 +110,7 @@ function target(parent, geo, pos, data){
 }
 target(crown.group, new THREE.BoxGeometry(9, 12, 2.4), [0, 6, GATE_Z], { kind: "gate", place: "crown", stand: [0, -0.9], reach: 2.2 });
 target(crown.group, new THREE.CylinderGeometry(1.5, 1.5, 4.6, 8), [AMARIS_HOME[0], 2.3, AMARIS_HOME[1]], { kind: "amaris", place: "crown", stand: [-1.9, 0.9], reach: 2.2 });
-target(crown.group, new THREE.BoxGeometry(3.4, 4.6, 2.2), [SIGN[0], 2.3, SIGN[1]], { kind: "sign", place: "crown", stand: [SIGN[0] - 0.6, SIGN[1] - 2.6], reach: 1.6 });
+target(crown.group, new THREE.BoxGeometry(3.4, 4.6, 2.2), [SIGN[0], 2.3, SIGN[1]], { kind: "sign", place: "crown", stand: [SIGN[0] - 2.9, SIGN[1] + 0.4], reach: 1.6 });
 target(crown.group, new THREE.CylinderGeometry(2.6, 2.6, 1.6, 10), [crown.viewpoint[0], 0.8, crown.viewpoint[1]], { kind: "view", place: "crown", stand: crown.viewpoint, reach: 1.2 });
 target(farIsle.group, new THREE.BoxGeometry(9, 12, 2.4), [0, 6, -3.2], { kind: "twin", place: "far", stand: [0, 0.4], reach: 2.2 });
 target(farIsle.group, new THREE.BoxGeometry(3.4, 4.2, 2.2), [farIsle.signPos[0], 2.1, farIsle.signPos[1]], { kind: "farsign", place: "far", stand: [2.6, 4.2], reach: 1.8 });
