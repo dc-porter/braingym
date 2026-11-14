@@ -214,9 +214,9 @@ Grammar's A is low because A is always "NO CHANGE" and it is right only 15 times
 
 **Ratings and the cap rules.**
 
-- The Spelling cap is applied as your rule says. Eleven words common in print moved down to 6, including hemorrhage and resuscitate, which you chose to keep. Desiccate sits at 7, which is fair for a word that is rare in print.
+- The Spelling cap is applied as your rule says. Ten words common in print moved down to 6, including hemorrhage and resuscitate, which you chose to keep. Desiccate sits at 7, which is fair for a word that is rare in print.
 - The result is a crowd at level 6: 27 Spelling questions, up from 17. Only four Spelling questions remain at level 7 or above.
-- Sixty Vocabulary questions moved up by 1 to 3 levels. The biggest jumps (vc23 antebellum from 2 to 5, vc25 vociferous from 4 to 7) are the ones whose old sentence spelled out the meaning. The direction is right. The exact numbers are judgments.
+- Fifty-nine Vocabulary questions moved up by 1 to 3 levels. The biggest jumps (vc23 antebellum from 2 to 5, vc25 vociferous from 4 to 7) are the ones whose old sentence spelled out the meaning. The direction is right. The exact numbers are judgments.
 
 **Small things on main that I noticed while reading (not caused by the branch)**
 
