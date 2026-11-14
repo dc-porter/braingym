@@ -4,10 +4,29 @@ For whichever model continues this work. Written so you can carry on without the
 
 ## State of things on Nov 14, 2026
 
-- **Built:** nothing. This branch, claude/world-design, holds design documents only, under docs/world/.
-- **Not built:** the prototype, the doorway, coins, the world slot in saving, the offline helper change and the world itself.
-- **Waiting on Dee:** the decisions in 12-top-10-decisions.md. Three block the prototype: staged roaming, no build step and the calm task card. **Do not start Phase 2 until she says go.**
-- **No pull request** was opened for this branch, at her instruction.
+- **Built:** the Phase 2 prototype, on the branch claude/world-prototype, in the folder world/. Draft pull request 51, marked do not merge, exists only for its preview link. Its report is world/PROTOTYPE-REPORT.md on that branch.
+- **Not built:** the doorway, coins, the world slot in saving, the offline helper change and the real world. Nothing in Bloom itself has changed.
+- **This branch,** claude/world-design, holds design documents only. No pull request.
+- **Waiting on Dee:** her phone check of the prototype, and her decision on the character look.
+- **The prototype never merges.** Parts of it are meant to be copied into the real world later (see Reusable building blocks).
+
+## What Dee approved on Nov 14, 2026
+
+These are decisions. Her conditions are part of them.
+
+| Decision | Approved as | Her conditions |
+|---|---|---|
+| Crystals | Learning makes them appear, roaming collects them, a few hidden ones per area | Two separate wallets. No top-ups. |
+| Coins | Bloom's core owns the wallet and ledger | **Treat the coin work as its own stage, not a side task.** |
+| Roaming | Real 3D now, freedom in stages | |
+| Build step | None. three.js saved in the project. | **three.js loads only on the world page.** The offline helper fix stays in these steps (B8). |
+| World can start a skill | Yes | **Record it in the Decisions Log as planned and dependent on Stage 4, not as a settled rule.** The prototype fakes it with a stand-in lesson. |
+| Calm task card | Yes | **It must also host mini-games and hands-on activities, not only questions.** |
+| Story and names | Story A, Aurelune, Amaris | **Names are not final** until checked online. |
+| Tap to arrange | Yes, as a measured experiment | The one-right-order rule. An off switch. |
+| Order | Prototype now, real world after Stage 7 | |
+| Character look | Not decided | She decides after seeing the prototype. |
+| Reference documents | | **Do not edit the Decisions Log, Design Guide or Roadmap** unless she asks. The proposed wording is in 13-document-changes.md. |
 
 ## Who you are working for
 
@@ -97,26 +116,26 @@ Full version: 10-technical-plan.md.
 
 ## Reusable building blocks
 
-None exists yet. This is the planned set. Build each so it can be used without reading the others.
+A first version of most of these exists in the prototype, on the branch claude/world-prototype. They were written to be reused. Copy them into the real world one at a time, each in its own run, and never by merging the prototype branch.
 
 | Block | File | Job |
 |---|---|---|
 | Doorway client | world/js/door.js | The only file that talks to Bloom |
-| Stand-in Bloom | world/js/standin-bloom.js | Fake Bloom with the same ten entries, prototype only |
-| Save and restore | world/js/save.js | World state, saved through the doorway |
-| Quality steps | world/js/quality.js | Measures frame time, steps quality down and up |
-| Input | world/js/input.js | Tap, hold, drag, pinch |
-| Follow camera | world/js/camera.js | Follows, frames, eases back |
+| Stand-in Bloom | world/js/standin-bloom.js | Fake Bloom with the same entries, prototype only. Never copy its items into real content without review. |
+| Save and restore | inside world/js/main.js for now | World state, saved through the doorway. Split into save.js when the real world starts. |
+| Quality steps | inside world/js/main.js for now | Measures frame time, steps quality down and up |
+| Input and follow camera | inside world/js/main.js for now | Tap to go, drag to look, camera follows and eases back. Hold-to-follow and pinch-to-map are not built. |
 | Sky | world/js/sky.js | Gradient, stars, planets, time of day |
 | Water | world/js/water.js | Surface, waterfalls, mist |
-| Isle recipe | world/js/island.js | An island from a few numbers |
-| Building recipes | world/js/buildings.js | Tower, arch, dome, bridge, lamp |
+| Shape kit | world/js/kit.js | Colors, the builder that bakes many shapes into one mesh, the soft material with edge glow, halos |
+| Isle and building recipes | world/js/island.js | Isle body, tower, tree, lamp, the Crown Isle, a placeholder isle, distant isles |
+| Gate | world/js/gate.js | A portal gate: dim with ghost copies, lit with a living portal, twin colors |
 | Character recipe | world/js/character.js | A character from a description. The swap point for a commissioned model. |
-| Effects | world/js/effects.js | Shimmer ghosts, probability cloud, portal fold, halo, light-up |
+| Effects | world/js/effects.js | Lamp halos, drifting motes and the light-up burst, each one batch. The probability cloud is not built. |
 | Task card | world/js/taskcard.js | The calm card, the light strip, feedback, fresh-item retry |
-| Activity types | inside taskcard.js | Tap to fix, multiple choice, fill-in-the-blank, one-word typing, and tap to arrange if approved |
-| Speech panel | world/js/speech.js | Two-sentence bubbles with two to four choices |
-| Scene files | world/js/scenes/ | One per place |
+| Activity types | inside taskcard.js | Built: multiple choice, tap to find and fix, tap to arrange (experiment, with a switch). Not built: fill-in-the-blank, one-word typing. |
+| Panels | world/js/ui.js | Speech with two to four choices, toast, reward, portal fold, sound, menu |
+| Scene files | world/js/scenes/ | Not built. One per place, when there is more than one place. |
 
 ## Build order
 
@@ -130,7 +149,7 @@ Small steps. Each is one purpose, one pull request and one phone check. Each row
 | 0b | Export, then the real placement retake |
 | 0c | One documents-only pass: the audit's drift list plus the rows Dee approves in 13-document-changes.md |
 
-### Track P: the prototype (only after Dee says go; branch claude/world-prototype from main; nothing merges)
+### Track P: the prototype (done on Nov 14, 2026; kept here as a record)
 
 The prototype is one branch that never merges, so its steps are commits with a clear message each, not separate pull requests. Do them in order and stop at any point with something showable.
 
@@ -163,7 +182,7 @@ Details and reasons are in 09-plug-in-contract.md.
 | B3 | Mark every item as test, lesson or world. No item text changes. | Question data | Leak check: world items never include a placement ID |
 | B4 | Doorway, read-only half: `version`, `getLearner`, `getSkills`, `getPlan` | App structure, no behavior change | Same simulation before and after, no difference |
 | B5 | Doorway, task half: `startTask`, `checkAnswer`, `finishTask` paying zero | App behavior | Contract test page shows all green |
-| B6 | Coins in Bloom's core: wallet, ledger, exact-task pay rules, reasons shown, `spend` | Saved-data shape, alone | Export before, Import test after |
+| B6 | **Coins, as its own stage** (Dee's condition). Plan it like a Roadmap stage with a goal, steps and a checklist. At least three runs: the wallet and ledger (saved-data shape, alone), the exact-task pay rules with reasons shown (behavior), then `spend` (behavior). | Mixed, so split into runs | Export before, Import test after, for the saved-data run |
 | B7 | World slot in saving: `saveWorld`, `loadWorld`, carried by Export, Import and backup, cleared by Reset | Saved-data shape, alone | Export before, Import test after |
 | B8 | Offline helper keeps the saved copy of big, rarely changing world files | sw.js only, alone | Phone check that a new version still arrives |
 
@@ -183,15 +202,26 @@ B1 and B2 belong at the start of Roadmap Stage 4. B3 to B8 can be done any time 
 
 Each new place is a recipe plus a scene file plus a host description. If a run needs to edit a shared block to add a place, that edit is its own run first.
 
+## What the prototype showed (measured in a test browser, not on a phone)
+
+- Download: 237 KB compressed in total. The 3D library is 195 KB of that.
+- 33 to 51 objects drawn per frame and 13,500 to 29,100 triangles, against budgets of 80 and 100,000.
+- Text contrast on the card: 16.8 to 1.
+- Leaving mid-task, reloading, rotating and losing the 3D picture all recover.
+- The page makes no network calls and stores data only under bloomworldproto_.
+- **Real frame rate on an iPhone 14 is still unknown.** Dee's phone check decides.
+
 ## Known issues and open risks
 
 - **Faces are the weak point of code-built art.** If Amaris does not pass Dee's eye, use the swap point in character.js and the artist request in 03-art-direction.md.
 - **Real frame rate on an iPhone 14 is unknown** until Dee tests. A test browser draws 3D in software and its frame rate means nothing.
-- **The shrunk size of the 3D library is an estimate** (180 to 220 KB). The as-shipped size is measured (419 KB for version 0.187).
+- **The 3D library is 195 KB compressed** once shrunk (measured, version 0.187.0, taken already shrunk from the jsDelivr copy of the official package). One line inside it was changed so it finds its second file. Note that in any upgrade.
+- **The prototype was never run in Safari.** Only in a Chromium test browser.
+- **The prototype's stand-in practice items have had no second review.** They are test content only.
+- **The prototype uses three lights, not two,** to keep warm skin tones warm.
 - **Every coin and price number is an estimate.** There are no coins in the code.
 - **Names are unchecked** for trademarks: Aurelune, Amaris and the host names.
 - **The skill names in 06-world-and-places.md come from today's code.** The audit found a second naming system in the grammar bank. Step B2 must settle them before any place is wired to a skill.
-- **Whether Vercel makes a preview link for a branch with no pull request** is unconfirmed. If it does not, ask Dee before opening a draft pull request.
 - **Whether Vercel previews share the live database** is unknown, per the audit. The prototype makes no server calls, so it is safe. Check before W1.
 - **The conflict rule can drop coins** when one copy is chosen over another. Recorded as an accepted trade, pending Dee's approval of row D6 in 13-document-changes.md.
 - **The reference documents are not in the repository.** They were attached to the session. docs/reference/ does not exist on main.
