@@ -25,7 +25,7 @@ Each is argued in file 2. The first four need your call.
 
 - **I cannot paint.** Everything is shapes, light and motion. Buildings, sky, water and effects will look good this way. **Faces are the risk.** I will design characters with simple, stylized faces and flowing robes and hair. The prototype's anchor character is the test. If she does not look right to you, the fix is a 3D character model from an artist or an art tool, and file 3 says exactly what to ask for.
 - **I cannot test on your iPhone.** Every number in this package is labeled measured or estimated. Smoothness on an iPhone 14 is an estimate until you hold the prototype.
-- **Bloom cannot host the real world yet.** There is no doorway, no coins, no world slot in saved data, and the offline helper re-downloads every file on each open. File 9 lists eight small steps that fix this, one purpose each. The prototype needs none of them because it runs on stand-ins.
+- **Bloom cannot host the real world yet.** There is no doorway, no coins and no world slot in saved data, and the offline helper re-downloads every file on each open. File 9 lists eight small steps that fix this, one purpose each. The prototype needs none of them because it runs on stand-ins.
 - **The Roadmap says no world-building before the two-week checkpoint.** A prototype on its own branch that never touches your progress keeps that rule in spirit. The real world should still wait for Stages 4 to 7. This needs one line in the Decisions Log.
 
 ## What the prototype would be

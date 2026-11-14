@@ -47,7 +47,7 @@ Color values are starting points. I will tune them on screen in Phase 2 and you 
 - **Tall and slender:** spires, needle towers, long arches. They suit a portrait screen.
 - **Crescents and rings everywhere:** crescent doorways, ringed towers, halo platforms. They echo moons and orbits.
 - **Soft edges:** rounded corners and bevels. No aggressive spikes.
-- **Islands:** a flat garden top, a rocky underside that narrows to a crystal point, and thin waterfalls that pour off the edge and fade into mist.
+- **Islands:** a flat garden top, a rocky underside that narrows to a crystal point and thin waterfalls that pour off the edge and fade into mist.
 - **Scale contrast:** tiny lamps and flowers near you, an enormous ringed planet behind. This contrast is what gives the "another universe" feeling for almost no cost.
 
 ## Light and surfaces

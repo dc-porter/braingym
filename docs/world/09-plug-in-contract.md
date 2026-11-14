@@ -31,7 +31,7 @@ The doorway is one small object named `BloomDoor`. Each entry below is one funct
 | `getSkills(skillIds)` | How is this learner doing on these sub-skills? | For each: started or not, level 1 to 10, whether a review is due. No raw history. |
 | `getPlan(placeId, skillIds)` | I am at this place, which teaches these sub-skills. What should happen next? | Two to four choices, already ordered by Bloom: weakest first, due reviews included, a strong skill sampled now and then. Each choice names a sub-skill and whether a short lesson must come first. |
 | `startTask(placeId, skillId, count, formats)` | Give me a set of practice items for this sub-skill, in formats this activity can show. | A task ID and the items: prompt, options and format. **No answer key.** Items are fresh where possible, at a difficulty Bloom chose. |
-| `checkAnswer(taskId, itemId, pick)` | The learner picked this. | Right or wrong, the correct answer, and the feedback: rule, reason and corrected example. Bloom records the answer and updates the skill record at this moment, so closing the app loses nothing. |
+| `checkAnswer(taskId, itemId, pick)` | The learner picked this. | Right or wrong, the correct answer and the feedback: rule, reason and corrected example. Bloom records the answer and updates the skill record at this moment, so closing the app loses nothing. |
 | `finishTask(taskId)` | Every light is lit. | The coins earned, each with its one-line reason, and the new balance. Bloom decides the amount. |
 
 ## What the world tells Bloom (three messages)
