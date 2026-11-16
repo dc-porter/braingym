@@ -131,6 +131,8 @@ button:focus-visible{ outline:3px solid var(--blue); outline-offset:2px; }
 .row{ min-height:52px; text-align:left; padding:10px 14px; border-radius:14px; background:var(--panel2); border:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; font-weight:600; }
 .row .state{ color:var(--gold); font-weight:700; } .row .state.off{ color:var(--soft); }
 .row.danger{ border-color:#7f78b8; }
+.row:disabled{ opacity:.75; cursor:default; }
+.link:disabled{ text-decoration:none; cursor:default; }
 .note{ font-size:.82rem; color:var(--soft); margin:4px 0; }
 .bannerInner{ width:min(88vw, 26rem); text-align:center; display:grid; gap:10px; padding:calc(16px + var(--safe-t)) 0 calc(16px + var(--safe-b)); }
 .bannerInner h1{ margin:0; font-size:2.1rem; letter-spacing:.06em; }

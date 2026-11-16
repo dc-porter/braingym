@@ -4,6 +4,28 @@ Nov 14, 2026 · for Dee · Phase 2 of the World Design Brief
 
 **This is a prototype. It does not merge.** It lives only on the branch claude/world-prototype, in the new folder world/. No existing file was changed. The names Aurelune and Amaris are still proposals that need an online check.
 
+## Update, Nov 16, 2026: two small fixes
+
+Made after your phone test. Nothing else was touched: not the other practice items, the portal, the landscape layout, roaming or any art.
+
+**1. Tap to arrange no longer gives away the first piece.**
+
+- Every piece now starts with a lowercase letter, so no piece stands out by its capital. The card capitalizes whichever piece you place first.
+- Each of the four arrange items has one decoy piece that does not belong. The prompt says so: "One piece does not belong."
+- Each decoy is a real, tempting mistake tied to the item's rule: a semicolon where a comma belongs, a comma before "however", a comma with no joining word, and a "because" clause standing alone as a sentence.
+- **One right order still holds.** With capitals no longer pinning the first piece, three of the four sentences had to be cut in different places, and two feedback lines were reworded to match. The sentences themselves are unchanged. I listed every plausible sentence each set of pieces can form and read them all: one is right in each set.
+- Checked in the test browser: all four items were solved through the real card, an answer using a decoy was judged "Not yet", and no piece in the bank showed a capital (measured).
+
+**2. The Sound control no longer pretends to work.**
+
+- On the first screen it now reads "Sound: coming soon" and cannot be tapped. In the menu the Sound row reads "Coming soon" and cannot be tapped.
+- No audio was added. Sound is forced off, so the two tones mentioned below never play. In a test that tapped both controls and played through, the page created no sound object at all (measured).
+- The likely reason you heard nothing before is recorded in `docs/world/art/06-sound.md` on the branch claude/world-art-direction.
+
+**The two promises still hold (re-checked Nov 16).** A full play-through asked for 16 files, all inside world/. A call to /api/ping from inside the page was blocked. Storage held only the two bloomworldproto_ names.
+
+**Your phone results, for the record:** loads in a few seconds, 60 frames a second, quality 6 of 6, readable text, survives app switching, the whole loop works. The look did not reach your bar: code-built characters and buildings are ruled out. The art plan is in `docs/world/art/` on claude/world-art-direction.
+
 ## The two promises you asked me to confirm
 
 **1. The prototype makes no server calls.** Confirmed, three ways:
@@ -26,7 +48,7 @@ About two minutes, start to finish:
 
 | Step | What happens |
 |---|---|
-| Banner | "Prototype. Stand-in data. Your real Bloom progress is not used or changed." Sound is off, with a switch. |
+| Banner | "Prototype. Stand-in data. Your real Bloom progress is not used or changed." Sound is not built; its control reads "coming soon". |
 | Arrival | The view sweeps down from the ringed planet to the Crown Isle, the castle and the dim First Gate. Skippable. |
 | Queen Amaris | Drawn from code: warm golden-brown skin, long platinum hair that drifts, layered robe, calm face. She greets you in two short bubbles and offers two choices. |
 | A short calm lesson | One "why" line, then the rule with one example and the key mark highlighted. This fakes "the world can start a skill" with stand-in content. |
@@ -79,7 +101,7 @@ Also built: reduce motion (follows the iPhone and has its own switch), automatic
 - **Real frame rate, heat and battery on an iPhone 14.** Only you can.
 - **How it feels under your thumb**, and whether tap targets in the scene are comfortable.
 - **Safari itself.** My test browser is Chromium. I avoided anything Safari handles differently where I knew of it, but nothing here has run in Safari.
-- **Sound on the phone.** Two soft tones are built. I could not hear them.
+- **Sound.** Not built. Two soft test tones exist in the code but are switched off, and the control reads "coming soon".
 - **The home-screen icon mode**, phone calls and real app switching. I simulated the last one only.
 - **Download time on mobile data.**
 - **Whether the names Aurelune and Amaris are free to use.**

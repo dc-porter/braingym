@@ -9,6 +9,12 @@ import { el } from "./ui.js";
 
 const $ = function(id){ return document.getElementById(id); };
 
+/* Every piece is stored lowercase. Whatever is placed first gets its
+   capital here, so capital letters never give a piece away. */
+function capFirst(text){
+  return /^[a-z]/.test(text) ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+}
+
 function joinTiles(tiles){
   // pieces that start with a punctuation mark attach to the piece before
   return tiles.reduce(function(s, t){ return s + (/^[;,.:]/.test(t) || s === "" ? "" : " ") + t; }, "");
@@ -151,8 +157,11 @@ export function createCard(door, hooks){
     if(stage && stage.fixes) repairStep(stage.spot, stage.fixes);   // resumed mid-item
   }
 
-  /* ---------- activity: tap to arrange (experiment) ---------- */
+  /* ---------- activity: tap to arrange (experiment) ----------
+     One piece in the bank is a decoy that does not belong, so the set is
+     ready to check once all but the spare pieces are placed. */
   function renderArrange(item){
+    const need = item.tiles.length - (item.spare || 0);
     body.appendChild(el("p", "prompt", item.prompt));
     const line = el("div", "line"), bank = el("div", "bank");
     line.setAttribute("aria-label", "Your inscription");
@@ -166,7 +175,7 @@ export function createCard(door, hooks){
     function redraw(){
       line.textContent = "";
       placed.forEach(function(text, n){
-        const b = el("button", "tile", text);
+        const b = el("button", "tile", n === 0 ? capFirst(text) : text);
         b.setAttribute("aria-label", text + ", tap to take back");
         b.onclick = function(){
           placed.splice(n, 1);
@@ -176,13 +185,13 @@ export function createCard(door, hooks){
         };
         line.appendChild(b);
       });
-      check.disabled = placed.length !== item.tiles.length;
+      check.disabled = placed.length < need;
     }
     body.appendChild(line); body.appendChild(bank);
     const check = button("primary", "Check", function(){
       const fb = door.checkAnswer(task.taskId, item.id, { order: placed.slice() });
       Array.prototype.forEach.call(line.children, function(x){ x.disabled = true; });
-      if(fb.correct){ line.textContent = ""; line.appendChild(el("span", "", joinTiles(placed))); }
+      if(fb.correct){ line.textContent = ""; line.appendChild(el("span", "", capFirst(joinTiles(placed)))); }
       afterCheck(fb);
     });
     check.disabled = true;

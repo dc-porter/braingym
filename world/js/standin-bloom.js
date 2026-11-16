@@ -53,7 +53,11 @@ const LESSON = {
    format "fix":     parts[] (sentence pieces), spots[] (indexes that can be
                      tapped), bad (index of the piece with the mistake),
                      fixes[] (replacements for that piece), answer (index)
-   format "arrange": tiles[] in the one right order (shown shuffled)
+   format "arrange": tiles[] in the one right order (shown shuffled), plus
+                     decoy = one piece that does not belong. Every piece
+                     starts lowercase, so no piece gives itself away by a
+                     capital letter. The card capitalizes whatever is placed
+                     first.
    Every item: d = difficulty 1-10, rule / reason / fixed = feedback,
    praise = what was done well.                                         */
 const B = "standin.sentence-boundaries", P = "standin.punctuation";
@@ -151,31 +155,31 @@ const ITEMS = [
     praise:"You gave the second statement its own sentence." },
 
   { id:"si-a1", skill:P, format:"arrange", d:4,
-    prompt:"Tap the pieces in order to rebuild the inscription.",
-    tiles:["When the bell rings,","the gate opens","for travelers."],
+    prompt:"Tap the pieces in order to rebuild the inscription. One piece does not belong.",
+    tiles:["when the bell rings,","the gate","opens for travelers."], decoy:"when the bell rings;",
     rule:"An opening clause comes first and ends with a comma. The main statement follows.",
-    reason:"The capital letter marks the start and the period marks the end.",
+    reason:"“When the bell rings” is the setup. A comma leads from it into the main statement. A semicolon would cut it off.",
     fixed:"When the bell rings, the gate opens for travelers.",
     praise:"You set the opening clause first and closed it with its comma." },
   { id:"si-a2", skill:P, format:"arrange", d:5,
-    prompt:"Tap the pieces in order to rebuild the inscription.",
-    tiles:["Visitors may enter","; however,","they must sign","the ledger."],
+    prompt:"Tap the pieces in order to rebuild the inscription. One piece does not belong.",
+    tiles:["visitors may enter","; however,","they must sign the ledger."], decoy:", however,",
     rule:"When “however” joins two complete sentences, put a semicolon before it and a comma after it.",
-    reason:"Each half is a full statement, so the semicolon holds them apart.",
+    reason:"Each half is a full statement, so the semicolon holds them apart. A comma before “however” would run them together.",
     fixed:"Visitors may enter; however, they must sign the ledger.",
     praise:"You placed “however” between two complete statements with the right marks." },
   { id:"si-a3", skill:B, format:"arrange", d:5,
-    prompt:"Tap the pieces in order to rebuild the inscription.",
-    tiles:["The lamps are lit",", and","the bridge is open","."],
+    prompt:"Tap the pieces in order to rebuild the inscription. One piece does not belong.",
+    tiles:["the lamps are lit",", and","the bridge is open."], decoy:",",
     rule:"Join two complete sentences with a comma plus a joining word such as “and.”",
-    reason:"The comma and “and” work together to link two full statements.",
+    reason:"The comma and “and” work together to link two full statements. A comma alone is too weak.",
     fixed:"The lamps are lit, and the bridge is open.",
     praise:"You linked two complete statements with a comma and “and.”" },
   { id:"si-a4", skill:P, format:"arrange", d:6,
-    prompt:"Tap the pieces in order to rebuild the inscription.",
-    tiles:["Because the tide was high,","the ferry waited","until dusk."],
+    prompt:"Tap the pieces in order to rebuild the inscription. One piece does not belong.",
+    tiles:["because the tide was high,","the ferry","waited until dusk."], decoy:"because the tide was high.",
     rule:"An opening clause comes first and ends with a comma. The main statement follows.",
-    reason:"“Because the tide was high” is the setup, so it leads into the main statement.",
+    reason:"“Because the tide was high” cannot stand alone as a sentence, so it leads into the main statement with a comma.",
     fixed:"Because the tide was high, the ferry waited until dusk.",
     praise:"You led with the reason and followed with the main statement." }
 ];
@@ -212,9 +216,18 @@ function publicItem(it){
   if(it.format === "choice") out.options = it.options.slice();
   if(it.format === "fix"){ out.parts = it.parts.slice(); out.spots = it.spots.slice(); }
   if(it.format === "arrange"){
-    let tiles = shuffle(it.tiles);
-    if(tiles.join("|") === it.tiles.join("|")) tiles = it.tiles.slice().reverse();
+    // Shuffle the real pieces together with the decoy. Never show the real
+    // pieces already in their right order.
+    const all = it.tiles.concat([it.decoy]);
+    let tiles = shuffle(all);
+    for(let tries = 0; tries < 12; tries++){
+      const real = tiles.filter(function(t){ return t !== it.decoy; });
+      if(real.join("|") !== it.tiles.join("|")) break;
+      tiles = shuffle(all);
+    }
+    if(tiles.filter(function(t){ return t !== it.decoy; }).join("|") === it.tiles.join("|")) tiles = all.slice().reverse();
     out.tiles = tiles;
+    out.spare = 1;      // how many pieces do not belong
   }
   return out;
 }

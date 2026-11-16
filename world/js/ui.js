@@ -84,7 +84,10 @@ export function fold(calm, atMiddle){
 
 export function dim(on){ $("dim").className = on ? "on" : ""; }
 
-/* ---------- sound: two soft tones made in code, off until turned on ---------- */
+/* ---------- sound: NOT BUILT YET ----------
+   The Sound control is labeled "coming soon" and is switched off in
+   main.js, so nothing below ever plays. The code is kept as a starting
+   point for the later sound run. */
 let audio = null, soundOn = false;
 export function setSound(on){
   soundOn = on;
@@ -120,13 +123,16 @@ export function setupMenu(prefs, handlers){
     b.setAttribute("aria-checked", on ? "true" : "false");
   }
   function paint(){
-    row("optSound", "Sound", prefs.sound);
+    // Sound is not built yet: say so, and do not act like a switch.
+    const s = $("optSound");
+    s.textContent = "";
+    s.appendChild(el("span", "", "Sound"));
+    s.appendChild(el("span", "state off", "Coming soon"));
     row("optCalm", "Reduce motion", prefs.calm);
     row("optArrange", "Tap to arrange (experiment)", prefs.arrange);
     row("optReadout", "Performance readout", prefs.readout);
   }
   function flip(key){ prefs[key] = !prefs[key]; paint(); handlers.changed(key); }
-  $("optSound").onclick = function(){ flip("sound"); };
   $("optCalm").onclick = function(){ flip("calm"); };
   $("optArrange").onclick = function(){ flip("arrange"); };
   $("optReadout").onclick = function(){ flip("readout"); };

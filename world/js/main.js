@@ -31,6 +31,7 @@ function save(){ door.saveWorld(world); }
 const prefs = world.prefs;
 if(!prefs.calmTouched && systemCalm) prefs.calm = systemCalm.matches;
 if(params.get("readout")) prefs.readout = true;
+prefs.sound = false;   // sound is not built yet; the control says "coming soon"
 
 /* ---------------- renderer ---------------- */
 const canvas = $("scene");
@@ -414,10 +415,8 @@ function tap(x, y){
 /* ---------------- menu, sound, readout ---------------- */
 function applyPrefs(){
   document.body.classList.toggle("calm", !!prefs.calm);
-  ui.setSound(prefs.sound);
+  ui.setSound(false);
   $("readout").hidden = !prefs.readout;
-  $("soundBtn").textContent = "Sound: " + (prefs.sound ? "on" : "off");
-  $("soundBtn").setAttribute("aria-checked", prefs.sound ? "true" : "false");
 }
 ui.setupMenu(prefs, {
   changed: function(key){ if(key === "calm") prefs.calmTouched = true; applyPrefs(); save(); needsFrame = true; },
@@ -425,7 +424,6 @@ ui.setupMenu(prefs, {
   replay: function(){ if(!card.isOpen() && !ui.isSpeaking()){ camPos.set(18, 58, 78); camLook.set(-180, 150, -520); startArrival(); } },
   reset: function(){ door.resetPrototype(); location.href = location.pathname; }
 });
-$("soundBtn").onclick = function(){ prefs.sound = !prefs.sound; applyPrefs(); save(); };
 if(systemCalm && systemCalm.addEventListener) systemCalm.addEventListener("change", function(e){ if(!prefs.calmTouched){ prefs.calm = e.matches; applyPrefs(); } });
 let cornerTaps = 0, cornerTimer = 0;
 $("corner").addEventListener("pointerdown", function(){
@@ -540,7 +538,6 @@ function onReady(){
 }
 $("beginBtn").onclick = function(){
   $("banner").hidden = true; $("hud").hidden = false;
-  ui.setSound(prefs.sound);
   lastInput = performance.now();
   if(!world.arrived && !params.get("skip")) { startArrival(); return; }
   if(!world.arrived){ world.arrived = true; }
