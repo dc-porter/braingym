@@ -124,7 +124,7 @@ Also built: reduce motion (follows the iPhone and has its own switch), automatic
 
 Open this link in Safari, signed in to Vercel as you are for your other previews:
 
-**https://braingym-git-claude-world-prototype-dee-a1cf.vercel.app/world/**
+**The Preview link on pull request 51, with `/world/` added to the end.** The preview address has changed since this report was first written, so take it from the pull request each time. On Nov. 16, 2026 it was https://braingym-git-claude-world-prototype-deepo333.vercel.app/world/
 
 1. **Speed:** from tapping Begin, does the world appear within about three seconds on mobile data?
 2. **Smoothness:** open the menu, turn on Performance readout, and watch "frames/s" during the arrival, at the Gate and on the terrace. Near 60 is the goal. Tell me the lowest number you see, and the "quality" line.
