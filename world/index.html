@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+<title>Aurelune — world prototype</title>
+<meta name="robots" content="noindex, nofollow" />
+<!-- This page is a prototype. The rule below makes the browser itself refuse
+     any network call from this page (connect-src 'none') and any file from
+     another site. It loads nothing from Bloom's js/ folder and no /api/. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'" />
+<meta name="theme-color" content="#141033" />
+<link rel="stylesheet" href="world.css" />
+</head>
+<body>
+  <canvas id="scene" aria-label="The world of Aurelune, a 3D scene"></canvas>
+  <div id="dim" aria-hidden="true"></div>
+  <div id="fold" aria-hidden="true"></div>
+
+  <div id="hud" hidden>
+    <div id="coins" aria-live="polite"><span class="coin" aria-hidden="true"></span><b id="coinCount">0</b><span class="tiny">prototype coins</span></div>
+    <div id="place"></div>
+    <button id="menuBtn" class="round" aria-label="Menu">☰</button>
+    <button id="skipBtn" class="pill" hidden>Skip</button>
+  </div>
+  <div id="corner" aria-hidden="true"></div>
+  <pre id="readout" hidden></pre>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <div id="reward" role="status" aria-live="polite" hidden></div>
+
+  <div id="speech" hidden>
+    <div class="who" id="speechWho"></div>
+    <p id="speechText"></p>
+    <div id="speechChoices"></div>
+    <div class="more" id="speechMore">Tap to continue</div>
+  </div>
+
+  <div id="card" role="dialog" aria-modal="true" aria-label="Practice" hidden>
+    <div class="cardTop">
+      <div id="lights" aria-label="Progress"></div>
+      <span class="tag" id="cardTag">practice sample</span>
+      <button id="leaveBtn" class="link">Leave for now</button>
+    </div>
+    <div class="cardBody" id="cardBody"></div>
+    <div class="cardFoot" id="cardFoot"></div>
+  </div>
+
+  <div id="sheet" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="sheetInner">
+      <h2>Prototype menu</h2>
+      <button class="row" id="optSound" disabled></button>
+      <button class="row" id="optCalm" role="switch"></button>
+      <button class="row" id="optArrange" role="switch"></button>
+      <button class="row" id="optReadout" role="switch"></button>
+      <button class="row" id="optReplay">Replay the arrival</button>
+      <button class="row danger" id="optReset">Reset prototype</button>
+      <p class="note">Prototype. Stand-in data. Your real Bloom progress is not used or changed. This page makes no server calls.</p>
+      <button class="primary" id="sheetClose">Close</button>
+    </div>
+  </div>
+
+  <div id="banner" role="dialog" aria-modal="true" aria-label="About this prototype">
+    <div class="bannerInner">
+      <div class="crest" aria-hidden="true"></div>
+      <h1>Aurelune</h1>
+      <p class="sub">World prototype</p>
+      <p><b>Prototype. Stand-in data.</b> Your real Bloom progress is not used or changed.</p>
+      <p class="small">The practice items and coins here are samples made for this test. Sound is not built yet.</p>
+      <p class="small" id="loadNote">Getting the world ready…</p>
+      <button class="primary" id="beginBtn" disabled>Begin</button>
+      <button class="link" id="soundBtn" disabled>Sound: coming soon</button>
+    </div>
+  </div>
+
+  <noscript>This prototype needs JavaScript.</noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
