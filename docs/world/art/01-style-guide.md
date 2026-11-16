@@ -134,7 +134,7 @@ One short note on the Star Guardian: I would design her dress from invented Aure
 - **Cut:** draped and layered. Greek-inspired wraps and gowns, long open robes, high collars for the court, a cloak or a drape over one shoulder.
 - **Cloth:** silk and velvet with a soft sheen. Opal and iridescent cloth for the court. Fine embroidery along edges.
 - **Jewelry:** circlets, collars, layered fine chains, cuffs, gems set at the brow and the belt. Gold for the Lumen folk. Silver and pearl for the Veil folk and Tideborn.
-- **Not this:** armor plates, helmets, capes with clasps, lightning marks, or anything that reads as a costume from a known film or game.
+- **Not this:** armor plates, helmets, capes with clasps, lightning marks or anything that reads as a costume from a known film or game.
 
 **About "gold means earned".** The first style guide reserved gold for things you have lit. Your references are full of gold jewelry and trim, so that rule needs sharpening: **gold metal is decoration, and warm golden light is "earned".** A place you have restored glows gold from inside. An unlit place has the same gold trim but no inner light.
 

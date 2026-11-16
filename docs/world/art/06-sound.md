@@ -51,7 +51,7 @@ For now, as you asked, the switch is relabeled so it does not pretend to work. R
 2. Search mood words: *ambient, ethereal, celestial, calm, meditation, harp, bells, no drums*.
 3. Listen with your eyes closed and picture the Gate Court. Skip anything with a strong beat or melody that would tire you by the tenth loop.
 4. Note the page address of the two or three you like.
-5. Send the addresses in a session. A run checks each license, downloads, trims, loops and shrinks them, and writes the log lines.
+5. Send the addresses in a session. A run checks each license, then downloads, trims, loops and shrinks the files. It also writes the log lines.
 
 ## Impact on the app (estimated)
 

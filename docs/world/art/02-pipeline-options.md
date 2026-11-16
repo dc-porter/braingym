@@ -2,7 +2,7 @@
 
 Nov 16, 2026 · for Dee
 
-A pipeline is the chain of tools that turns an idea into a file Bloom can show. This file lists every free tool I looked at, what each can and cannot do, and three ways to chain them. File 3 says how good each result can be. File 8 lists exactly what I checked.
+A pipeline is the chain of tools that turns an idea into a file Bloom can show. This file lists every free tool I looked at and what each can and cannot do. It ends with three ways to chain them. File 3 says how good each result can be. File 8 lists exactly what I checked.
 
 ## How to read the "Checked?" column
 
@@ -165,7 +165,7 @@ Every character is a painting. Every place is a set of painted layers that shift
 3. A run slims it and sets it in the scene.
 4. If it must bend and walk, it also needs a rig, which today means a computer.
 
-**Strength:** you can walk all the way around it. **Weakness:** faces, hair, hands and jewelry all degrade, the free tools are few and limited, and rigging has no confirmed free iPhone route.
+**Strength:** you can walk all the way around it. **Weakness:** faces, hair, hands and jewelry all degrade. The free tools are few and limited. Rigging has no confirmed free iPhone route.
 
 ### Hybrid: painted where you look, 3D where you walk
 
