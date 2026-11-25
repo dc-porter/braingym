@@ -2,7 +2,7 @@
    Same-origin requests always try the network first (bypassing the HTTP
    cache) so a freshly deployed version is picked up immediately whenever
    the device is online; the cache is only a fallback for offline use. */
-const CACHE_NAME = "bloom-shell-v3";
+const CACHE_NAME = "bloom-shell-v4";
 const SHELL_FILES = [
   "./",
   "./index.html",
