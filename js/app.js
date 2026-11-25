@@ -155,7 +155,7 @@
   // the placement taxonomy — they're more specific, and seeding falls
   // back to the category ceiling for the ones placement doesn't cover.
   const LESSON_POOL = PLACEMENT_POOL
-    .filter(function(q){ return CATEGORY_NAMES[q.category]; })
+    .filter(function(q){ return CATEGORY_NAMES[q.category] && isPlacementActive(q); })
     .concat(GRAMMAR_BANK.map(function(q){
       return {
         id: q.id, category: q.type, type: q.type, sub: q.sub,
@@ -1556,7 +1556,6 @@
 
   /* ================= RENDER: screens ================= */
   function renderHome(){
-    const streak = computeStreak();
     const avg = computeAvgScore();
 
     let greetTitle, greetBody;
@@ -1565,7 +1564,7 @@
       // The overall level is not shown: each category has its own level on the
       // results screen. It is still kept in the code as the fallback for old
       // results that have no category scores.
-      greetBody = streak > 0 ? streak + " day" + (streak === 1 ? "" : "s") + " in a row" : "Your placement results are in.";
+      greetBody = "Your placement results are in.";
     } else if(placementProgress){
       greetTitle = "Pick up where you left off";
       greetBody = "Your placement test is waiting for you.";
@@ -1630,8 +1629,7 @@
         "</div>" +
         '<div class="stack">' + placementCard + lessonsCard + historyCard + "</div>" +
         (placementResult ? (
-          '<div class="stat-grid">' +
-            '<div class="stat-tile"><div class="num">' + streak + '</div><div class="lbl">DAY STREAK</div></div>' +
+          '<div class="stat-grid" style="grid-template-columns:repeat(2, 1fr);">' +
             '<div class="stat-tile"><div class="num">' + history.length + '</div><div class="lbl">LESSONS DONE</div></div>' +
             '<div class="stat-tile"><div class="num">' + (history.length ? avg + "%" : "—") + '</div><div class="lbl">AVG SCORE</div></div>' +
           "</div>"
@@ -1684,7 +1682,6 @@
         '<div class="card stack">' +
           '<div class="row-between" style="flex-wrap:wrap; row-gap:8px;">' +
             '<span class="pill pill-amethyst" style="white-space:nowrap;">' + esc(CATEGORY_NAMES[q.category]) + "</span>" +
-            '<span class="pill pill-beige" style="white-space:nowrap;">Difficulty ' + placementProgress.displaySnapshot[idx] + '/10</span>' +
           "</div>" +
           passageHTML(q) +
           '<div class="prompt-box">' + renderPrompt(q.prompt) + "</div>" +
@@ -1971,10 +1968,6 @@
         '<div class="card stack">' +
           '<div class="row-between" style="flex-wrap:wrap; row-gap:8px;">' +
             '<span class="pill pill-rose">' + esc(q.sub) + "</span>" +
-            // Lessons in progress from before per-question difficulty was stored carry no value.
-            (typeof q.difficulty === "number"
-              ? '<span class="pill pill-beige" style="white-space:nowrap;">Difficulty ' + q.difficulty + "/10</span>"
-              : "") +
           "</div>" +
           '<div class="prompt-box">' + renderPrompt(q.prompt) + "</div>" +
           choiceListHTML({ options:q.options, correctIndex:q.correctIndex, selectedIndex: answer ? answer.selectedIndex : null, locked:locked, action:"select-lesson" }) +
