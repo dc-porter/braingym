@@ -110,8 +110,8 @@ const PLACEMENT_POOL = [
 
   { id:"ge7", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:4,
     prompt:"When the surgeon consulted with the resident before the procedure, ⟦she⟧ reviewed the imaging results one final time.",
-    options:["NO CHANGE","they","the surgeon","the surgeon, she,"], correctIndex:2,
-    explanation:"Since either the surgeon or the resident could be the person who reviewed the imaging, \"she\" is an ambiguous pronoun reference. Replacing it with \"the surgeon\" removes the ambiguity. \"They\" has the same problem and can also be read as both people, and \"the surgeon, she,\" repeats the unclear pronoun after the noun." },
+    options:["NO CHANGE","her","the surgeon","the surgeon, she,"], correctIndex:2,
+    explanation:"Since either the surgeon or the resident could be the person who reviewed the imaging, \"she\" is an ambiguous pronoun reference. Replacing it with \"the surgeon\" removes the ambiguity. \"Her\" is the wrong case for the subject of \"reviewed\" and still leaves it unclear who is meant, and \"the surgeon, she,\" repeats the unclear pronoun after the noun." },
 
   { id:"ge8", type:"error", category:"error", sub:"Pronoun Agreement & Reference", difficulty:1,
     prompt:"The nonprofit organization announced that ⟦they⟧ would expand its outreach program to three additional counties next year.",
@@ -1123,38 +1123,38 @@ const PLACEMENT_POOL = [
 
   { id:"vc44", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"Among his oldest friends, he became surprisingly voluble. What is the opposite of \"voluble\" as used here?",
-    options:["reluctant to speak","quick to anger","serious and sincere","insincere and flattering"], correctIndex:0,
-    explanation:"\"Voluble\" means talking easily and at length, so its opposite is reluctant to speak. \"Quick to anger\" is the lookalike trap from \"volatile,\" and \"serious and sincere\" and \"insincere and flattering\" describe how someone talks rather than how much." },
+    options:["reluctant to speak","quick to anger","tired and distracted","insincere and flattering"], correctIndex:0,
+    explanation:"\"Voluble\" means talking easily and at length, so its opposite is reluctant to speak. \"Quick to anger\" is the lookalike trap from \"volatile,\" \"insincere and flattering\" describes how someone talks rather than how much, and \"tired and distracted\" is a mood a person might show among friends but says nothing about talking." },
 
   { id:"vc45", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"By the end of the season, the locker room felt lugubrious. What is the opposite of \"lugubrious\" as used here?",
-    options:["sad and downcast","cheerful and lively","silly and absurd","gainful and rewarding"], correctIndex:1,
-    explanation:"\"Lugubrious\" means looking or sounding sad and dismal, so its opposite is cheerful and lively. \"Sad and downcast\" is the word's own meaning, which is the trap for anyone who reads the question backwards; \"silly and absurd\" and \"gainful and rewarding\" echo the lookalikes \"ludicrous\" and \"lucrative.\"" },
+    options:["cramped and damp","cheerful and lively","silly and absurd","gainful and rewarding"], correctIndex:1,
+    explanation:"\"Lugubrious\" means looking or sounding sad and dismal, so its opposite is cheerful and lively. \"Cramped and damp\" is tempting because it describes a locker room, but it says nothing about mood. \"Silly and absurd\" and \"gainful and rewarding\" echo the lookalikes \"ludicrous\" and \"lucrative.\"" },
 
   { id:"vc46", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"The new coach enforces stringent rules about attendance. What is the opposite of \"stringent\" as used here?",
-    options:["strict and demanding","loud and harsh","lax and flexible","vague and unclear"], correctIndex:2,
-    explanation:"\"Stringent\" means strict and demanding, so its opposite is lax and flexible. \"Strict and demanding\" is the word's own meaning, \"loud and harsh\" echoes the lookalike \"strident,\" and \"vague and unclear\" is tempting because it describes poorly defined rules." },
+    options:["new and unpopular","loud and harsh","lax and flexible","vague and unclear"], correctIndex:2,
+    explanation:"\"Stringent\" means strict and demanding, so its opposite is lax and flexible. \"New and unpopular\" is tempting because rules from a new coach may be disliked, but it does not describe how strict they are. \"Loud and harsh\" echoes the lookalike \"strident,\" and \"vague and unclear\" is tempting because it describes poorly defined rules." },
 
   { id:"vc47", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:4,
     prompt:"After the market crash, the family was left destitute. What is the opposite of \"destitute\" as used here?",
-    options:["poor and desperate","careful and thrifty","disgraced and isolated","wealthy and comfortable"], correctIndex:3,
-    explanation:"\"Destitute\" means having no money or possessions, so its opposite is wealthy and comfortable. \"Poor and desperate\" is the word's own meaning, and \"careful and thrifty\" is tempting because it is also about money, but thrifty people choose to spend little rather than being unable to." },
+    options:["shocked and badly shaken","careful and thrifty","disgraced and isolated","wealthy and comfortable"], correctIndex:3,
+    explanation:"\"Destitute\" means having no money or possessions, so its opposite is wealthy and comfortable. \"Shocked and badly shaken\" is tempting because a family hit by a crash might feel that way, but it describes feelings, not money. \"Careful and thrifty\" is tempting because it is also about money, but thrifty people choose to spend little rather than being unable to, and \"disgraced and isolated\" describes reputation and company." },
 
   { id:"vc48", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:5,
     prompt:"Negotiations over the new contract turned antagonistic. What is the opposite of \"antagonistic\" as used here?",
-    options:["friendly and cooperative","hostile and bitter","slow and stagnant","disappointing and flat"], correctIndex:0,
-    explanation:"\"Antagonistic\" means showing active opposition or hostility, so its opposite is friendly and cooperative. \"Hostile and bitter\" is the word's own meaning, and \"disappointing and flat\" echoes the lookalike \"anticlimactic.\"" },
+    options:["friendly and cooperative","lengthy and highly technical","slow and stagnant","disappointing and flat"], correctIndex:0,
+    explanation:"\"Antagonistic\" means showing active opposition or hostility, so its opposite is friendly and cooperative. \"Lengthy and highly technical\" is tempting because contract talks often are, but it says nothing about attitude. \"Slow and stagnant\" describes pace, and \"disappointing and flat\" echoes the lookalike \"anticlimactic.\"" },
 
   { id:"vc49", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"After the diagnosis he adopted an ascetic existence. What is the opposite of \"ascetic\" as used here?",
-    options:["strictly self-denying","indulgent and luxurious","peaceful and serene","loud and festive"], correctIndex:1,
-    explanation:"\"Ascetic\" means practicing strict self-denial, so its opposite is indulgent and luxurious. \"Strictly self-denying\" is the word's own meaning, and \"peaceful and serene\" is tempting because ascetics are often pictured living quietly." },
+    options:["devout and devoted to prayer","indulgent and luxurious","peaceful and serene","solitary and secretive"], correctIndex:1,
+    explanation:"\"Ascetic\" means practicing strict self-denial, so its opposite is indulgent and luxurious. \"Devout and devoted to prayer\" is tempting because ascetics are often religious, and \"peaceful and serene\" because they are often pictured living quietly. \"Solitary and secretive\" is tempting because some ascetics live alone, but none of these says anything about indulgence." },
 
   { id:"vc50", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:3,
     prompt:"The team felt pessimistic about hitting the deadline. What is the opposite of \"pessimistic\" as used here?",
-    options:["doubtful and gloomy","practical and realistic","hopeful and confident","sentimental and emotional"], correctIndex:2,
-    explanation:"\"Pessimistic\" means expecting the worst, so its opposite is hopeful and confident. \"Doubtful and gloomy\" is the word's own meaning, and \"practical and realistic\" is tempting because pessimists often describe themselves as realists." },
+    options:["tired and overworked","practical and realistic","hopeful and confident","calm and patient"], correctIndex:2,
+    explanation:"\"Pessimistic\" means expecting the worst, so its opposite is hopeful and confident. \"Practical and realistic\" is tempting because pessimists often describe themselves as realists. \"Tired and overworked\" and \"calm and patient\" are moods a team might show near a deadline, but they say nothing about expecting success or failure." },
 
   { id:"vx1", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:1,
     prompt:"Her uncle was known around the neighborhood as a generous man. As used here, \"generous\" most nearly means:",
@@ -1253,33 +1253,33 @@ const PLACEMENT_POOL = [
 
   { id:"vx20", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:5,
     prompt:"The young engineer gave candid responses to the review board. What is the opposite of \"candid\" as used here?",
-    options:["honest and direct","rude and insulting","evasive and guarded","nervous and uncertain"], correctIndex:2,
-    explanation:"\"Candid\" means open and honest, so its opposite is evasive and guarded. \"Honest and direct\" is the word's own meaning, and \"rude and insulting\" is tempting because blunt honesty can feel rude." },
+    options:["slow and methodical","rude and insulting","evasive and guarded","nervous and uncertain"], correctIndex:2,
+    explanation:"\"Candid\" means open and honest, so its opposite is evasive and guarded. \"Slow and methodical\" is tempting because a careful answer can seem unhurried, and \"rude and insulting\" is tempting because blunt honesty can feel rude, but neither is the opposite of openness." },
 
   { id:"vx21", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:5,
     prompt:"The historian was known as meticulous. What is the opposite of \"meticulous\" as used here?",
-    options:["thorough and precise","slow and hesitant","dishonest and sneaky","careless and slapdash"], correctIndex:3,
-    explanation:"\"Meticulous\" means extremely careful about detail, so its opposite is careless and slapdash. \"Thorough and precise\" is the word's own meaning, and \"slow and hesitant\" is tempting because careful people often work slowly." },
+    options:["strict and highly demanding","slow and hesitant","dishonest and sneaky","careless and slapdash"], correctIndex:3,
+    explanation:"\"Meticulous\" means extremely careful about detail, so its opposite is careless and slapdash. \"Strict and highly demanding\" is tempting because meticulous people often hold others to a high standard, and \"slow and hesitant\" because careful people often work slowly, but neither is the opposite of careful." },
 
   { id:"vx22", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"The CEO sounded sanguine in her address to shareholders. What is the opposite of \"sanguine\" as used here?",
-    options:["gloomy and hopeless","cheerful and hopeful","pale and sickly","calm and unemotional"], correctIndex:0,
-    explanation:"\"Sanguine\" means optimistic, especially in a difficult situation, so its opposite is gloomy and hopeless. \"Cheerful and hopeful\" is the word's own meaning. \"Pale and sickly\" is the opposite of the word's other sense, a ruddy, healthy complexion, which does not apply to a speech. \"Calm and unemotional\" is tempting because a sanguine speaker sounds composed." },
+    options:["gloomy and hopeless","polite and formal","red-faced and flushed","calm and unemotional"], correctIndex:0,
+    explanation:"\"Sanguine\" means optimistic, especially in a difficult situation, so its opposite is gloomy and hopeless. \"Red-faced and flushed\" is tempting because \"sanguine\" can also describe a ruddy complexion, but a speech is judged by outlook, not looks. \"Calm and unemotional\" is tempting because a sanguine speaker sounds composed, and \"polite and formal\" describes manner rather than outlook." },
 
   { id:"vx23", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"The detective was famously laconic on the stand. What is the opposite of \"laconic\" as used here?",
-    options:["brief and to the point","wordy and long-winded","loud and boisterous","lazy and unmotivated"], correctIndex:1,
-    explanation:"\"Laconic\" means using very few words, so its opposite is wordy and long-winded. \"Brief and to the point\" is the word's own meaning, and \"lazy and unmotivated\" is tempting because it resembles \"lax.\"" },
+    options:["blunt and sometimes rude","wordy and long-winded","loud and boisterous","lazy and unmotivated"], correctIndex:1,
+    explanation:"\"Laconic\" means using very few words, so its opposite is wordy and long-winded. \"Blunt and sometimes rude\" is tempting because very short answers can come across as curt, and \"lazy and unmotivated\" because it resembles \"lax,\" but neither is the opposite of saying little." },
 
   { id:"vx24", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:6,
     prompt:"The candidate grew strangely diffident in the meeting room. What is the opposite of \"diffident\" as used here?",
-    options:["shy and hesitant","different and unusual","bold and self-assured","stubborn and inflexible"], correctIndex:2,
-    explanation:"\"Diffident\" means modest or shy because of a lack of self-confidence, so its opposite is bold and self-assured. \"Shy and hesitant\" is the word's own meaning, and \"different and unusual\" is the lookalike." },
+    options:["formal and polite","different and unusual","bold and self-assured","stubborn and inflexible"], correctIndex:2,
+    explanation:"\"Diffident\" means modest or shy because of a lack of self-confidence, so its opposite is bold and self-assured. \"Different and unusual\" is the lookalike. \"Formal and polite\" is tempting because a nervous candidate might act that way in a meeting room, but it does not describe confidence." },
 
   { id:"vx25", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"The general remained obdurate. What is the opposite of \"obdurate\" as used here?",
-    options:["rigid and set in his ways","cautious and slow to decide","calm and untroubled","flexible and yielding"], correctIndex:3,
-    explanation:"\"Obdurate\" means stubbornly refusing to change one's opinion, so its opposite is flexible and yielding. \"Rigid and set in his ways\" is the word's own meaning, and \"cautious and slow to decide\" is tempting because it also involves not acting quickly." },
+    options:["loyal and dutiful","cautious and slow to decide","calm and untroubled","flexible and yielding"], correctIndex:3,
+    explanation:"\"Obdurate\" means stubbornly refusing to change one's opinion, so its opposite is flexible and yielding. \"Cautious and slow to decide\" is tempting because it also involves not acting quickly, and \"loyal and dutiful\" because a general who will not budge may be sticking to duty, but neither is the opposite of stubborn." },
 
   { id:"vx26", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:7,
     prompt:"Students found the professor's lectures recondite. As used here, \"recondite\" most nearly means:",
@@ -1298,8 +1298,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx29", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:7,
     prompt:"The veteran captain seemed insouciant as the storm closed in. What is the opposite of \"insouciant\" as used here?",
-    options:["carefree and casual","tireless and energetic","stubborn and unreformed","anxious and worried"], correctIndex:3,
-    explanation:"\"Insouciant\" means casually unconcerned, so its opposite is anxious and worried. \"Carefree and casual\" is the word's own meaning, while \"tireless and energetic\" and \"stubborn and unreformed\" are the meanings of the lookalikes \"indefatigable\" and \"incorrigible.\"" },
+    options:["proud and boastful","tireless and energetic","stubborn and unreformed","anxious and worried"], correctIndex:3,
+    explanation:"\"Insouciant\" means casually unconcerned, so its opposite is anxious and worried. \"Tireless and energetic\" and \"stubborn and unreformed\" are the meanings of the lookalikes \"indefatigable\" and \"incorrigible,\" and \"proud and boastful\" is a trait a veteran captain might show but says nothing about concern." },
 
   { id:"vx30", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:8,
     prompt:"After the merger, the former CEO was given a sinecure on the advisory board. As used here, \"sinecure\" most nearly means:",
@@ -1309,7 +1309,7 @@ const PLACEMENT_POOL = [
   { id:"vx31", type:"vocab", category:"vocab", sub:"Synonyms & Nuance", difficulty:8,
     prompt:"Several people at the back of the hall were obstreperous. Which word is closest in meaning to \"obstreperous\" as used here:",
     options:["Jubilant","Unruly","Sullen","Inattentive"], correctIndex:1,
-    explanation:"\"Obstreperous\" means noisy and difficult to control, which is what \"unruly\" means. \"Jubilant,\" \"sullen\" and \"inattentive\" are all moods a crowd might show but none describes disorderly behavior." },
+    explanation:"\"Obstreperous\" means noisy and difficult to control, which is what \"unruly\" means. \"Jubilant,\" \"sullen\" and \"inattentive\" are all moods a group might show but none describes disorderly behavior." },
 
   { id:"vx32", type:"vocab", category:"vocab", sub:"Word Meaning in Context", difficulty:9,
     prompt:"Several historians described the documentary as tendentious. As used here, \"tendentious\" most nearly means:",
@@ -1323,8 +1323,8 @@ const PLACEMENT_POOL = [
 
   { id:"vx34", type:"vocab", category:"vocab", sub:"Antonyms & Contrast", difficulty:8,
     prompt:"The senator was truculent when questioned by the committee. What is the opposite of \"truculent\" as used here?",
-    options:["aggressive and defiant","smug and self-satisfied","evasive and vague","conciliatory and mild"], correctIndex:3,
-    explanation:"\"Truculent\" means eager to fight or argue, so its opposite is conciliatory and mild. \"Aggressive and defiant\" is the word's own meaning, and \"smug and self-satisfied\" and \"evasive and vague\" are other attitudes a senator might show under questioning." },
+    options:["formal and well prepared","smug and self-satisfied","evasive and vague","conciliatory and mild"], correctIndex:3,
+    explanation:"\"Truculent\" means eager to fight or argue, so its opposite is conciliatory and mild. \"Smug and self-satisfied,\" \"evasive and vague\" and \"formal and well prepared\" are other attitudes a senator might show under questioning, but none is the opposite of eager to fight." },
 
   { id:"vx35", type:"vocab", category:"vocab", sub:"Roots & Prefixes/Suffixes", difficulty:8,
     prompt:"Foreign investors had complained for years about the country's sclerotic bureaucracy. As used here, \"sclerotic\" most nearly means:",
